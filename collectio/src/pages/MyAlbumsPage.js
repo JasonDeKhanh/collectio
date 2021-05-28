@@ -4,7 +4,6 @@ function MyAlbumsPage() {
 
   return (
     <>
-      <AppBar1 />
       <main>
 
       </main>
