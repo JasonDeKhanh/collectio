@@ -18,7 +18,7 @@ import PageLogin from "./pages/PageLogin";
 
 import "./styles.css";
 
-import AppBar1 from "./components/AppBar1";
+import AppShell from "./components/AppShell";
 
 export default function App() {
   return (
@@ -38,6 +38,7 @@ export default function App() {
   );
 }
 
+{/*}
 function AppShell() {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -58,3 +59,4 @@ function AppShell() {
     <AppBar1 />
   );
 }
+*/}
