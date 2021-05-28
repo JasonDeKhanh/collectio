@@ -6,7 +6,7 @@ function MyAlbumsPage() {
   return (
     <>
       <main>
-        <SpacingGrid />
+
       </main>
     </>
   );
