@@ -5,7 +5,6 @@ function MyAlbumsPage() {
 
   return (
     <>
-      <AppBar1 />
       <main>
         <SpacingGrid />
       </main>

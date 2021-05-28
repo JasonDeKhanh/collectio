@@ -18,6 +18,8 @@ import PageLogin from "./pages/PageLogin";
 
 import "./styles.css";
 
+import AppBar1 from "./components/AppBar1";
+
 export default function App() {
   return (
     <div className="App">
@@ -53,36 +55,6 @@ function AppShell() {
   };
 
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" style={{ flexGrow: 1, textAlign: "left" }}>
-          Todo List
-        </Typography>
-        <IfFirebaseAuthed>
-          {({ user, firebase }) => (
-            <div>
-              <Avatar
-                alt={user.displayName}
-                src={user.photoURL}
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              />
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={() => handleLogout(firebase)}>
-                  Logout
-                </MenuItem>
-              </Menu>
-            </div>
-          )}
-        </IfFirebaseAuthed>
-      </Toolbar>
-    </AppBar>
+    <AppBar1 />
   );
 }
