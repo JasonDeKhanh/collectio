@@ -84,8 +84,7 @@ const useStyles = makeStyles((theme) => ({
               </Menu>
             </div>
           )}
-        </IfFirebaseAuthed>
-            <Button color="inherit">Logout</Button>
+          </IfFirebaseAuthed>
           </Toolbar>
         </AppBar>
       </div>
