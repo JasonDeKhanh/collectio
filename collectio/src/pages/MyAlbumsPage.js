@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 import AppBar1 from "../components/AppBar1";
-import SpacingGrid from "../components/Grid";
 
-import CreateNewAlbumPopup from "../components/CreateNewAlbum";
+import CreateNewAlbumPopup from "../components/CreateNewAlbumPopup";
+
+import styles from "../components/CreateNewAlbumButton.module.css";
 
 function MyAlbumsPage() {
   const [buttonPopup, setButtonPopup] = useState(false);
@@ -11,9 +12,8 @@ function MyAlbumsPage() {
   return (
     <div>
       <main>
-        <button onClick={() => setButtonPopup(true)}> Create New Album </button>
+        <button className={styles.button} onClick={() => setButtonPopup(true)}> Create New Album </button>
       </main>
-
       <CreateNewAlbumPopup trigger={buttonPopup} setTrigger={setButtonPopup} />
     </div>
   );

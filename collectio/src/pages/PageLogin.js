@@ -15,7 +15,7 @@ function PageLogin() {
           <Button
             variant="contained"
             color="primary"
-            onClick={(firebase) => handleGoogleSignIn(firebase)}
+            onClick={() => handleGoogleSignIn(firebase)}
           >
             Sign in with Google
           </Button>

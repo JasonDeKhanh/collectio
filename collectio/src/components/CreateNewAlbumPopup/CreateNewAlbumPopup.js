@@ -7,22 +7,17 @@ function CreateNewAlbumPopup(props) {
       <div className="popup">
         <div className="popup-inner">
           <button className="close-btn" onClick={() => props.setTrigger(false)}>
-            close
+            Close
           </button>
           {props.children}
           <div>
-            <h3> test test</h3>
-            Why hello there
+            <h3> Add a New Album </h3>
+            
           </div>
 
           <button className="create-btn"> Create</button>
 
-          <button
-            className="cancel-btn"
-            onClick={() => props.setTrigger(false)}
-          >
-            Cancel
-          </button>
+          
         </div>
       </div>
     </div>
