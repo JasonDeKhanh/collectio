@@ -25,6 +25,8 @@ import {
   IfFirebaseUnAuthed,
 } from "@react-firebase/auth";
 
+import MenuIconTopRight from "./MenuIconTopRight";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -57,64 +59,37 @@ export default function AppBar1() {
 
   return (
     <div className={classes.root}>
-      
-        <IfFirebaseUnAuthed>
-        <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" style={{ flexGrow: 1, textAlign: "left" }}>
-          Login
-        </Typography>
-      </Toolbar>
-      </AppBar>
-      </IfFirebaseUnAuthed>
-      <IfFirebaseAuthed>
       <AppBar position="static">
-
+        <IfFirebaseUnAuthed>
           <Toolbar>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-            >
-              <Tooltip title="Add new Album" aria-label="add">
-                <Fab color="primary" className={classes.fab}>
-                  <AddIcon />
-                </Fab>
-              </Tooltip>
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              My Albums
+            <Typography variant="h6" style={{ flexGrow: 1, textAlign: "left" }}>
+              Login
             </Typography>
-
-            {({ user, firebase }) => (
-              <div>
-                <Avatar
-                  alt={user.displayName}
-                  src={user.photoURL}
-                  aria-controls="simple-menu"
-                  aria-haspopup="true"
-                  onClick={handleClick}
-                />
-                <Menu
-                  id="simple-menu"
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={() => handleLogout(firebase)}>
-                    Logout
-                  </MenuItem>
-                </Menu>
-              </div>
-            )}
-          
           </Toolbar>
+        </IfFirebaseUnAuthed>
+        <IfFirebaseAuthed>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="menu"
+              >
+                <Tooltip title="Add new Album" aria-label="add">
+                  <Fab color="primary" className={classes.fab}>
+                    <AddIcon />
+                  </Fab>
+                </Tooltip>
+              </IconButton>
+              <Typography variant="h6" className={classes.title}>
+                My Albums
+              </Typography>
+              <MenuIconTopRight />
+            </Toolbar>
           </AppBar>
-      </IfFirebaseAuthed>
-      
-      
+        </IfFirebaseAuthed>
+      </AppBar>
     </div>
   );
 }
