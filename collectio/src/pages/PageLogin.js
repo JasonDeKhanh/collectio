@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
+import { firebase } from "@firebase/app";
 
 function PageLogin() {
   const handleGoogleSignIn = (firebase) => {
@@ -15,7 +16,7 @@ function PageLogin() {
           <Button
             variant="contained"
             color="primary"
-            onClick={(firebase) => handleGoogleSignIn(firebase)}
+            onClick={() => handleGoogleSignIn(firebase)}
           >
             Sign in with Google
           </Button>

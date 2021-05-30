@@ -3,7 +3,7 @@ import { useState } from "react";
 import AppBar1 from "../components/AppBar1";
 import SpacingGrid from "../components/Grid";
 
-import CreateNewAlbumPopup from "../components/CreateNewAlbum";
+import CreateNewAlbumPopup from "../components/CreateNewAlbumPopup";
 
 function MyAlbumsPage() {
   const [buttonPopup, setButtonPopup] = useState(false);
