@@ -70,7 +70,7 @@ export default function AppBar1() {
         <IfFirebaseAuthed>
           <AppBar position="static">
             <Toolbar>
-              <IconButton
+              {/*<IconButton
                 edge="start"
                 className={classes.menuButton}
                 color="inherit"
@@ -81,7 +81,7 @@ export default function AppBar1() {
                     <AddIcon />
                   </Fab>
                 </Tooltip>
-              </IconButton>
+              </IconButton>*/}
               <Typography variant="h6" className={classes.title}>
                 My Albums
               </Typography>
