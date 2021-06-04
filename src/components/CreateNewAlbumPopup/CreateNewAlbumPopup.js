@@ -1,28 +1,23 @@
 import React from "react";
-import "./CreateNewAlbumPopup.css";
+
+import { useState } from "react";
+
+import Popup from "../Popup";
 
 function CreateNewAlbumPopup(props) {
-  return props.trigger ? (
+  const buttonPopup = props.trigger;
+  const setButtonPopup = props.setTrigger;
+
+  return (
     <div>
-      <div className="popup">
-        <div className="popup-inner">
-          <button className="close-btn" onClick={() => props.setTrigger(false)}>
-            Close
-          </button>
-          {props.children}
-          <div>
-            <h3> Add a New Album </h3>
-            
-          </div>
-
-          <button className="create-btn"> Create</button>
-
-          
-        </div>
-      </div>
+      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+        <h1>Hello bleh bleh bleh</h1>
+        Test test walah
+        <br></br>
+        <br></br>
+        <button> Create new album </button>
+      </Popup>
     </div>
-  ) : (
-    ""
   );
 }
 

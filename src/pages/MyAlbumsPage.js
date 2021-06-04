@@ -17,6 +17,7 @@ function MyAlbumsPage() {
           Create New Album{" "}
         </button>
       </main>
+
       <CreateNewAlbumPopup trigger={buttonPopup} setTrigger={setButtonPopup} />
     </div>
   );
