@@ -1,29 +1,10 @@
 import React from "react";
-import { useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
-import AddIcon from "@material-ui/icons/Add";
-import Fab from "@material-ui/core/Fab";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Tooltip from "@material-ui/core/Tooltip";
 
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  IconButton,
-  Avatar,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
-import {
-  FirebaseAuthConsumer,
-  IfFirebaseAuthed,
-  IfFirebaseUnAuthed,
-} from "@react-firebase/auth";
+import { IfFirebaseAuthed, IfFirebaseUnAuthed } from "@react-firebase/auth";
 
 import MenuIconTopRight from "./MenuIconTopRight";
 
@@ -42,8 +23,10 @@ const useStyles = makeStyles((theme) => ({
 export default function AppBar1() {
   const classes = useStyles();
 
+  /*
   const [anchorEl, setAnchorEl] = useState(null);
 
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -52,10 +35,11 @@ export default function AppBar1() {
     setAnchorEl(null);
   };
 
+  
   const handleLogout = (firebase) => {
     handleClose();
     firebase.auth().signOut();
-  };
+  };*/
 
   return (
     <div className={classes.root}>

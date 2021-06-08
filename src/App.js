@@ -1,17 +1,8 @@
-import { useState } from "react";
 import {
   FirebaseAuthConsumer,
   IfFirebaseAuthed,
-  IfFirebaseUnAuthed
+  IfFirebaseUnAuthed,
 } from "@react-firebase/auth";
-import {
-  AppBar,
-  Avatar,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Typography
-} from "@material-ui/core";
 
 import MyAlbumsPage from "./pages/MyAlbumsPage";
 import PageLogin from "./pages/PageLogin";
@@ -38,7 +29,7 @@ export default function App() {
   );
 }
 
-{/*}
+/*
 function AppShell() {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -59,4 +50,4 @@ function AppShell() {
     <AppBar1 />
   );
 }
-*/}
+*/
