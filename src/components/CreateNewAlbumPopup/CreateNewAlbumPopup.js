@@ -31,7 +31,7 @@ function CreateNewAlbumPopup(props) {
         <h1>Create New Album</h1>
 
         <br></br>
-        <form onChange={onSubmit}>
+        <form onSubmit={onSubmit}>
           <div>
             <label htmlFor="album-name">Album Name:</label>
             <br />
@@ -62,7 +62,10 @@ function CreateNewAlbumPopup(props) {
             <label htmlFor="landscape">Landscape</label>
           </div>
           <div>
-            <button type="submit"> Create new album </button>
+            <button type="submit" onClick={() => setButtonPopup(false)}>
+              {" "}
+              Create new album{" "}
+            </button>
           </div>
         </form>
         <br></br>
