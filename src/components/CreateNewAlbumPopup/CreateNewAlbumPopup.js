@@ -25,13 +25,13 @@ function CreateNewAlbumPopup(props) {
           <div>
             <input
               type="radio"
-              name="orientation-portrait"
+              name="orientation"
               id="album-orientation-portrait"
             />
             <label htmlFor="album-orientation-portrait">Portrait</label>
             <input
               type="radio"
-              name="orientation-landscape"
+              name="orientation"
               id="album-orientation-landscape"
             />
             <label htmlFor="album-orientation-landscape">Landscape</label>
