@@ -20,22 +20,8 @@ function CreateNewAlbumPopup(props) {
     });
   };
 
-  const onNameChange = (e) => {
-    setAlbum({
-      ...album,
-      name: e.target.value,
-    });
-  };
-
-  const onOrientationChange = (e) => {
-    setAlbum({
-      ...album,
-      orientation: e.target.value,
-    });
-  };
-
   const onSubmit = (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     console.log(album);
   };
 
