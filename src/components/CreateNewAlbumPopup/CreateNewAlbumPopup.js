@@ -21,8 +21,15 @@ function CreateNewAlbumPopup(props) {
   };
 
   const onSubmit = (e) => {
+    //process creating album
     e.preventDefault();
     console.log(album);
+    setButtonPopup(false);
+
+    setAlbum({
+      name: "",
+      orientation: "",
+    });
   };
 
   return (
@@ -31,7 +38,7 @@ function CreateNewAlbumPopup(props) {
         <h1>Create New Album</h1>
 
         <br></br>
-        <form onChange={onSubmit}>
+        <form id="create-album-form" onSubmit={onSubmit}>
           <div>
             <label htmlFor="album-name">Album Name:</label>
             <br />
