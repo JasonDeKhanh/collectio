@@ -11,6 +11,8 @@ import "./styles.css";
 
 import AppShell from "./components/AppShell";
 
+import firebase from '@firebase/app';
+
 export default function App() {
   return (
     <div className="App">

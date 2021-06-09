@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import App from './App';
+
+import { firebase } from "@firebase/app";
 import { config } from "./config/firebase";
 
 import reportWebVitals from './reportWebVitals';
 
 import { FirebaseAuthProvider } from "@react-firebase/auth";
 
-import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
 

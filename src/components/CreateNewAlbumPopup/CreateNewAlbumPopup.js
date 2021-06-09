@@ -4,9 +4,14 @@ import { useState } from "react";
 
 import Popup from "../Popup";
 
+import firebase from '@firebase/app';
+
+
 function CreateNewAlbumPopup(props) {
   const buttonPopup = props.trigger;
   const setButtonPopup = props.setTrigger;
+
+  const db = firebase.firestore();
 
   const [album, setAlbum] = useState({
     name: "",
@@ -24,6 +29,7 @@ function CreateNewAlbumPopup(props) {
     //process creating album
     e.preventDefault();
     console.log(album);
+    db.collection('albums').add(album);
     setButtonPopup(false);
 
     setAlbum({
