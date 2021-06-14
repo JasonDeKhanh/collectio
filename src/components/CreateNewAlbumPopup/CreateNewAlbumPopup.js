@@ -28,7 +28,10 @@ function CreateNewAlbumPopup(props) {
     //process creating album
     e.preventDefault();
     console.log(album);
-    db.collection("albums").add(album);
+
+    const uid = firebase.auth().currentUser?.uid;
+
+    db.collection("users").doc(uid).collection("albums").add(album);
     setButtonPopup(false);
 
     setAlbum({

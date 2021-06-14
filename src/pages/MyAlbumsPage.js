@@ -20,7 +20,11 @@ function MyAlbumsPage() {
 
   useEffect(() => {
     (async () => {
-      const snapshot = await db.collection("albums").get();
+      const snapshot = await db
+        .collection("users")
+        .doc(uid)
+        .collection("albums")
+        .get();
       const albumsArray = [];
       snapshot.forEach((doc) => {
         albumsArray.push({
