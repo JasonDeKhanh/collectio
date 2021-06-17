@@ -9,6 +9,14 @@ import styles from "../components/CreateNewAlbumButton.module.css";
 import firebase from "@firebase/app";
 import "@firebase/firestore";
 
+import { makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from "@material-ui/icons/Info";
+
 function MyAlbumsPage() {
   const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -66,6 +74,36 @@ function MyAlbumsPage() {
             </span>
           </div>
         ))}
+      </div>
+
+      <div name="album-list">
+        <div className={albums.root}>
+          <GridList cellHeight={180} className={albums.gridList}>
+            <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
+              <ListSubheader component="div">Albums</ListSubheader>
+            </GridListTile>
+            {albums.map((album) => (
+              <GridListTile key={album.img}>
+                <img src={album.img} alt={album.title} />
+                <GridListTileBar
+                  title={album.name}
+                  /*subtitle={
+                    <span>by: {album.author}}</span>
+                    //re add in the future if we want authors
+                  }*/
+                  actionIcon={
+                    <IconButton
+                      aria-label={`info about ${album.title}`}
+                      className={albums.icon}
+                    >
+                      <InfoIcon />
+                    </IconButton>
+                  }
+                />
+              </GridListTile>
+            ))}
+          </GridList>
+        </div>
       </div>
     </div>
   );
