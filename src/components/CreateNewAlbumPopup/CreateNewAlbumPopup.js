@@ -37,7 +37,7 @@ function CreateNewAlbumPopup(props) {
     const storageRef = firebase.storage().ref();
     const fileRef = storageRef.child(file.name);
     await fileRef.put(file);
-    setFileUrl(await fileRef.getDownloadURL());
+    setFileUrl(fileRef.getDownloadURL());
   };
 
   const onSubmit = (e) => {

@@ -76,6 +76,7 @@ function MyAlbumsPage() {
         {albums.map((album) => (
           <div className="album-item">
             <h4>{album.name}</h4>
+            <img src={album.coverImg} alt="album picture" />
             <span>
               <strong>Orientation:</strong> {album.orientation}
             </span>
@@ -91,7 +92,7 @@ function MyAlbumsPage() {
             </GridListTile>
             {albums.map((album) => (
               <GridListTile key={album.img}>
-                <img src={album.img} alt={album.title} />
+                <img src={album.coverImg} alt={album.title} />
                 <GridListTileBar
                   title={album.name}
                   /*subtitle={
