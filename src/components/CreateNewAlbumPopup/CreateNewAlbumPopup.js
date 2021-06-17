@@ -27,6 +27,7 @@ function CreateNewAlbumPopup(props) {
   const onChange = (e) => {
     setAlbum({
       ...album,
+      coverImg: fileUrl,
       [e.target.name]: e.target.value,
     });
   };
@@ -50,7 +51,7 @@ function CreateNewAlbumPopup(props) {
     setButtonPopup(false);
 
     setAlbum({
-      coverImg: fileUrl,
+      coverImg: "",
       name: "",
       orientation: "",
     });
