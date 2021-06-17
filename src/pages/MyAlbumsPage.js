@@ -17,6 +17,8 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 
+//import duck from "../components/CreateNewAlbumPopup/duck.jpg";
+
 function MyAlbumsPage() {
   const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -79,7 +81,7 @@ function MyAlbumsPage() {
       <div name="album-list">
         <div className={albums.root}>
           <GridList cellHeight={180} className={albums.gridList}>
-            <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
+            <GridListTile key="Subheader" cols={4} style={{ height: "auto" }}>
               <ListSubheader component="div">Albums</ListSubheader>
             </GridListTile>
             {albums.map((album) => (

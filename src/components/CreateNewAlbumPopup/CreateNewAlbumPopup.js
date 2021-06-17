@@ -7,12 +7,15 @@ import Popup from "../Popup";
 import firebase from "@firebase/app";
 import "@firebase/firestore";
 
+import duck from "./duck.jpg";
+
 function CreateNewAlbumPopup(props) {
   const buttonPopup = props.trigger;
   const setButtonPopup = props.setTrigger;
   const db = props.db;
 
   const [album, setAlbum] = useState({
+    img: { duck },
     name: "",
     orientation: "",
   });
