@@ -8,6 +8,7 @@ import styles from "../components/CreateNewAlbumButton.module.css";
 
 import firebase from "@firebase/app";
 import "@firebase/firestore";
+import "@firebase/storage";
 
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
@@ -16,6 +17,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
+import { FirebaseAuthConsumer } from "@react-firebase/auth";
 
 //import duck from "../components/CreateNewAlbumPopup/duck.jpg";
 
@@ -23,6 +25,8 @@ function MyAlbumsPage() {
   const [buttonPopup, setButtonPopup] = useState(false);
 
   const db = firebase.firestore();
+
+  //const storage = firebase.storage();
 
   const [albums, setAlbums] = useState([]);
 
@@ -63,6 +67,7 @@ function MyAlbumsPage() {
           trigger={buttonPopup}
           setTrigger={setButtonPopup}
           db={db}
+          //storage={storage}
         />
       </div>
 
