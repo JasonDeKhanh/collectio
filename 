@@ -1,0 +1,243 @@
+[33mcommit a9f4a761c36dcdc1cfbf5bb5459ffe34fdaf1a21[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Thu Jun 17 14:46:57 2021 +0800
+
+    more grid list stuff
+
+[33mcommit 00d83b2d6237caa307869507d3ea6e06dd4fa85a[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Thu Jun 17 13:58:08 2021 +0800
+
+    started grid list my albums page
+
+[33mcommit a3ba01e9e6dec70fe6466f121391072823116560[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Tue Jun 15 06:15:41 2021 +0800
+
+    changed onSubmit createNewAlbum and initial test render to render only albums tied to a user, not everything :D
+
+[33mcommit 68eb356243dbcdb48e1c8beba64039b3fab491b5[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Mon Jun 14 22:51:13 2021 +0800
+
+    copied over the code to show albums list from firestore, next step is to render only the user's saved albums, not all
+
+[33mcommit 86a6d0fd3c9e7ada4174db92ba84881b52ad9836[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Sat Jun 12 03:03:46 2021 +0800
+
+    moved db=firebase.firestore up from CreateNew.. to MyAlbumsPage
+
+[33mcommit 25b06a31edc783832c2e0ada21f714601eef045e[m
+Author: br234 <brendahangjh@gmail.com>
+Date:   Wed Jun 9 14:02:32 2021 +0800
+
+    Added firestore database
+
+[33mcommit e6f235e7298a800f9c10bbbea3d9cc8cb96e7a5d[m
+Merge: b9483be c2740c2
+Author: br234 <brendahangjh@gmail.com>
+Date:   Wed Jun 9 09:58:14 2021 +0800
+
+    Merge branch 'main' of https://github.com/JasonDeKhanh/Collectio
+
+[33mcommit c2740c2b810c963eb634d1fdc40d4585bd4c3b7d[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Wed Jun 9 08:12:52 2021 +0800
+
+    make it so create new album button will reset the input fields
+
+[33mcommit 6d4af47e066f6052dcc626b7bfab0a2040df73cd[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Wed Jun 9 05:57:00 2021 +0800
+
+    make create button close, and fixed refresh issue
+
+[33mcommit b9483bec7a67554767ae9871b05af5a7e910ef69[m
+Merge: 4a1ac2b 92063ec
+Author: br234 <brendahangjh@gmail.com>
+Date:   Tue Jun 8 22:34:35 2021 +0800
+
+    merge
+
+[33mcommit 4a1ac2b32a2d92137d6a1476f823c68d4fdbcc19[m
+Author: br234 <brendahangjh@gmail.com>
+Date:   Tue Jun 8 22:32:46 2021 +0800
+
+    sth
+
+[33mcommit 92063ecfa593fb88ffa3e4890661a1a3c4234ce1[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Tue Jun 8 22:26:37 2021 +0800
+
+    onSubmit
+
+[33mcommit 5eb2d393cf4fe7811fc6af096c7f3d539d134648[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Tue Jun 8 18:44:09 2021 +0800
+
+    kinda worked on the form submitting create new album
+
+[33mcommit 76e263cfa437013693017130dc478717a66b424d[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Tue Jun 8 14:56:30 2021 +0800
+
+    start create new album menu
+
+[33mcommit 21a1759e6e4ff340b4a1e8b9d8cdb92f137e3f6b[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Sat Jun 5 00:03:37 2021 +0800
+
+    Abstracted out Popup
+
+[33mcommit 1c7c08be0d3c7231b742862c42118102a100a22d[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Mon May 31 00:39:49 2021 +0800
+
+    remove + button top left corner
+
+[33mcommit 1359d2a9274677bb3685af7ce7b248d4009d2b4c[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Sun May 30 18:47:20 2021 +0800
+
+    deploy stuff
+
+[33mcommit 93d6d9bf39de3ce3c71fcacf6e53d625096b57c1[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Sun May 30 18:30:13 2021 +0800
+
+    add homepage: '.'
+
+[33mcommit 7d375c275dcd337be91afe7dd9a0d4d8dfe5bb6d[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Sun May 30 18:00:11 2021 +0800
+
+    fixed folder
+
+[33mcommit dfc2e59daa49cea5084e00c318cd873560f45d69[m
+Merge: fe5e1a6 677c5ca
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Sun May 30 17:45:05 2021 +0800
+
+    to deploy
+
+[33mcommit fe5e1a67973667a65c27d6be65f3438c4173e43c[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Sun May 30 17:43:31 2021 +0800
+
+    push to deploy
+
+[33mcommit 677c5caa713630439c95b4d801455e03248662ce[m
+Author: br234 <brendahangjh@gmail.com>
+Date:   Sat May 29 22:37:26 2021 +0800
+
+    Edited My Albums Page
+
+[33mcommit c919abef613b2d29cae0a11442eb4e7e92dca831[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Sat May 29 20:55:11 2021 +0800
+
+    Created Create New Album button
+
+[33mcommit 2877729da0f30b4dd4364187b41d0490a426c17a[m
+Author: br234 <brendahangjh@gmail.com>
+Date:   Sat May 29 13:28:45 2021 +0800
+
+    Put Menu Icon in separate file
+
+[33mcommit 0e5036dec62457a01aa9ffaaa0e6eee607b892b0[m
+Author: br234 <brendahangjh@gmail.com>
+Date:   Sat May 29 12:56:55 2021 +0800
+
+    Modified App Bar
+
+[33mcommit 7d4ed2aa8039cbf264061ff1321957fd7ac1c83e[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Fri May 28 21:24:06 2021 +0800
+
+    Abstracted AppShell
+
+[33mcommit 6466562cd9f7a91a8f4b358891e8cf76dce2162d[m
+Author: br234 <brendahangjh@gmail.com>
+Date:   Fri May 28 17:49:02 2021 +0800
+
+    Removed redundant Logout button
+
+[33mcommit 1ddb039198d263691ae93087813d9f639c9e6ffa[m
+Author: br234 <brendahangjh@gmail.com>
+Date:   Fri May 28 17:43:05 2021 +0800
+
+    ok
+
+[33mcommit b38ca38ef69bf74d7249737e140c3292e130f087[m
+Merge: d476ecc 4c66a1f
+Author: br234 <brendahangjh@gmail.com>
+Date:   Fri May 28 17:41:26 2021 +0800
+
+    Merge branch 'main' of https://github.com/JasonDeKhanh/Collectio
+
+[33mcommit d476ecca4a70015d9b2f6c1ca5776661bddf3809[m
+Author: br234 <brendahangjh@gmail.com>
+Date:   Fri May 28 17:41:06 2021 +0800
+
+    ok
+
+[33mcommit 4c66a1f433c99dc02c722200425f08f87667c8b6[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Fri May 28 17:38:39 2021 +0800
+
+    Remove extra AppBar, fix logout function abit
+
+[33mcommit 526af6090cfb9d2aacbb1b2a5a783d41357a2f19[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Fri May 28 17:13:42 2021 +0800
+
+    Import and wrap FirebaseAuthProvider around App.
+
+[33mcommit 1aa465462d8fb16b8b8dc8cd02b2ee97d5d25c1d[m
+Author: br234 <brendahangjh@gmail.com>
+Date:   Fri May 28 16:47:18 2021 +0800
+
+    Added Login page and My Albums page
+
+[33mcommit 16fa7ea6c8b1de8ffd954a0c460b70b01afabc31[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Fri May 28 16:14:41 2021 +0800
+
+    Add config lines into firebase config file
+
+[33mcommit 50c59045d0d19d02ee66054bb2e5434daf5dae37[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Fri May 28 16:10:49 2021 +0800
+
+    Add Firebase config
+
+[33mcommit 4ad0f4bb75c8ccef88b5530ccbf65726e5cde3d0[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Fri May 28 00:51:34 2021 +0800
+
+    Changed stuff to become react app
+
+[33mcommit f84ff09d8d79cfdf85fe9402b77ca30eae38e98a[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Thu May 27 14:20:37 2021 +0800
+
+    add placeholder README files to 4 folders inside src/
+
+[33mcommit 34b4b5e01544c75a4138e1dcefa76ad1e314e95c[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Thu May 27 14:10:35 2021 +0800
+
+    Add src folder, and components, css, img, js folders. Add index html file
+
+[33mcommit a41123a74f9d4d5490c5eea91bd27b817aa25029[m
+Author: Jason <giakhanh.lehoang@gmail.com>
+Date:   Tue May 25 16:39:15 2021 +0800
+
+    test commit
+
+[33mcommit 1b8dc573fb7934214542b024fcc9c52e0a37f72c[m
+Author: br234 <61417836+br234@users.noreply.github.com>
+Date:   Tue May 25 16:10:49 2021 +0800
+
+    Create README.md

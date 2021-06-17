@@ -15,7 +15,7 @@ function CreateNewAlbumPopup(props) {
   const db = props.db;
 
   const [album, setAlbum] = useState({
-    img: { duck },
+    coverImg: "",
     name: "",
     orientation: "",
   });
