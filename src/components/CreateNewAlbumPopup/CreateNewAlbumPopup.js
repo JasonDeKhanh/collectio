@@ -6,16 +6,20 @@ import Popup from "../Popup";
 
 import firebase from "@firebase/app";
 import "@firebase/firestore";
+import "firebase/storage";
 
-import duck from "./duck.jpg";
+//import duck from "./duck.jpg";
 
 function CreateNewAlbumPopup(props) {
   const buttonPopup = props.trigger;
   const setButtonPopup = props.setTrigger;
   const db = props.db;
+  //const storage = props.storage;
+
+  const [fileUrl, setFileUrl] = useState(null);
 
   const [album, setAlbum] = useState({
-    img: { duck },
+    coverImg: null,
     name: "",
     orientation: "",
   });
@@ -25,6 +29,14 @@ function CreateNewAlbumPopup(props) {
       ...album,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const onFileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = firebase.storage().ref();
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+    setFileUrl(await fileRef.getDownloadURL());
   };
 
   const onSubmit = (e) => {
@@ -38,6 +50,7 @@ function CreateNewAlbumPopup(props) {
     setButtonPopup(false);
 
     setAlbum({
+      coverImg: fileUrl,
       name: "",
       orientation: "",
     });
@@ -79,6 +92,11 @@ function CreateNewAlbumPopup(props) {
             />
             <label htmlFor="landscape">Landscape</label>
           </div>
+          <br></br>
+          <div>
+            <input type="file" onChange={onFileChange} />
+          </div>
+          <br></br>
           <div>
             <button type="submit"> Create new album </button>
           </div>
