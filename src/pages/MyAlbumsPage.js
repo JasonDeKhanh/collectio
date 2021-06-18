@@ -71,7 +71,7 @@ function MyAlbumsPage() {
         />
       </div>
 
-      <div name="album list test">
+      {/* <div name="album list test">
         <h2>test album list</h2>
         {albums.map((album) => (
           <div className="album-item">
@@ -82,7 +82,7 @@ function MyAlbumsPage() {
             </span>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div name="album-list">
         <div className={albums.root}>
