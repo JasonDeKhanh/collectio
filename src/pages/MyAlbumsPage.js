@@ -61,7 +61,7 @@ function MyAlbumsPage() {
       backgroundColor: theme.palette.background.paper,
     },
     gridList: {
-      width: 500,
+      width: 1000,
       height: 450,
     },
     icon: {
@@ -107,9 +107,11 @@ function MyAlbumsPage() {
 
       <div className={styles.albumsList}>
         <div className={albumsList.root}>
-          <GridList cellHeight={200} className={albumsList.gridList}>
-            <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
-              <ListSubheader component="div">Albums</ListSubheader>
+          <GridList cellHeight={200} cols={4} className={albumsList.gridList}>
+            <GridListTile key="Subheader" cols={1} style={{ height: "auto" }}>
+              <ListSubheader component="div">
+                We can put the create new Album button here
+              </ListSubheader>
             </GridListTile>
             {albums.map((album) => (
               <GridListTile key={album.img}>
