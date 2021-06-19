@@ -4,7 +4,7 @@ import AppBar1 from "../components/AppBar1";
 
 import CreateNewAlbumPopup from "../components/CreateNewAlbumPopup";
 
-import styles from "../components/CreateNewAlbumButton.module.css";
+import styles from "./MyAlbumsPage.module.css";
 
 import firebase from "@firebase/app";
 import "@firebase/firestore";
@@ -50,12 +50,33 @@ function MyAlbumsPage() {
     })();
   }, []);
 
+  // Grid List style
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-around",
+      overflow: "hidden",
+      backgroundColor: theme.palette.background.paper,
+    },
+    gridList: {
+      width: 500,
+      height: 450,
+    },
+    icon: {
+      color: "rgba(255, 255, 255, 0.54)",
+    },
+  }));
+
+  const albumsList = useStyles();
+
   return (
     <div>
       <div>
         <main>
           <button
-            className={styles.button}
+            className={styles.buttonCreateAlbum}
             onClick={() => setButtonPopup(true)}
           >
             {" "}
@@ -84,10 +105,10 @@ function MyAlbumsPage() {
         ))}
       </div> */}
 
-      <div name="album-list">
-        <div className={albums.root}>
-          <GridList cellHeight={180} className={albums.gridList}>
-            <GridListTile key="Subheader" cols={4} style={{ height: "auto" }}>
+      <div className={styles.albumList}>
+        <div className={albumsList.root}>
+          <GridList cellHeight={200} className={albumsList.gridList}>
+            <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
               <ListSubheader component="div">Albums</ListSubheader>
             </GridListTile>
             {albums.map((album) => (
