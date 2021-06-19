@@ -74,7 +74,7 @@ function MyAlbumsPage() {
   return (
     <div>
       <div>
-        <main>
+        <div>
           <button
             className={styles.buttonCreateAlbum}
             onClick={() => setButtonPopup(true)}
@@ -82,7 +82,7 @@ function MyAlbumsPage() {
             {" "}
             Create New Album{" "}
           </button>
-        </main>
+        </div>
 
         <CreateNewAlbumPopup
           trigger={buttonPopup}
@@ -105,7 +105,7 @@ function MyAlbumsPage() {
         ))}
       </div> */}
 
-      <div className={styles.albumList}>
+      <div className={styles.albumsList}>
         <div className={albumsList.root}>
           <GridList cellHeight={200} className={albumsList.gridList}>
             <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
@@ -123,7 +123,7 @@ function MyAlbumsPage() {
                   actionIcon={
                     <IconButton
                       aria-label={`info about ${album.title}`}
-                      className={albums.icon}
+                      className={albumsList.icon}
                     >
                       <InfoIcon />
                     </IconButton>

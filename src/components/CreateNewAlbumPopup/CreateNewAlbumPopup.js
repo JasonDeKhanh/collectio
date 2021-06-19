@@ -11,6 +11,8 @@ import "@firebase/storage";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 
+import styles from "./CreateNewAlbumPopup.module.css";
+
 //import duck from "./duck.jpg";
 
 function CreateNewAlbumPopup(props) {
@@ -71,8 +73,8 @@ function CreateNewAlbumPopup(props) {
     });
   };
 
-  // Modal stuff
-  function getModalStyle() {
+  // Popup Modal stuff
+  function getPopupStyle() {
     const top = 50;
     const left = 50;
 
@@ -82,6 +84,8 @@ function CreateNewAlbumPopup(props) {
       transform: `translate(-${top}%, -${left}%)`,
     };
   }
+
+  const [popupStyle] = React.useState(getPopupStyle);
 
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -94,11 +98,11 @@ function CreateNewAlbumPopup(props) {
     },
   }));
 
-  const classes = useStyles();
+  const Popup = useStyles();
 
   // Body of modal
   const body = (
-    <div className={classes.paper}>
+    <div className={Popup.paper} style={popupStyle}>
       <h2 id="simple-modal-title">Text in a modal</h2>
       <p id="simple-modal-description">
         Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
