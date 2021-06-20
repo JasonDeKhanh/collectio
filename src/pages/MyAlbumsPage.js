@@ -75,13 +75,13 @@ function MyAlbumsPage() {
     <div>
       <div>
         <div>
-          <button
+          {/* <button
             className={styles.buttonCreateAlbum}
             onClick={() => setButtonPopup(true)}
           >
             {" "}
             Create New Album{" "}
-          </button>
+          </button> */}
         </div>
 
         <CreateNewAlbumPopup
@@ -91,6 +91,8 @@ function MyAlbumsPage() {
           //storage={storage}
         />
       </div>
+
+      <br></br>
 
       {/* <div name="album list test">
         <h2>test album list</h2>
@@ -109,9 +111,15 @@ function MyAlbumsPage() {
         <div className={albumsList.root}>
           <GridList cellHeight={200} cols={4} className={albumsList.gridList}>
             <GridListTile key="Subheader" cols={1} style={{ height: "auto" }}>
-              <ListSubheader component="div">
-                We can put the create new Album button here
-              </ListSubheader>
+              {/* <ListSubheader component="div"> */}
+              <button
+                className={styles.buttonCreateAlbum}
+                onClick={() => setButtonPopup(true)}
+              >
+                {" "}
+                Create New Album +{" "}
+              </button>
+              {/* </ListSubheader> */}
             </GridListTile>
             {albums.map((album) => (
               <GridListTile key={album.img}>

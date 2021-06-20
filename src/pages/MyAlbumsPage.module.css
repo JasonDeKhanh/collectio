@@ -1,6 +1,8 @@
 .buttonCreateAlbum {
   position: relative;
-  left: 50%;
+  top: 20%;
+  margin-left: 40%;
+  margin-right: 40%;
 }
 
 /* .albumList {
