@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import AppBar1 from "../components/AppBar1";
+import AlbumOptionsButton from "../components/MyAlbumsPage/AlbumOptionsButton";
 
 import CreateNewAlbumPopup from "../components/CreateNewAlbumPopup";
 
@@ -135,7 +136,7 @@ function MyAlbumsPage() {
                       aria-label={`info about ${album.title}`}
                       className={albumsList.icon}
                     >
-                      <InfoIcon />
+                      <AlbumOptionsButton />
                     </IconButton>
                   }
                 />
