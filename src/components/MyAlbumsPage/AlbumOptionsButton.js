@@ -78,12 +78,15 @@ export default function CustomizedMenus() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        
+        <StyledMenuItem component={Link} to="/edit">
           <ListItemIcon>
             <EditIcon fontSize="small" />
-          </ListItemIcon>
+          </ListItemIcon >
           <ListItemText primary="Edit" />
         </StyledMenuItem>
+
+
         <StyledMenuItem>
           <ListItemIcon>
             <LooksIcon fontSize="small" />
