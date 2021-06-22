@@ -17,6 +17,10 @@ import EditIcon from "@material-ui/icons/Edit";
 import LooksIcon from "@material-ui/icons/Looks";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import firebase from "@firebase/app";
+import "@firebase/firestore";
+import "@firebase/storage";
+
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
@@ -48,7 +52,10 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function CustomizedMenus() {
+export default function CustomizedMenus(props) {
+  const db = firebase.firestore();
+  const docID = props.docID;
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -59,7 +66,20 @@ export default function CustomizedMenus() {
     setAnchorEl(null);
   };
 
-  const toEditPage = () => {};
+  const uid = firebase.auth().currentUser?.uid;
+  const handleDelete = () => {
+    db.collection("users")
+      .doc(uid)
+      .collection("albums")
+      .doc(docID)
+      .delete()
+      .then(() => {
+        console.log("Document successfully deleted!");
+      })
+      .catch((error) => {
+        console.error("Error removing document: ", error);
+      });
+  };
 
   return (
     <div>
@@ -91,7 +111,8 @@ export default function CustomizedMenus() {
           </ListItemIcon>
           <ListItemText primary="View" />
         </StyledMenuItem>
-        <StyledMenuItem>
+
+        <StyledMenuItem onClick={handleDelete}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />
           </ListItemIcon>

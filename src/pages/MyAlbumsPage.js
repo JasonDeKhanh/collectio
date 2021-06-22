@@ -53,26 +53,13 @@ function MyAlbumsPage(props) {
     })();
   }, []);
 
+  useEffect(() => {
+    const uid = firebase.auth().currentUser?.uid;
+    const db = firebase.firestore();
+    db.collection("users").doc(uid).set({ albums: albums });
+  }, [albums]);
+
   // Grid List style
-
-  var width;
-  window.onresize = window.onload = function () {
-    width = this.innerWidth;
-  };
-
-  let getGridListCols = () => {
-    if (width > 1920) {
-      return 5;
-    } else if (width > 1280) {
-      return 4;
-    } else if (width > 960) {
-      return 3;
-    } else if (width > 600) {
-      return 2;
-    } else {
-      return 1;
-    }
-  };
 
   function getCols(screenWidth) {
     if (isWidthUp("lg", screenWidth)) {
@@ -109,68 +96,65 @@ function MyAlbumsPage(props) {
 
   return (
     <div>
-      <div>{width}</div>
       <div>
-        <div>
-          {/* <button
-            className={styles.buttonCreateAlbum}
-            onClick={() => setButtonPopup(true)}
-          >
-            {" "}
-            Create New Album{" "}
-          </button> */}
-        </div>
-
         <CreateNewAlbumPopup
           trigger={buttonPopup}
           setTrigger={setButtonPopup}
           db={db}
-          //storage={storage}
         />
       </div>
 
       <br></br>
 
-      <div>
-        <div className={albumsList.root}>
-          <GridList
-            cellHeight={200}
-            cols={cols}
-            className={albumsList.gridList}
-          >
-            <GridListTile key="Subheader" cols={1} style={{ height: "auto" }}>
-              {/* <ListSubheader component="div"> */}
-              <button
-                className={styles.buttonCreateAlbum}
-                onClick={() => setButtonPopup(true)}
-              >
-                {" "}
-                Create New Album +{" "}
-              </button>
-              {/* </ListSubheader> */}
-            </GridListTile>
-            {albums.map((album) => (
-              <GridListTile key={album.img}>
-                <img src={album.coverImg} alt={album.title} />
-                <GridListTileBar
-                  title={album.name}
-                  /*subtitle={
+      <AlbumList
+        albumsList={albumsList}
+        cols={cols}
+        setButtonPopup={setButtonPopup}
+        albums={albums}
+      />
+    </div>
+  );
+}
+
+function AlbumList(props) {
+  const { albumsList, cols, setButtonPopup, albums } = props;
+
+  return (
+    <div>
+      <div className={albumsList.root}>
+        <GridList cellHeight={200} cols={cols} className={albumsList.gridList}>
+          <GridListTile key="Subheader" cols={1} style={{ height: "auto" }}>
+            {/* <ListSubheader component="div"> */}
+            <button
+              className={styles.buttonCreateAlbum}
+              onClick={() => setButtonPopup(true)}
+            >
+              {" "}
+              Create New Album +{" "}
+            </button>
+            {/* </ListSubheader> */}
+          </GridListTile>
+          {albums.map((album) => (
+            <GridListTile key={album.img}>
+              <img src={album.coverImg} alt={album.title} />
+              <GridListTileBar
+                title={album.name}
+                /*subtitle={
                     <span>by: {album.author}}</span>
                     //re add in the future if we want authors
                   }*/
-                  actionIcon={
-                    <IconButton
-                      aria-label={`info about ${album.title}`}
-                      className={albumsList.icon}
-                    >
-                      <AlbumOptionsButton />
-                    </IconButton>
-                  }
-                />
-              </GridListTile>
-            ))}
-          </GridList>
-        </div>
+                actionIcon={
+                  <IconButton
+                    aria-label={`info about ${album.title}`}
+                    className={albumsList.icon}
+                  >
+                    <AlbumOptionsButton docID={album.id} />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+          ))}
+        </GridList>
       </div>
     </div>
   );

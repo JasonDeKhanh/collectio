@@ -31,6 +31,7 @@ function CreateNewAlbumPopup(props) {
     coverImg: "",
     name: "",
     orientation: "",
+    id: "",
   });
 
   const onChange = (e) => {
@@ -70,6 +71,7 @@ function CreateNewAlbumPopup(props) {
       coverImg: "",
       name: "",
       orientation: "",
+      id: "",
     });
   };
 
