@@ -45,7 +45,6 @@ export default function App() {
                     <MyAlbumsPage />
                   </Route>
                   <Route path="/edit">
-                    <AppShell />
                     <EditAlbumPage />
                   </Route>
                 </Switch>
