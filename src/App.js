@@ -54,6 +54,7 @@ export default function App() {
             {/* <MyAlbumsPage /> */}
           </IfFirebaseAuthed>
           <IfFirebaseUnAuthed>
+            <AppShell />
             <PageLogin />
           </IfFirebaseUnAuthed>
         </FirebaseAuthConsumer>

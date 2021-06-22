@@ -56,28 +56,21 @@ export default function AppBar1() {
         <IfFirebaseAuthed>
           <AppBar position="static">
             <Toolbar>
-              {/*<IconButton
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="menu"
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
               >
-                <Tooltip title="Add new Album" aria-label="add">
-                  <Fab color="primary" className={classes.fab}>
-                    <AddIcon />
-                  </Fab>
-                </Tooltip>
-              </IconButton>*/}
-
-              <Button
-                href="#text-buttons"
-                color="white"
-                variant="outlined"
-                component={Link}
-                to="/"
-              >
-                My Albums
-              </Button>
+                <Button variant="outlined" component={Link} to="/">
+                  <Typography
+                    variant="h6"
+                    style={{ flexGrow: 1, textAlign: "left", color: "white" }}
+                  >
+                    My Albums
+                  </Typography>
+                </Button>
+              </div>
 
               <Grid container justify="flex-end">
                 <MenuIconTopRight justify="flex-end" />
