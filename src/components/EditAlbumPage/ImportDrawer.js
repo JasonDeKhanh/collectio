@@ -13,6 +13,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 
+import { Button, Grid } from "@material-ui/core";
+import { Link } from "react-router-dom";
+
+import MenuIconTopRight from "../MenuIconTopRight";
+
 import AppBar1 from "../AppBar1";
 
 const drawerWidth = 240;
@@ -46,13 +51,29 @@ export default function ImportDrawer() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {/* <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" noWrap>
-            Clipped drawer
-          </Typography>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Button variant="outlined" component={Link} to="/">
+              <Typography
+                variant="h6"
+                style={{ flexGrow: 1, textAlign: "left", color: "white" }}
+              >
+                My Albums
+              </Typography>
+            </Button>
+          </div>
+
+          <Grid container justify="flex-end">
+            <MenuIconTopRight justify="flex-end" />
+          </Grid>
         </Toolbar>
-      </AppBar> */}
+      </AppBar>
       <Drawer
         className={classes.drawer}
         variant="permanent"

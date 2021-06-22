@@ -7,9 +7,7 @@ function EditAlbumPage() {
     <div>
       <br></br>
       <h1>Edit Page</h1>
-      <div>
-        <AppShell />
-      </div>
+
       <div>
         <ImportDrawer />
       </div>
