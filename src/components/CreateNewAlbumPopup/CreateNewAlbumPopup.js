@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Popup from "../Popup";
 
@@ -19,7 +19,10 @@ function CreateNewAlbumPopup(props) {
   const buttonPopup = props.trigger;
   const setButtonPopup = props.setTrigger;
   const db = props.db;
-  const storage = props.storage;
+  const albums = props.albums;
+  const setAlbums = props.setAlbums;
+
+  const uid = firebase.auth().currentUser?.uid;
 
   const handleClose = () => {
     setButtonPopup(false);
@@ -60,11 +63,17 @@ function CreateNewAlbumPopup(props) {
   const onSubmit = (e) => {
     //process creating album
     e.preventDefault();
-    console.log(album);
 
-    const uid = firebase.auth().currentUser?.uid;
+    const newAlbum = {
+      ...album,
+      coverImg: fileUrl,
+    };
 
-    db.collection("users").doc(uid).collection("albums").add(album);
+    const newAlbums = [...albums, { ...newAlbum }];
+    db.collection("users").doc(uid).collection("albums").add(newAlbum);
+
+    setAlbums(newAlbums);
+
     setButtonPopup(false);
 
     setAlbum({
@@ -74,6 +83,24 @@ function CreateNewAlbumPopup(props) {
       id: "",
     });
   };
+
+  useEffect(() => {
+    (async () => {
+      const snapshot = await db
+        .collection("users")
+        .doc(uid)
+        .collection("albums")
+        .get();
+      const albumsArray = [];
+      snapshot.forEach((doc) => {
+        albumsArray.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
+      setAlbums(albumsArray);
+    })();
+  }, []);
 
   // Popup Modal stuff
   function getPopupStyle() {

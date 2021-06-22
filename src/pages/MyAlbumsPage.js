@@ -53,11 +53,12 @@ function MyAlbumsPage(props) {
     })();
   }, []);
 
-  useEffect(() => {
-    const uid = firebase.auth().currentUser?.uid;
-    const db = firebase.firestore();
-    db.collection("users").doc(uid).set({ albums: albums });
-  }, [albums]);
+  // detect changes in albums and update firestore
+  // useEffect(() => {
+  //   const uid = firebase.auth().currentUser?.uid;
+  //   const db = firebase.firestore();
+  //   db.collection("users").doc(uid).set({ albums: albums });
+  // }, [albums]);
 
   // Grid List style
 
@@ -101,6 +102,8 @@ function MyAlbumsPage(props) {
           trigger={buttonPopup}
           setTrigger={setButtonPopup}
           db={db}
+          albums={albums}
+          setAlbums={setAlbums}
         />
       </div>
 
@@ -111,13 +114,14 @@ function MyAlbumsPage(props) {
         cols={cols}
         setButtonPopup={setButtonPopup}
         albums={albums}
+        setAlbums={setAlbums}
       />
     </div>
   );
 }
 
 function AlbumList(props) {
-  const { albumsList, cols, setButtonPopup, albums } = props;
+  const { albumsList, cols, setButtonPopup, albums, setAlbums } = props;
 
   return (
     <div>
@@ -148,7 +152,11 @@ function AlbumList(props) {
                     aria-label={`info about ${album.title}`}
                     className={albumsList.icon}
                   >
-                    <AlbumOptionsButton docID={album.id} />
+                    <AlbumOptionsButton
+                      docID={album.id}
+                      albums={albums}
+                      setAlbums={setAlbums}
+                    />
                   </IconButton>
                 }
               />
