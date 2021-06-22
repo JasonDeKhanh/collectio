@@ -21,25 +21,13 @@ import firebase from "@firebase/app";
 export default function App() {
   return (
     <div className="App">
-      <AppShell />
-      <div style={{ maxWidth: "64rem", margin: "0 auto" }}>
+      <div style={{ maxWidth: "flex", margin: "0 auto" }}>
         <FirebaseAuthConsumer>
           <IfFirebaseAuthed>
             <Router>
               {/* <Route path={"myalbums"} component={MyAlbumsPage} />
               <Route path={"editalbum"} component={EditAlbumPage} /> */}
               <div>
-                <ul>
-                  <li>
-                    <Link to="/">My Albums</Link>
-                  </li>
-                  <li>
-                    <Link to="/edit">Edit Album</Link>
-                  </li>
-                </ul>
-
-                <hr />
-
                 {/*
           A <Switch> looks through all its children <Route>
           elements and renders the first one whose path
@@ -49,9 +37,15 @@ export default function App() {
         */}
                 <Switch>
                   <Route exact path="/">
+                    <AppShell />
+                    <MyAlbumsPage />
+                  </Route>
+                  <Route path="/myalbums">
+                    <AppShell />
                     <MyAlbumsPage />
                   </Route>
                   <Route path="/edit">
+                    <AppShell />
                     <EditAlbumPage />
                   </Route>
                 </Switch>

@@ -1,8 +1,10 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from "@react-firebase/auth";
 
@@ -66,9 +68,15 @@ export default function AppBar1() {
                   </Fab>
                 </Tooltip>
               </IconButton>*/}
-              <Typography variant="h6" className={classes.title}>
+              <Button
+                href="#text-buttons"
+                color="white"
+                variant="outlined"
+                component={Link}
+                to="/myalbums"
+              >
                 My Albums
-              </Typography>
+              </Button>
               <MenuIconTopRight />
             </Toolbar>
           </AppBar>
