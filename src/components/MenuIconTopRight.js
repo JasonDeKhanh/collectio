@@ -11,6 +11,8 @@ import {
   MenuItem,
   Toolbar,
   Typography,
+  Grid,
+  makeStyles,
 } from "@material-ui/core";
 
 function MenuIconTopRight() {
@@ -29,17 +31,27 @@ function MenuIconTopRight() {
     firebase.auth().signOut();
   };
 
+  const useStyles = makeStyles({
+    avatar: {},
+  });
+
+  const classes = useStyles();
+
   return (
     <IfFirebaseAuthed>
       {({ user, firebase }) => (
         <div>
-          <Avatar
-            alt={user.displayName}
-            src={user.photoURL}
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          />
+          <Grid container justify="flex-end" spacing={24}>
+            <Avatar
+              className={classes.avatar}
+              alt={user.displayName}
+              src={user.photoURL}
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            />
+          </Grid>
+
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}

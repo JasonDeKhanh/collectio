@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Button, Grid } from "@material-ui/core";
 
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from "@react-firebase/auth";
 
@@ -68,16 +68,20 @@ export default function AppBar1() {
                   </Fab>
                 </Tooltip>
               </IconButton>*/}
+
               <Button
                 href="#text-buttons"
                 color="white"
                 variant="outlined"
                 component={Link}
-                to="/myalbums"
+                to="/"
               >
                 My Albums
               </Button>
-              <MenuIconTopRight />
+
+              <Grid container justify="flex-end">
+                <MenuIconTopRight justify="flex-end" />
+              </Grid>
             </Toolbar>
           </AppBar>
         </IfFirebaseAuthed>
