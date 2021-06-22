@@ -1,3 +1,9 @@
 h1 {
-    font-family: 'Homemade Apple', cursive;
+  font-family: "Homemade Apple", cursive;
+}
+
+.signin {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }

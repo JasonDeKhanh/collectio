@@ -11,7 +11,9 @@ import firebase from "@firebase/app";
 import "@firebase/firestore";
 import "@firebase/storage";
 
-import { makeStyles } from "@material-ui/core/styles";
+import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
+
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
@@ -22,7 +24,7 @@ import { FirebaseAuthConsumer } from "@react-firebase/auth";
 
 //import duck from "../components/CreateNewAlbumPopup/duck.jpg";
 
-function MyAlbumsPage() {
+function MyAlbumsPage(props) {
   const [buttonPopup, setButtonPopup] = useState(false);
 
   const db = firebase.firestore();
@@ -53,17 +55,50 @@ function MyAlbumsPage() {
 
   // Grid List style
 
+  var width;
+  window.onresize = window.onload = function () {
+    width = this.innerWidth;
+  };
+
+  let getGridListCols = () => {
+    if (width > 1920) {
+      return 5;
+    } else if (width > 1280) {
+      return 4;
+    } else if (width > 960) {
+      return 3;
+    } else if (width > 600) {
+      return 2;
+    } else {
+      return 1;
+    }
+  };
+
+  function getCols(screenWidth) {
+    if (isWidthUp("lg", screenWidth)) {
+      return 5;
+    }
+
+    if (isWidthUp("md", screenWidth)) {
+      return 3;
+    }
+
+    return 2;
+  }
+
+  const cols = getCols(props.width);
+
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
       flexWrap: "wrap",
-      justifyContent: "space-around",
+      justifyContent: "space-evenly",
       overflow: "hidden",
       backgroundColor: theme.palette.background.paper,
     },
     gridList: {
-      width: 1000,
-      height: 450,
+      width: "90%",
+      height: "100%",
     },
     icon: {
       color: "rgba(255, 255, 255, 0.54)",
@@ -74,6 +109,7 @@ function MyAlbumsPage() {
 
   return (
     <div>
+      <div>{width}</div>
       <div>
         <div>
           {/* <button
@@ -95,22 +131,13 @@ function MyAlbumsPage() {
 
       <br></br>
 
-      {/* <div name="album list test">
-        <h2>test album list</h2>
-        {albums.map((album) => (
-          <div className="album-item">
-            <h4>{album.name}</h4>
-            <img src={album.coverImg} alt="album picture" />
-            <span>
-              <strong>Orientation:</strong> {album.orientation}
-            </span>
-          </div>
-        ))}
-      </div> */}
-
-      <div className={styles.albumsList}>
+      <div>
         <div className={albumsList.root}>
-          <GridList cellHeight={200} cols={4} className={albumsList.gridList}>
+          <GridList
+            cellHeight={200}
+            cols={cols}
+            className={albumsList.gridList}
+          >
             <GridListTile key="Subheader" cols={1} style={{ height: "auto" }}>
               {/* <ListSubheader component="div"> */}
               <button
@@ -149,4 +176,4 @@ function MyAlbumsPage() {
   );
 }
 
-export default MyAlbumsPage;
+export default withWidth()(MyAlbumsPage);
