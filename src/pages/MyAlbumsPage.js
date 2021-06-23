@@ -45,7 +45,6 @@ function MyAlbumsPage(props) {
       const albumsArray = [];
       snapshot.forEach((doc) => {
         albumsArray.push({
-          id: doc.id,
           ...doc.data(),
         });
       });
@@ -138,7 +137,7 @@ function AlbumList(props) {
             </button>
             {/* </ListSubheader> */}
           </GridListTile>
-          {albums.map((album) => (
+          {albums.map((album, index) => (
             <GridListTile key={album.img}>
               <img src={album.coverImg} alt={album.title} />
               <GridListTileBar
@@ -153,7 +152,8 @@ function AlbumList(props) {
                     className={albumsList.icon}
                   >
                     <AlbumOptionsButton
-                      docID={album.id}
+                      album={album}
+                      index={index}
                       albums={albums}
                       setAlbums={setAlbums}
                     />

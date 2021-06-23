@@ -54,9 +54,12 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function CustomizedMenus(props) {
+export default function AlbumOptionsButton(props) {
   const db = firebase.firestore();
-  const docID = props.docID;
+  const thisAlbum = props.album;
+  const index = props.index;
+  const albums = props.albums;
+  const setAlbums = props.setAlbums;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -70,10 +73,16 @@ export default function CustomizedMenus(props) {
 
   const uid = firebase.auth().currentUser?.uid;
   const handleDelete = () => {
+    const tempAlbums = Object.assign([], albums);
+    console.log(index);
+    tempAlbums.splice(index, 1);
+
+    setAlbums(tempAlbums);
+
     db.collection("users")
       .doc(uid)
       .collection("albums")
-      .doc(docID)
+      .doc(index)
       .delete()
       .then(() => {
         console.log("Document successfully deleted!");

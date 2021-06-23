@@ -34,7 +34,7 @@ function CreateNewAlbumPopup(props) {
     coverImg: "",
     name: "",
     orientation: "",
-    id: "",
+    idx: "",
   });
 
   const onChange = (e) => {
@@ -64,13 +64,20 @@ function CreateNewAlbumPopup(props) {
     //process creating album
     e.preventDefault();
 
+    var indexNow = albums.length + 1;
+
     const newAlbum = {
       ...album,
       coverImg: fileUrl,
+      idx: indexNow,
     };
 
     const newAlbums = [...albums, { ...newAlbum }];
-    db.collection("users").doc(uid).collection("albums").add(newAlbum);
+    db.collection("users")
+      .doc(uid)
+      .collection("albums")
+      .doc(indexNow.toString())
+      .set(newAlbum);
 
     setAlbums(newAlbums);
 
@@ -80,27 +87,9 @@ function CreateNewAlbumPopup(props) {
       coverImg: "",
       name: "",
       orientation: "",
-      id: "",
+      idX: "",
     });
   };
-
-  useEffect(() => {
-    (async () => {
-      const snapshot = await db
-        .collection("users")
-        .doc(uid)
-        .collection("albums")
-        .get();
-      const albumsArray = [];
-      snapshot.forEach((doc) => {
-        albumsArray.push({
-          id: doc.id,
-          ...doc.data(),
-        });
-      });
-      setAlbums(albumsArray);
-    })();
-  }, []);
 
   // Popup Modal stuff
   function getPopupStyle() {
