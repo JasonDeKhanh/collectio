@@ -57,7 +57,6 @@ const StyledMenuItem = withStyles((theme) => ({
 export default function AlbumOptionsButton(props) {
   const db = firebase.firestore();
   const thisAlbum = props.album;
-  const index = props.index;
   const albums = props.albums;
   const setAlbums = props.setAlbums;
 
@@ -74,15 +73,23 @@ export default function AlbumOptionsButton(props) {
   const uid = firebase.auth().currentUser?.uid;
   const handleDelete = () => {
     const tempAlbums = Object.assign([], albums);
-    console.log(index);
-    tempAlbums.splice(index, 1);
+    console.log(thisAlbum.id);
+    // tempAlbums.splice(index, 1);
+    // now let's try to delete using array search ;--;
+    for (var i = 0; i < tempAlbums.length; i++) {
+      if (tempAlbums[i].id === thisAlbum.id) {
+        tempAlbums.splice(i, 1);
+        break;
+      }
+    }
 
     setAlbums(tempAlbums);
 
+    // var currIdx = index.toString();
     db.collection("users")
       .doc(uid)
       .collection("albums")
-      .doc(index)
+      .doc(thisAlbum.id) //stub
       .delete()
       .then(() => {
         console.log("Document successfully deleted!");

@@ -46,6 +46,7 @@ function MyAlbumsPage(props) {
       snapshot.forEach((doc) => {
         albumsArray.push({
           ...doc.data(),
+          id: doc.id,
         });
       });
       setAlbums(albumsArray);
@@ -153,7 +154,6 @@ function AlbumList(props) {
                   >
                     <AlbumOptionsButton
                       album={album}
-                      index={index}
                       albums={albums}
                       setAlbums={setAlbums}
                     />

@@ -34,7 +34,6 @@ function CreateNewAlbumPopup(props) {
     coverImg: "",
     name: "",
     orientation: "",
-    idx: "",
   });
 
   const onChange = (e) => {
@@ -64,20 +63,14 @@ function CreateNewAlbumPopup(props) {
     //process creating album
     e.preventDefault();
 
-    var indexNow = albums.length + 1;
-
     const newAlbum = {
       ...album,
       coverImg: fileUrl,
-      idx: indexNow,
     };
 
     const newAlbums = [...albums, { ...newAlbum }];
-    db.collection("users")
-      .doc(uid)
-      .collection("albums")
-      .doc(indexNow.toString())
-      .set(newAlbum);
+
+    db.collection("users").doc(uid).collection("albums").add(newAlbum);
 
     setAlbums(newAlbums);
 
@@ -87,7 +80,6 @@ function CreateNewAlbumPopup(props) {
       coverImg: "",
       name: "",
       orientation: "",
-      idX: "",
     });
   };
 
