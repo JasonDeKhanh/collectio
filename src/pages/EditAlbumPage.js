@@ -34,25 +34,28 @@ function EditAlbumPage() {
     })();
   }, []);
 
-  const { currID } = useParams();
+  const currID = useParams().albumID;
 
-  const tempAlbums = Object.assign([], albums);
+  // const tempAlbums = Object.assign([], albums);
   let currAlbum;
-  // now let's try to delete using array search ;--;
-  for (var i = 0; i < tempAlbums.length; i++) {
-    if (tempAlbums[i].id === currID) {
-      currAlbum = tempAlbums[i];
+  // run through albums array
+  for (var i = 0; i < albums.length; i++) {
+    if (albums[i].id === currID) {
+      currAlbum = albums[i];
       break;
     }
   }
 
+  console.log(currAlbum);
+
   const body = (
     <div>
-      <h1>blablablbalbablabla</h1>
-      <h2> bleh bleh bleh bleh</h2>
-      <h3> blu blu blu blu blu blu blu</h3>
-      <button> click me </button>
-      <h2>{currID}</h2>
+      <h2>{currAlbum?.name}</h2>
+      <img
+        src={currAlbum?.coverImg}
+        alt={currAlbum?.title}
+        style={{ width: "1000px" }}
+      />
     </div>
   );
 
