@@ -73,8 +73,6 @@ export default function AlbumOptionsButton(props) {
   const uid = firebase.auth().currentUser?.uid;
   const handleDelete = () => {
     const tempAlbums = Object.assign([], albums);
-    console.log(thisAlbum.id);
-    // tempAlbums.splice(index, 1);
     // now let's try to delete using array search ;--;
     for (var i = 0; i < tempAlbums.length; i++) {
       if (tempAlbums[i].id === thisAlbum.id) {
@@ -85,11 +83,10 @@ export default function AlbumOptionsButton(props) {
 
     setAlbums(tempAlbums);
 
-    // var currIdx = index.toString();
     db.collection("users")
       .doc(uid)
       .collection("albums")
-      .doc(thisAlbum.id) //stub
+      .doc(thisAlbum.id)
       .delete()
       .then(() => {
         console.log("Document successfully deleted!");
@@ -116,7 +113,7 @@ export default function AlbumOptionsButton(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem component={Link} to="/edit">
+        <StyledMenuItem component={Link} to={"/edit/" + thisAlbum.id}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>

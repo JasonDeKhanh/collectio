@@ -1,6 +1,7 @@
 import React from "react";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import {
   FirebaseAuthConsumer,
@@ -17,16 +18,16 @@ import "./styles.css";
 import AppShell from "./components/AppShell";
 
 import firebase from "@firebase/app";
+import "@firebase/firestore";
+import "@firebase/storage";
 
-export default function App() {
+function App() {
   return (
     <div className="App">
       <div style={{ maxWidth: "flex", margin: "0 auto" }}>
         <FirebaseAuthConsumer>
           <IfFirebaseAuthed>
             <Router>
-              {/* <Route path={"myalbums"} component={MyAlbumsPage} />
-              <Route path={"editalbum"} component={EditAlbumPage} /> */}
               <div>
                 {/*
           A <Switch> looks through all its children <Route>
@@ -44,7 +45,7 @@ export default function App() {
                     <AppShell />
                     <MyAlbumsPage />
                   </Route>
-                  <Route path="/edit">
+                  <Route path="/edit/:albumID">
                     <EditAlbumPage />
                   </Route>
                 </Switch>
@@ -62,25 +63,4 @@ export default function App() {
   );
 }
 
-/*
-function AppShell() {
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleLogout = (firebase) => {
-    handleClose();
-    firebase.auth().signOut();
-  };
-
-  return (
-    <AppBar1 />
-  );
-}
-*/
+export default App;

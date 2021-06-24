@@ -29,8 +29,6 @@ function MyAlbumsPage(props) {
 
   const db = firebase.firestore();
 
-  //const storage = firebase.storage();
-
   const [albums, setAlbums] = useState([]);
 
   const uid = firebase.auth().currentUser?.uid;
@@ -59,6 +57,7 @@ function MyAlbumsPage(props) {
   //   const db = firebase.firestore();
   //   db.collection("users").doc(uid).set({ albums: albums });
   // }, [albums]);
+  // DOESN'T WORK, DELETE LATER
 
   // Grid List style
 
@@ -138,7 +137,7 @@ function AlbumList(props) {
             </button>
             {/* </ListSubheader> */}
           </GridListTile>
-          {albums.map((album, index) => (
+          {albums.map((album) => (
             <GridListTile key={album.img}>
               <img src={album.coverImg} alt={album.title} />
               <GridListTileBar
