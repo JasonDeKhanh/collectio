@@ -11,16 +11,12 @@ import "@firebase/storage";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 
-import styles from "./CreateNewAlbumPopup.module.css";
-
 //import duck from "./duck.jpg";
 
-function CreateNewAlbumPopup(props) {
+function ImportItemPopup(props) {
   const buttonPopup = props.trigger;
   const setButtonPopup = props.setTrigger;
   const db = props.db;
-  const albums = props.albums;
-  const setAlbums = props.setAlbums;
 
   const uid = firebase.auth().currentUser?.uid;
 
@@ -60,27 +56,10 @@ function CreateNewAlbumPopup(props) {
   };
 
   const onSubmit = (e) => {
-    //process creating album
-    e.preventDefault();
-
-    const newAlbum = {
-      ...album,
-      coverImg: fileUrl,
-    };
-
-    const newAlbums = [...albums, { ...newAlbum }];
-
-    db.collection("users").doc(uid).collection("albums").add(newAlbum);
-
-    setAlbums(newAlbums);
-
-    setButtonPopup(false);
-
-    setAlbum({
-      coverImg: "",
-      name: "",
-      orientation: "",
-    });
+    // stub
+    // something like db.collection("users").doc(uid).collection("items").add(newItem);
+    // also add into "items" array, use a similar useEffect
+    // "items" array should be made in the Edit Albums page, and then passed down to ImportDrawer, then to this ImportItemPopup
   };
 
   // Popup Modal stuff
@@ -113,11 +92,7 @@ function CreateNewAlbumPopup(props) {
   // Body of modal
   const body = (
     <div className={Popup.paper} style={popupStyle}>
-      {/* <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p> */}
-      <h1>Create New Album</h1>
+      <h1>Import Item</h1>
 
       <br></br>
       <form id="create-album-form" onSubmit={onSubmit}>
@@ -173,54 +148,8 @@ function CreateNewAlbumPopup(props) {
           {body}
         </Modal>
       </div>
-
-      {/* <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-        <h1>Create New Album</h1>
-
-        <br></br>
-        <form id="create-album-form" onSubmit={onSubmit}>
-          <div>
-            <label htmlFor="album-name">Album Name:</label>
-            <br />
-            <input
-              type="text"
-              value={album.name}
-              onChange={onChange}
-              name="name"
-              id="album-name"
-            />
-          </div>
-          <br></br>
-          Orientation:
-          <div value={album.orientation} onChange={onChange}>
-            <input
-              type="radio"
-              id="portrait"
-              name="orientation"
-              value="portrait"
-            />
-            <label htmlFor="portrait">Portrait</label>
-            <input
-              type="radio"
-              id="landscape"
-              name="orientation"
-              value="landscape"
-            />
-            <label htmlFor="landscape">Landscape</label>
-          </div>
-          <br></br>
-          <div>
-            <input type="file" onChange={onFileChange} />
-          </div>
-          <br></br>
-          <div>
-            <button type="submit"> Create new album </button>
-          </div>
-        </form>
-        <br></br>
-      </Popup> */}
     </div>
   );
 }
 
-export default CreateNewAlbumPopup;
+export default ImportItemPopup;

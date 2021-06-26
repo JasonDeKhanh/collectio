@@ -70,7 +70,11 @@ function MyAlbumsPage(props) {
       return 3;
     }
 
-    return 2;
+    if (isWidthUp("sm", screenWidth)) {
+      return 2;
+    }
+
+    return 1;
   }
 
   const cols = getCols(props.width);

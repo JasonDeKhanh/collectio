@@ -1,4 +1,7 @@
 import React from "react";
+
+import { useState } from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -18,7 +21,12 @@ import { Link } from "react-router-dom";
 
 import MenuIconTopRight from "../MenuIconTopRight";
 
+import firebase from "@firebase/app";
+import "@firebase/firestore";
+import "@firebase/storage";
+
 import AppBar1 from "../AppBar1";
+import ImportItemPopup from "./ImportItemPopup";
 
 const drawerWidth = 240;
 
@@ -49,6 +57,10 @@ export default function ImportDrawer(props) {
   const classes = useStyles();
   const body = props.body;
 
+  const [importPopup, setImportPopup] = useState(false);
+
+  const db = firebase.firestore();
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -75,6 +87,15 @@ export default function ImportDrawer(props) {
           </Grid>
         </Toolbar>
       </AppBar>
+      {/* end of app bar, drawer stuff below */}
+
+      <div>
+        <ImportItemPopup
+          trigger={importPopup}
+          setTrigger={setImportPopup}
+          db={db}
+        />
+      </div>
 
       <Drawer
         className={classes.drawer}
@@ -90,7 +111,11 @@ export default function ImportDrawer(props) {
           <Divider />
           <List>
             <Grid container justify="center">
-              <Button variant="contained" color="primary">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => setImportPopup(true)}
+              >
                 Import Item
               </Button>
             </Grid>
