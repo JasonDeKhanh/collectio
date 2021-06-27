@@ -16,9 +16,12 @@ import { makeStyles } from "@material-ui/core/styles";
 function ImportItemPopup(props) {
   const buttonPopup = props.trigger;
   const setButtonPopup = props.setTrigger;
-  const db = props.db;
+  const importedItems = props.importedItems;
+  const setImportedItems = props.setImportedItems;
+  const currID = props.currID; // current album ID
 
   const uid = firebase.auth().currentUser?.uid;
+  const db = firebase.firestore();
 
   const handleClose = () => {
     setButtonPopup(false);
@@ -26,16 +29,16 @@ function ImportItemPopup(props) {
 
   const [fileUrl, setFileUrl] = useState(null);
 
-  const [album, setAlbum] = useState({
-    coverImg: "",
+  const [item, setItem] = useState({
+    img: "",
     name: "",
-    orientation: "",
+    note1: "",
   });
 
   const onChange = (e) => {
-    setAlbum({
-      ...album,
-      coverImg: fileUrl,
+    setItem({
+      ...item,
+      img: fileUrl,
       [e.target.name]: e.target.value,
     });
   };
@@ -49,17 +52,42 @@ function ImportItemPopup(props) {
 
     console.log(fileUrl);
 
-    setAlbum({
-      ...album,
-      coverImg: fileUrl,
+    setItem({
+      ...item,
+      img: fileUrl,
     });
   };
 
   const onSubmit = (e) => {
     // stub
-    // something like db.collection("users").doc(uid).collection("items").add(newItem);
+    // something like db.collection("users").doc(uid).collection("albums").doc(albumID).collection("items").add(newItem);
     // also add into "items" array, use a similar useEffect
     // "items" array should be made in the Edit Albums page, and then passed down to ImportDrawer, then to this ImportItemPopup
+    e.preventDefault();
+
+    const newImportedItem = {
+      ...item,
+      img: fileUrl,
+    };
+
+    const newImportedItems = [...importedItems, { ...newImportedItem }];
+
+    db.collection("users")
+      .doc(uid)
+      .collection("albums")
+      .doc(currID)
+      .collection("importedItems")
+      .add(newImportedItem);
+
+    setImportedItems(newImportedItems);
+
+    setButtonPopup(false);
+
+    setItem({
+      img: "",
+      name: "",
+      note1: "",
+    });
   };
 
   // Popup Modal stuff
@@ -95,41 +123,38 @@ function ImportItemPopup(props) {
       <h1>Import Item</h1>
 
       <br></br>
-      <form id="create-album-form" onSubmit={onSubmit}>
+      <form id="create-item-form" onSubmit={onSubmit}>
         <div>
-          <input type="file" onChange={onFileChange} />
+          <label htmlFor="item-img">Item Image:</label>
+          <br />
+          <input type="file" accept="image/*" onChange={onFileChange} />
         </div>
         <br></br>
         <div>
-          <label htmlFor="album-name">Album Name:</label>
+          <label htmlFor="item-name">Item Name:</label>
           <br />
           <input
             type="text"
-            value={album.name}
+            value={item.name}
             onChange={onChange}
             name="name"
-            id="album-name"
+            id="item-name"
           />
         </div>
-        <br></br>
-        Orientation:
-        <div value={album.orientation} onChange={onChange}>
+        <br />
+        <div>
+          <label htmlFor="item-note1">Note #1:</label>
+          <br />
           <input
-            type="radio"
-            id="portrait"
-            name="orientation"
-            value="portrait"
+            type="text"
+            value={item.note1}
+            onChange={onChange}
+            name="note1"
+            id="item-note1"
           />
-          <label htmlFor="portrait">Portrait</label>
-          <input
-            type="radio"
-            id="landscape"
-            name="orientation"
-            value="landscape"
-          />
-          <label htmlFor="landscape">Landscape</label>
         </div>
-        <br></br>
+        <br />
+        <br />
         <div>
           <button type="submit"> Create new album </button>
         </div>

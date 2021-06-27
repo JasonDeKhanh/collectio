@@ -10,11 +10,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import IconButton from "@material-ui/core/IconButton";
 
 import { Button, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -30,7 +31,7 @@ import ImportItemPopup from "./ImportItemPopup";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const useStylesDrawer = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
@@ -54,17 +55,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ImportDrawer(props) {
-  const classes = useStyles();
-  const body = props.body;
+  const drawerClass = useStylesDrawer();
+  const { body, albums, setAlbums, currID, importedItems, setImportedItems } =
+    props;
 
   const [importPopup, setImportPopup] = useState(false);
 
   const db = firebase.firestore();
 
+  // imported items style
+  const useStylesImportedItems = makeStyles((theme) => ({
+    root: {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-evenly",
+      overflow: "hidden",
+      backgroundColor: theme.palette.background.paper,
+    },
+    gridList: {
+      width: "90%",
+      height: "100%",
+    },
+    icon: {
+      color: "rgba(255, 255, 255, 0.54)",
+    },
+  }));
+
+  const importedItemsList = useStylesImportedItems();
+
   return (
-    <div className={classes.root}>
+    <div className={drawerClass.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className={drawerClass.appBar}>
         <Toolbar>
           <div
             style={{
@@ -93,19 +115,22 @@ export default function ImportDrawer(props) {
         <ImportItemPopup
           trigger={importPopup}
           setTrigger={setImportPopup}
+          currID={currID}
+          importedItems={importedItems}
+          setImportedItems={setImportedItems}
           db={db}
         />
       </div>
 
       <Drawer
-        className={classes.drawer}
+        className={drawerClass.drawer}
         variant="permanent"
         classes={{
-          paper: classes.drawerPaper,
+          paper: drawerClass.drawerPaper,
         }}
       >
         <Toolbar />
-        <div className={classes.drawerContainer}>
+        <div className={drawerClass.drawerContainer}>
           <br></br>
 
           <Divider />
@@ -121,10 +146,48 @@ export default function ImportDrawer(props) {
             </Grid>
           </List>
           <Divider />
-          <List></List>
+          <List>
+            {importedItems.map((importedItem) => (
+              <div>
+                {/* <GridListTile key={importedItem.img}>
+                <img
+                  src={importedItem.img}
+                  alt={importedItem.name}
+                  style={{ width: 200, height: 200 }}
+                />
+                <GridListTileBar
+                  title={importedItem.name}
+                  actionIcon={
+                    <IconButton
+                      aria-label={`info about ${importedItem.name}`}
+                      className={importedItemsList.icon}
+                    ></IconButton>
+                  }
+                />
+              </GridListTile> */}
+
+                <Grid container justify="center">
+                  <img
+                    src={importedItem.img}
+                    alt={importedItem.name}
+                    style={{
+                      width: 200,
+                      height: 200,
+                    }}
+                  />
+                </Grid>
+                <Grid container justify="center">
+                  <button>add</button> <button>delete</button>
+                </Grid>
+
+                <Divider />
+                <br />
+              </div>
+            ))}
+          </List>
         </div>
       </Drawer>
-      <main className={classes.content}>{body}</main>
+      <main className={drawerClass.content}>{body}</main>
     </div>
   );
 }

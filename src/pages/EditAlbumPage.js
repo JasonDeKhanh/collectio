@@ -10,10 +10,13 @@ import "@firebase/storage";
 
 import { useParams } from "react-router-dom";
 
+import Page from "../components/Page/Page";
+
 function EditAlbumPage() {
   const db = firebase.firestore();
   const uid = firebase.auth().currentUser?.uid;
 
+  // retrieve albums data from firestore
   const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
@@ -34,7 +37,7 @@ function EditAlbumPage() {
     })();
   }, []);
 
-  const currID = useParams().albumID;
+  const currID = useParams().albumID; // ID of current album being edited
 
   // const tempAlbums = Object.assign([], albums);
   let currAlbum;
@@ -46,16 +49,39 @@ function EditAlbumPage() {
     }
   }
 
-  console.log(currAlbum);
+  // retrieve imported items tied to album being edited
+  const [importedItems, setImportedItems] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const snapshot = await db
+        .collection("users")
+        .doc(uid)
+        .collection("albums")
+        .doc(currID)
+        .collection("importedItems")
+        .get();
+      const itemsArray = [];
+      snapshot.forEach((doc) => {
+        itemsArray.push({
+          ...doc.data(),
+          id: doc.id,
+        });
+      });
+      setImportedItems(itemsArray);
+    })();
+  }, []);
+
+  //
 
   const body = (
     <div>
-      <h2>{currAlbum?.name}</h2>
+      {/* <h2>{currAlbum?.name}</h2>
       <img
         src={currAlbum?.coverImg}
         alt={currAlbum?.title}
         style={{ width: "1000px" }}
-      />
+      /> */}
+      <Page />
     </div>
   );
 
@@ -64,7 +90,14 @@ function EditAlbumPage() {
       <br></br>
       <h1>Edit Page</h1>
       <div>
-        <ImportDrawer body={body} />
+        <ImportDrawer
+          body={body}
+          albums={albums}
+          setAlbums={setAlbums}
+          currID={currID}
+          importedItems={importedItems}
+          setImportedItems={setImportedItems}
+        />
       </div>
     </div>
   );

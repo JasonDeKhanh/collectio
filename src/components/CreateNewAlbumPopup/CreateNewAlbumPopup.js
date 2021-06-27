@@ -18,11 +18,11 @@ import styles from "./CreateNewAlbumPopup.module.css";
 function CreateNewAlbumPopup(props) {
   const buttonPopup = props.trigger;
   const setButtonPopup = props.setTrigger;
-  const db = props.db;
   const albums = props.albums;
   const setAlbums = props.setAlbums;
 
   const uid = firebase.auth().currentUser?.uid;
+  const db = firebase.firestore();
 
   const handleClose = () => {
     setButtonPopup(false);
@@ -70,7 +70,45 @@ function CreateNewAlbumPopup(props) {
 
     const newAlbums = [...albums, { ...newAlbum }];
 
-    db.collection("users").doc(uid).collection("albums").add(newAlbum);
+    var lastID;
+
+    db.collection("users")
+      .doc(uid)
+      .collection("albums")
+      .add(newAlbum)
+      .then((docRef) => {
+        lastID = docRef.id;
+        // console.log("last id: " + lastID);
+      })
+      .then(() => {
+        // adding cover page to album
+        db.collection("users")
+          .doc(uid)
+          .collection("albums")
+          .doc(lastID)
+          .collection("pages")
+          .doc("0")
+          .set({
+            itemsOnPage: [],
+            bgColor: "white",
+            pgNum: 0,
+            orientation: newAlbum.orientation,
+          });
+
+        // adding blank page 1 to album
+        db.collection("users")
+          .doc(uid)
+          .collection("albums")
+          .doc(lastID)
+          .collection("pages")
+          .doc("1")
+          .set({
+            itemsOnPage: [],
+            bgColor: "white",
+            pgNum: 1,
+            orientation: newAlbum.orientation,
+          });
+      });
 
     setAlbums(newAlbums);
 
@@ -122,7 +160,8 @@ function CreateNewAlbumPopup(props) {
       <br></br>
       <form id="create-album-form" onSubmit={onSubmit}>
         <div>
-          <input type="file" onChange={onFileChange} />
+          <label htmlFor="album-cover-img">Cover Image:</label>
+          <input type="file" accept="image/*" onChange={onFileChange} />
         </div>
         <br></br>
         <div>
