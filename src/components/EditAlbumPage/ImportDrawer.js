@@ -73,7 +73,7 @@ const useStylesDrawer = makeStyles((theme) => ({
 const useStylesCard = makeStyles((theme) => ({
   root: {
     width: "90%",
-    height: 295,
+    height: 300,
     border: "1px solid #B5B5B5",
   },
   cardTitle: {
@@ -81,8 +81,11 @@ const useStylesCard = makeStyles((theme) => ({
     overflow: "hidden",
   },
   media: {
-    height: 200,
-    width: 200,
+    // height: "100%",
+    //width: 200,
+    height: "70%",
+    display: "flex",
+    objectFit: "cover",
     margin: "auto",
     marginTop: 5,
     marginBottom: 5,
@@ -206,6 +209,7 @@ export default function ImportDrawer(props) {
                         title={importedItem.name}
                         classes={{ title: cardClasses.cardTitle }}
                       />
+
                       <CardMedia
                         className={cardClasses.media}
                         image={importedItem.img}
