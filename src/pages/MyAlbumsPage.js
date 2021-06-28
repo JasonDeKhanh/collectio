@@ -20,7 +20,11 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
+import AddBoxIcon from "@material-ui/icons/AddBox";
+
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
+
+import Button from "@material-ui/core/Button";
 
 //import duck from "../components/CreateNewAlbumPopup/duck.jpg";
 
@@ -79,24 +83,33 @@ function MyAlbumsPage(props) {
 
   const cols = getCols(props.width);
 
-  const useStyles = makeStyles((theme) => ({
+  const useStylesAlbums = makeStyles((theme) => ({
     root: {
       display: "flex",
-      flexWrap: "wrap",
+      //flexWrap: "wrap",
       justifyContent: "space-evenly",
       overflow: "hidden",
       backgroundColor: theme.palette.background.paper,
     },
     gridList: {
-      width: "90%",
-      height: "100%",
+      width: "100%",
     },
+    gridTile: {},
     icon: {
       color: "rgba(255, 255, 255, 0.54)",
     },
+    buttonCreateAlbum: {
+      backgroundColor: "#5FC9FF",
+      height: 200,
+      width: "100%",
+      margin: "auto",
+      fontSize: 20,
+      color: "white",
+      fontWeight: "fontWeightBold",
+    },
   }));
 
-  const albumsList = useStyles();
+  const albumsList = useStylesAlbums();
 
   return (
     <div>
@@ -129,27 +142,40 @@ function AlbumList(props) {
   return (
     <div>
       <div className={albumsList.root}>
-        <GridList cellHeight={200} cols={cols} className={albumsList.gridList}>
+        <GridList
+          cellHeight={200}
+          spacing={20}
+          cols={cols}
+          className={albumsList.gridList}
+        >
           <GridListTile key="Subheader" cols={1} style={{ height: "auto" }}>
             {/* <ListSubheader component="div"> */}
-            <button
-              className={styles.buttonCreateAlbum}
+
+            <Button
+              className={albumsList.buttonCreateAlbum}
               onClick={() => setButtonPopup(true)}
             >
-              {" "}
-              Create New Album +{" "}
-            </button>
+              Create New Album
+              <br />
+              <AddBoxIcon />
+            </Button>
             {/* </ListSubheader> */}
           </GridListTile>
           {albums.map((album) => (
             <GridListTile key={album.img}>
-              <img src={album.coverImg} alt={album.title} />
+              <img
+                src={album.coverImg}
+                alt={album.title}
+                style={{
+                  border: "2px solid #C8C8C8",
+                  height: "98%",
+                  width: "98.5%",
+                  borderRadius: 5,
+                  margin: "auto",
+                }}
+              />
               <GridListTileBar
                 title={album.name}
-                /*subtitle={
-                    <span>by: {album.author}}</span>
-                    //re add in the future if we want authors
-                  }*/
                 actionIcon={
                   <IconButton
                     aria-label={`info about ${album.title}`}
@@ -162,6 +188,7 @@ function AlbumList(props) {
                     />
                   </IconButton>
                 }
+                style={{ width: "99.7%" }}
               />
             </GridListTile>
           ))}

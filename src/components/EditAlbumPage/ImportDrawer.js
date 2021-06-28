@@ -84,14 +84,15 @@ const useStylesCard = makeStyles((theme) => ({
     height: 200,
     width: 200,
     margin: "auto",
-    paddingTop: 0,
-    paddingBottom: 0,
+    marginTop: 5,
+    marginBottom: 5,
   },
   header: {
-    height: 50,
+    height: 35,
     overflow: "hidden",
     display: "block",
-    paddingTop: 5,
+    paddingTop: 13,
+    paddingBottom: 0,
   },
   button: {
     margin: "auto",
@@ -208,7 +209,7 @@ export default function ImportDrawer(props) {
                       <CardMedia
                         className={cardClasses.media}
                         image={importedItem.img}
-                        title="Paella dish"
+                        title={importedItem.name}
                       />
 
                       <CardActions disableSpacing>

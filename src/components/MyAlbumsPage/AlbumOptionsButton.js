@@ -103,6 +103,12 @@ export default function AlbumOptionsButton(props) {
         aria-haspopup="true"
         variant="contained"
         onClick={handleClick}
+        style={{
+          backgroundColor: "#E5E5E5",
+          borderRadius: 100,
+          width: 30,
+          height: 30,
+        }}
       >
         <BuildIcon />
       </IconButton>

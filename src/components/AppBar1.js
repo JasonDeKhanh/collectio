@@ -20,6 +20,15 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  myAlbums: {
+    flexGrow: 1,
+    textAlign: "center",
+    color: "white",
+  },
+  myAlbumsButton: {
+    width: 150,
+    border: "0px",
+  },
 }));
 
 export default function AppBar1() {
@@ -62,11 +71,13 @@ export default function AppBar1() {
                   alignItems: "center",
                 }}
               >
-                <Button variant="outlined" component={Link} to="/">
-                  <Typography
-                    variant="h6"
-                    style={{ flexGrow: 1, textAlign: "left", color: "white" }}
-                  >
+                <Button
+                  variant="outlined"
+                  className={classes.myAlbumsButton}
+                  component={Link}
+                  to="/"
+                >
+                  <Typography variant="h6" className={classes.myAlbums}>
                     My Albums
                   </Typography>
                 </Button>
