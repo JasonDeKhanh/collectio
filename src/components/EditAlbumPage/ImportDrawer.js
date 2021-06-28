@@ -17,6 +17,20 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 
+import clsx from "clsx";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import Avatar from "@material-ui/core/Avatar";
+import { red } from "@material-ui/core/colors";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from "@material-ui/icons/Share";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+
 import { Button, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
@@ -54,14 +68,41 @@ const useStylesDrawer = makeStyles((theme) => ({
   },
 }));
 
+// card imported items style
+const useStylesCard = makeStyles((theme) => ({
+  root: {
+    maxWidth: "90%",
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%", // 16:9
+  },
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: "rotate(180deg)",
+  },
+  avatar: {
+    backgroundColor: red[500],
+  },
+}));
+
 export default function ImportDrawer(props) {
   const drawerClass = useStylesDrawer();
+  const cardClasses = useStylesCard();
+
   const { body, albums, setAlbums, currID, importedItems, setImportedItems } =
     props;
 
   const [importPopup, setImportPopup] = useState(false);
 
   const db = firebase.firestore();
+  const uid = firebase.auth().currentUser?.uid;
 
   // imported items style
   const useStylesImportedItems = makeStyles((theme) => ({
@@ -82,6 +123,34 @@ export default function ImportDrawer(props) {
   }));
 
   const importedItemsList = useStylesImportedItems();
+
+  // delete item from imported list
+  // function handleDelete(importedItemID) {
+  //   const tempImportedItems = Object.assign([], importedItems);
+  //   // now let's try to delete using array search ;--;
+  //   for (var i = 0; i < tempImportedItems.length; i++) {
+  //     if (tempImportedItems[i].id === importedItemID) {
+  //       tempImportedItems.splice(i, 1);
+  //       break;
+  //     }
+  //   }
+
+  //   setImportedItems(tempImportedItems);
+
+  //   db.collection("users")
+  //     .doc(uid)
+  //     .collection("albums")
+  //     .doc(currID)
+  //     .collection("importedItems")
+  //     .doc(importedItemID)
+  //     .delete();
+  //   // .then(() => {
+  //   //   console.log("item successfully deleted!");
+  //   // })
+  //   // .catch((error) => {
+  //   //   console.error("Error removing document: ", error);
+  //   // });
+  // }
 
   return (
     <div className={drawerClass.root}>
@@ -166,19 +235,27 @@ export default function ImportDrawer(props) {
                 />
               </GridListTile> */}
 
-                <Grid container justify="center">
-                  <img
-                    src={importedItem.img}
-                    alt={importedItem.name}
-                    style={{
-                      width: 200,
-                      height: 200,
-                    }}
-                  />
-                </Grid>
-                <Grid container justify="center">
-                  <button>add</button> <button>delete</button>
-                </Grid>
+                <div>
+                  <Grid container justify="center">
+                    <Card className={cardClasses.root}>
+                      <CardHeader title="Shrimp and Chorizo Paella" />
+                      <CardMedia
+                        className={cardClasses.media}
+                        image={importedItem.img}
+                        title="Paella dish"
+                      />
+
+                      <CardActions disableSpacing>
+                        <IconButton aria-label="add to favorites">
+                          <FavoriteIcon />
+                        </IconButton>
+                        <IconButton aria-label="share">
+                          <ShareIcon />
+                        </IconButton>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                </div>
 
                 <Divider />
                 <br />

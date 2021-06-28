@@ -156,7 +156,7 @@ function ImportItemPopup(props) {
         <br />
         <br />
         <div>
-          <button type="submit"> Create new album </button>
+          <button type="submit"> Import new item </button>
         </div>
         <div>
           <button onClick={handleClose}>Cancel</button>
