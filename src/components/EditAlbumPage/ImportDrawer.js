@@ -67,6 +67,15 @@ const useStylesDrawer = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  myAlbums: {
+    flexGrow: 1,
+    textAlign: "center",
+    color: "white",
+  },
+  myAlbumsButton: {
+    width: 150,
+    border: "0px",
+  },
 }));
 
 // card imported items style
@@ -128,11 +137,13 @@ export default function ImportDrawer(props) {
               alignItems: "center",
             }}
           >
-            <Button variant="outlined" component={Link} to="/">
-              <Typography
-                variant="h6"
-                style={{ flexGrow: 1, textAlign: "left", color: "white" }}
-              >
+            <Button
+              variant="outlined"
+              className={drawerClass.myAlbumsButton}
+              component={Link}
+              to="/"
+            >
+              <Typography variant="h6" className={drawerClass.myAlbums}>
                 My Albums
               </Typography>
             </Button>

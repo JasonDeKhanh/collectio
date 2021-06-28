@@ -161,6 +161,7 @@ function CreateNewAlbumPopup(props) {
       <form id="create-album-form" onSubmit={onSubmit}>
         <div>
           <label htmlFor="album-cover-img">Cover Image:</label>
+          <br />
           <input type="file" accept="image/*" onChange={onFileChange} />
         </div>
         <br></br>
