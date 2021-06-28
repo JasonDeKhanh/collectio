@@ -25,8 +25,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
-import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import { grey, red } from "@material-ui/core/colors";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -42,6 +41,8 @@ import "@firebase/storage";
 
 import AppBar1 from "../AppBar1";
 import ImportItemPopup from "./ImportItemPopup";
+import ImportedItemDeleteButton from "./ImportedItemDeleteButton";
+import ImportedItemAddButton from "./ImportedItemAddButton";
 
 const drawerWidth = 240;
 
@@ -71,24 +72,32 @@ const useStylesDrawer = makeStyles((theme) => ({
 // card imported items style
 const useStylesCard = makeStyles((theme) => ({
   root: {
-    maxWidth: "90%",
+    width: "90%",
+    height: 295,
+    border: "1px solid #B5B5B5",
+  },
+  cardTitle: {
+    fontSize: [16],
+    overflow: "hidden",
   },
   media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
+    height: 200,
+    width: 200,
+    margin: "auto",
+    paddingTop: 0,
+    paddingBottom: 0,
   },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
+  header: {
+    height: 50,
+    overflow: "hidden",
+    display: "block",
+    paddingTop: 5,
   },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-  avatar: {
-    backgroundColor: red[500],
+  button: {
+    margin: "auto",
+    width: 20,
+    height: 20,
+    paddingLeft: 0,
   },
 }));
 
@@ -103,54 +112,6 @@ export default function ImportDrawer(props) {
 
   const db = firebase.firestore();
   const uid = firebase.auth().currentUser?.uid;
-
-  // imported items style
-  const useStylesImportedItems = makeStyles((theme) => ({
-    root: {
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "space-evenly",
-      overflow: "hidden",
-      backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-      width: "90%",
-      height: "100%",
-    },
-    icon: {
-      color: "rgba(255, 255, 255, 0.54)",
-    },
-  }));
-
-  const importedItemsList = useStylesImportedItems();
-
-  // delete item from imported list
-  // function handleDelete(importedItemID) {
-  //   const tempImportedItems = Object.assign([], importedItems);
-  //   // now let's try to delete using array search ;--;
-  //   for (var i = 0; i < tempImportedItems.length; i++) {
-  //     if (tempImportedItems[i].id === importedItemID) {
-  //       tempImportedItems.splice(i, 1);
-  //       break;
-  //     }
-  //   }
-
-  //   setImportedItems(tempImportedItems);
-
-  //   db.collection("users")
-  //     .doc(uid)
-  //     .collection("albums")
-  //     .doc(currID)
-  //     .collection("importedItems")
-  //     .doc(importedItemID)
-  //     .delete();
-  //   // .then(() => {
-  //   //   console.log("item successfully deleted!");
-  //   // })
-  //   // .catch((error) => {
-  //   //   console.error("Error removing document: ", error);
-  //   // });
-  // }
 
   return (
     <div className={drawerClass.root}>
@@ -237,8 +198,13 @@ export default function ImportDrawer(props) {
 
                 <div>
                   <Grid container justify="center">
-                    <Card className={cardClasses.root}>
-                      <CardHeader title="Shrimp and Chorizo Paella" />
+                    <Card className={cardClasses.root} variant="outlined">
+                      <CardHeader
+                        // titleTypographyProps={{ variant: "subtitle1" }}
+                        className={cardClasses.header}
+                        title={importedItem.name}
+                        classes={{ title: cardClasses.cardTitle }}
+                      />
                       <CardMedia
                         className={cardClasses.media}
                         image={importedItem.img}
@@ -246,18 +212,41 @@ export default function ImportDrawer(props) {
                       />
 
                       <CardActions disableSpacing>
-                        <IconButton aria-label="add to favorites">
-                          <FavoriteIcon />
+                        <IconButton
+                          aria-label="share"
+                          className={cardClasses.button}
+                        >
+                          <ImportedItemAddButton />
                         </IconButton>
-                        <IconButton aria-label="share">
-                          <ShareIcon />
+                        {/* <Typography className={cardClasses.buttonLabel}>
+                          {" "}
+                          Add{" "}
+                        </Typography> */}
+
+                        <IconButton
+                          aria-label="delete"
+                          className={cardClasses.button}
+                          // style={cardClasses.button}
+                          // iconStyle={cardClasses.icon}
+                          // tooltipStyles={cardClasses.tooltip}
+                        >
+                          <ImportedItemDeleteButton
+                            importedItem={importedItem}
+                            importedItemID={importedItem.id}
+                            currID={currID} //current album ID
+                            importedItems={importedItems}
+                            setImportedItems={setImportedItems}
+                          />
                         </IconButton>
+                        {/* <Typography className={cardClasses.buttonLabel}>
+                          {" "}
+                          Delete{" "}
+                        </Typography> */}
                       </CardActions>
                     </Card>
                   </Grid>
                 </div>
 
-                <Divider />
                 <br />
               </div>
             ))}
