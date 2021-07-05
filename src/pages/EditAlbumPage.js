@@ -39,6 +39,10 @@ function EditAlbumPage() {
 
   const currID = useParams().albumID; // ID of current album being edited
 
+  // obtain page number
+  const [currPageNum, setCurrPageNum] = useState(useParams().pageNum);
+  console.log("curr page num: " + currPageNum);
+
   // const tempAlbums = Object.assign([], albums);
   let currAlbum;
   // run through albums array
@@ -72,6 +76,30 @@ function EditAlbumPage() {
   }, []);
 
   //
+  // obtain array of pages
+  const [albumPages, setAlbumPages] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const snapshot = await db
+        .collection("users")
+        .doc(uid)
+        .collection("albums")
+        .doc(currID)
+        .collection("pages")
+        .get();
+      const pagesArray = [];
+      snapshot.forEach((doc) => {
+        pagesArray.push({
+          ...doc.data(),
+        });
+      });
+      setAlbumPages(pagesArray);
+    })();
+  }, []);
+  //
+
+  console.log("pages.length: " + albumPages.length);
+  console.log("importedItems.length: " + importedItems.length);
 
   const body = (
     <div>
@@ -81,7 +109,11 @@ function EditAlbumPage() {
         alt={currAlbum?.title}
         style={{ width: "1000px" }}
       /> */}
-      <Page />
+
+      {/* pass current page items into this page object */}
+      <Page albumPages={albumPages} currPageNum={currPageNum} currID={currID} />
+
+      {/* for next page button or something, can just get the "pages".length or something to prevent going out of bound */}
     </div>
   );
 

@@ -45,7 +45,7 @@ function App() {
                     <AppShell />
                     <MyAlbumsPage />
                   </Route>
-                  <Route path="/edit/:albumID">
+                  <Route path="/edit/:albumID/:pageNum">
                     <EditAlbumPage />
                   </Route>
                 </Switch>

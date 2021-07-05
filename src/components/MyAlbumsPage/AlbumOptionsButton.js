@@ -119,7 +119,7 @@ export default function AlbumOptionsButton(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem component={Link} to={"/edit/" + thisAlbum.id}>
+        <StyledMenuItem component={Link} to={"/edit/" + thisAlbum.id + "/0"}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
