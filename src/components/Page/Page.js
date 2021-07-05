@@ -8,7 +8,7 @@ import firebase from "@firebase/app";
 import "@firebase/firestore";
 import "@firebase/storage";
 
-const useStylesPaper = makeStyles((theme) => ({
+const useStylesPaperLandscape = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
@@ -16,6 +16,18 @@ const useStylesPaper = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: 1280,
       height: 720,
+    },
+  },
+}));
+
+const useStylesPaperPortrait = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    "& > *": {
+      margin: theme.spacing(1),
+      width: 720,
+      height: 1280,
     },
   },
 }));
@@ -35,7 +47,17 @@ function Page(props) {
   const currPage = albumPages[currPageNum];
   console.log(albumPages);
   //
-  const paperClasses = useStylesPaper();
+  // do an if else here, if album orientation is landscape, then = useStylesLandscape(), else = useStylePortrait
+  const paperClassesLandscape = useStylesPaperLandscape();
+  const paperClassesPortrait = useStylesPaperPortrait();
+  var paperClasses;
+  if (currPage?.orientation === "landscape") {
+    paperClasses = paperClassesLandscape;
+  } else {
+    paperClasses = paperClassesPortrait;
+  }
+
+  //= useStylesPaper();
 
   return (
     <div>

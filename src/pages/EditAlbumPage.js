@@ -113,7 +113,9 @@ function EditAlbumPage() {
       {/* pass current page items into this page object */}
       <Page albumPages={albumPages} currPageNum={currPageNum} currID={currID} />
 
-      {/* for next page button or something, can just get the "pages".length or something to prevent going out of bound */}
+      {/* for next page button or something, can just get the "pages".length or something to prevent going out of bound 
+        , when creating the new page, the orientation will = currAlbum.orientation
+      */}
     </div>
   );
 
