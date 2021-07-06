@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import AppBar1 from "../components/AppBar1";
 import AlbumOptionsButton from "../components/MyAlbumsPage/AlbumOptionsButton";
+import SearchBar from "../components/SearchBar";
 
 import CreateNewAlbumPopup from "../components/CreateNewAlbumPopup";
 
@@ -111,8 +112,15 @@ function MyAlbumsPage(props) {
 
   const albumsList = useStylesAlbums();
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredalbums = albums.filter((album) =>
+    album.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
+      <SearchBar handleChange={(e) => setSearchTerm(e.target.value)} />
       <div>
         <CreateNewAlbumPopup
           trigger={buttonPopup}
@@ -129,7 +137,7 @@ function MyAlbumsPage(props) {
         albumsList={albumsList}
         cols={cols}
         setButtonPopup={setButtonPopup}
-        albums={albums}
+        albums={filteredalbums}
         setAlbums={setAlbums}
       />
     </div>
