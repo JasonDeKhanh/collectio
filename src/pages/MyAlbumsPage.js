@@ -6,7 +6,7 @@ import SearchBar from "../components/SearchBar";
 
 import CreateNewAlbumPopup from "../components/CreateNewAlbumPopup";
 
-import styles from "./MyAlbumsPage.module.css";
+import "./MyAlbumsPage.module.css";
 
 import firebase from "@firebase/app";
 import "@firebase/firestore";
@@ -15,6 +15,7 @@ import "@firebase/storage";
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
@@ -120,7 +121,11 @@ function MyAlbumsPage(props) {
 
   return (
     <div>
-      <SearchBar handleChange={(e) => setSearchTerm(e.target.value)} />
+      <br></br>
+      <Grid container justify="center">
+        <SearchBar handleChange={(e) => setSearchTerm(e.target.value)} />
+      </Grid>
+
       <div>
         <CreateNewAlbumPopup
           trigger={buttonPopup}
