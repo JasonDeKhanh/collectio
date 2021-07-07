@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
@@ -40,6 +41,7 @@ function NavigatePrevPageButton(props) {
         color="primary"
         component={Link}
         to={"/edit/" + currID + "/" + newPageNum.toString()}
+        disabled={currPageNum === 0}
         onClick={handleClick}
       >
         <NavigateBeforeRoundedIcon />

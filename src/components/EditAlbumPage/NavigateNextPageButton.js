@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
@@ -25,8 +26,12 @@ function NavigateNextPageButton(props) {
 
   const buttonClasses = useStylesNavigateButton();
 
+  const newPageNum = currPageNum + 1;
+
+  // find max page num
+  const lastPage = albumPages.length - 1;
+
   const handleClick = () => {
-    const newPageNum = currPageNum + 1;
     setCurrPageNum(newPageNum);
     console.log("next page button, curr page num = " + newPageNum);
     setCurrPage(albumPages[newPageNum]);
@@ -38,7 +43,8 @@ function NavigateNextPageButton(props) {
         aria-label="prevPage"
         color="primary"
         component={Link}
-        to={"/edit/" + currID + "/1"}
+        to={"/edit/" + currID + "/" + newPageNum.toString()}
+        disabled={currPageNum >= lastPage}
         onClick={handleClick}
       >
         <NavigateNextRoundedIcon />
