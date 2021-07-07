@@ -65,7 +65,7 @@ const useStylesDrawer = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    paddingLeft: theme.spacing(3),
   },
   myAlbums: {
     flexGrow: 1,
