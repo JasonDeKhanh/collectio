@@ -118,8 +118,18 @@ export default function ImportDrawer(props) {
   const drawerClass = useStylesDrawer();
   const cardClasses = useStylesCard();
 
-  const { body, albums, setAlbums, currID, importedItems, setImportedItems } =
-    props;
+  const {
+    body,
+    albums,
+    setAlbums,
+    currID,
+    importedItems,
+    setImportedItems,
+    albumPages,
+    setAlbumPages,
+    currPageNum,
+    setCurrPageNum,
+  } = props;
 
   const [importPopup, setImportPopup] = useState(false);
 
@@ -232,7 +242,17 @@ export default function ImportDrawer(props) {
                           aria-label="share"
                           className={cardClasses.button}
                         >
-                          <ImportedItemAddButton />
+                          <ImportedItemAddButton
+                            importedItem={importedItem}
+                            importedItemID={importedItem.id}
+                            currID={currID} //current album ID
+                            importedItems={importedItems}
+                            setImportedItems={setImportedItems}
+                            albumPages={albumPages}
+                            setAlbumPages={setAlbumPages}
+                            currPageNum={currPageNum}
+                            setCurrPageNum={setCurrPageNum}
+                          />
                         </IconButton>
                         {/* <Typography className={cardClasses.buttonLabel}>
                           {" "}
