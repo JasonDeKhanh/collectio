@@ -98,9 +98,6 @@ function EditAlbumPage() {
   }, []);
   //
 
-  console.log("pages.length: " + albumPages.length);
-  console.log("importedItems.length: " + importedItems.length);
-
   const body = (
     <div>
       {/* <h2>{currAlbum?.name}</h2>
@@ -111,10 +108,18 @@ function EditAlbumPage() {
       /> */}
 
       {/* pass current page items into this page object */}
-      <Page albumPages={albumPages} currPageNum={currPageNum} currID={currID} />
+      <div>
+        <Page
+          albumPages={albumPages}
+          currPageNum={currPageNum}
+          currID={currID}
+        />
+      </div>
 
       {/* for next page button or something, can just get the "pages".length or something to prevent going out of bound 
         , when creating the new page, the orientation will = currAlbum.orientation
+
+        FOR WEDNESDAY 7 JULY - figure out how to put divs in a row, to put the prev and next button 
       */}
     </div>
   );

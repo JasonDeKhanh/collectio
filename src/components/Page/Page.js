@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
 import firebase from "@firebase/app";
 import "@firebase/firestore";
@@ -77,11 +78,15 @@ function Page(props) {
         <Paper elevation={18}>
           <div>
             {/* need to put the ? because idk without it everything breaks */}
+
+            <Grid container justify="center">
+              <h1>Page Number :D : {currPage?.pgNum}</h1>
+            </Grid>
+            <br />
             {currPage?.bgColor}
             <br />
             {currPage?.orientation}
             <br />
-            {currPage?.pgNum}
           </div>
         </Paper>
       </div>
