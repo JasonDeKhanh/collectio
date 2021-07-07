@@ -80,7 +80,7 @@ function ImportedItemAddButton(props) {
       .collection("albums")
       .doc(currID)
       .collection("pages")
-      .doc(currPageNum)
+      .doc(currPageNum.toString())
       .set(tempPage);
   };
 

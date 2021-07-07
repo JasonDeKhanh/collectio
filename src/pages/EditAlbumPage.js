@@ -162,7 +162,7 @@ function EditAlbumPage() {
           setCurrPage={setCurrPage}
         />
 
-        <h3> Page {currPageNum}</h3>
+        <caption> Page {currPageNum}</caption>
 
         <NavigateNextPageButton
           albumPages={albumPages}
@@ -187,6 +187,7 @@ function EditAlbumPage() {
             currID={currID}
             currPage={currPage}
             setCurrPage={setCurrPage}
+            itemsThisPage={currPage?.itemsOnPage}
           />
         </div>
       </Grid>

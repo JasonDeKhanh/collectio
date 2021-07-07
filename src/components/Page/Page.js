@@ -5,9 +5,44 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+
 import firebase from "@firebase/app";
 import "@firebase/firestore";
 import "@firebase/storage";
+
+// card imported items style
+const useStylesCard = makeStyles((theme) => ({
+  root: {
+    width: 200,
+    height: 200,
+    border: "1px solid #B5B5B5",
+    margin: 10, // adjust spacing between the cards for now
+  },
+  cardTitle: {
+    fontSize: [16],
+    overflow: "hidden",
+  },
+  media: {
+    // height: "100%",
+    //width: 200,
+    height: "70%",
+    display: "flex",
+    objectFit: "cover",
+    margin: "auto",
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  header: {
+    height: 35,
+    overflow: "hidden",
+    display: "block",
+    paddingTop: 13,
+    paddingBottom: 0,
+  },
+}));
 
 const useStylesPaperLandscape = makeStyles((theme) => ({
   root: {
@@ -34,6 +69,8 @@ const useStylesPaperPortrait = makeStyles((theme) => ({
 }));
 
 function Page(props) {
+  const cardClasses = useStylesCard();
+
   const db = firebase.firestore();
   const uid = firebase.auth().currentUser?.uid;
   // inside props will have
@@ -47,6 +84,7 @@ function Page(props) {
     currID,
     currPage,
     setCurrPage,
+    itemsThisPage,
   } = props;
 
   console.log(currPageNum + " " + currID);
@@ -84,15 +122,50 @@ function Page(props) {
         <Paper elevation={18}>
           <div>
             {/* need to put the ? because idk without it everything breaks */}
-
             <Grid container justify="center">
               <h1>Page Number : {currPage?.pgNum}</h1>
             </Grid>
+            Page background color: {currPage?.bgColor}
             <br />
-            {currPage?.bgColor}
             <br />
-            {currPage?.orientation}
+            Page orientation: {currPage?.orientation}
             <br />
+            <br />
+            Yes, these image cards are temporary to test out add function.
+            <br />
+            <br />
+            can write this in the testing excel also.
+            <br />
+            also Brenda we need to fix these fonts thing HAHAHA
+            <br />
+            {/* {itemsThisPage?.map((item) => (
+              //do stuff
+              <div>
+                <img src={item.src} alt={item.name} />
+                <h3>{item.name}</h3>
+              </div>
+            ))} */}
+            <Grid container direction="row" justify="center">
+              {itemsThisPage?.map((item) => (
+                <div>
+                  <Card className={cardClasses.root} variant="outlined">
+                    <CardHeader
+                      // titleTypographyProps={{ variant: "subtitle1" }}
+                      className={cardClasses.header}
+                      title={item.name}
+                      classes={{ title: cardClasses.cardTitle }}
+                    />
+                    <CardMedia
+                      className={cardClasses.media}
+                      image={item.img}
+                      title={item.name}
+                    />
+                  </Card>
+
+                  <br />
+                </div>
+              ))}
+            </Grid>
           </div>
         </Paper>
       </div>
