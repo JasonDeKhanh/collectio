@@ -1,6 +1,6 @@
 import react from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import ImportDrawer from "../components/EditAlbumPage/ImportDrawer";
 import AppShell from "../components/AppShell";
@@ -16,18 +16,20 @@ import "@firebase/firestore";
 import "@firebase/storage";
 
 import Page from "../components/Page/Page";
+import NavigatePrevPageButton from "../components/EditAlbumPage/NavigatePrevPageButton";
+import NavigateNextPageButton from "../components/EditAlbumPage/NavigateNextPageButton";
 
 // prev next page button style
-const useStylesNavigateButton = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-}));
+// const useStylesNavigateButton = makeStyles((theme) => ({
+//   root: {
+//     "& > *": {
+//       margin: theme.spacing(1),
+//     },
+//   },
+// }));
 
 function EditAlbumPage() {
-  const navigateButtonClassese = useStylesNavigateButton();
+  // const navigateButtonClassese = useStylesNavigateButton();
 
   const db = firebase.firestore();
   const uid = firebase.auth().currentUser?.uid;
@@ -58,16 +60,24 @@ function EditAlbumPage() {
   // obtain page number
   const [currPageNum, setCurrPageNum] = useState(useParams().pageNum);
   console.log("curr page num: " + currPageNum);
+  console.log("currID: " + currID);
 
   // const tempAlbums = Object.assign([], albums);
-  let currAlbum;
+  var currAlbum;
   // run through albums array
+  // THIS IS NOT WORKING FOR SOME REASON, BUT IT IS NOT BEING USED ANYWAY, DO NOT DELETE, MIGHT BE HANDY LATER
   for (var i = 0; i < albums.length; i++) {
-    if (albums[i].id === currID) {
-      currAlbum = albums[i];
+    if (albums[i]?.id === currID) {
+      // currAlbum = albums[i];
+      currAlbum = {
+        ...albums[i],
+        id: currID,
+      };
       break;
     }
   }
+
+  console.log("currAlbum: " + currAlbum);
 
   // retrieve imported items tied to album being edited
   const [importedItems, setImportedItems] = useState([]);
@@ -113,6 +123,13 @@ function EditAlbumPage() {
     })();
   }, []);
   //
+  console.log(
+    "log here here, albumPages[currPageNum].bgColor: " + albumPages[0]?.bgColor
+  );
+
+  const [currPage, setCurrPage] = useState(albumPages[currPageNum]);
+  console.log("log beneath here then, " + currPage?.bgColor);
+  // setCurrPage(albumPages[0]);
 
   const body = (
     <div>
@@ -126,17 +143,43 @@ function EditAlbumPage() {
       {/* pass current page items into this page object */}
 
       <Grid container justify="center">
-        <div className={navigateButtonClassese}>
-          <IconButton aria-label="prevPage" color="primary">
+        <Grid>
+          <div>
+            {/* <div className={navigateButtonClassese}> */}
+            {/* <IconButton
+            aria-label="prevPage"
+            color="primary"
+            component={Link}
+            to={"/edit/" + currID + "/0"}
+          >
             <NavigateBeforeRoundedIcon />
-          </IconButton>
+          </IconButton> */}
 
-          <subtitle> Page {currPageNum}</subtitle>
+            <NavigatePrevPageButton
+              albumPages={albumPages}
+              currPageNum={currPageNum}
+              setCurrPageNum={setCurrPageNum}
+              currID={currID}
+              urrPage={currPage}
+              setCurrPage={setCurrPage}
+            />
 
-          <IconButton aria-label="nexxtPage" color="primary">
+            <subtitle> Page {currPageNum}</subtitle>
+
+            <NavigateNextPageButton
+              albumPages={albumPages}
+              currPageNum={currPageNum}
+              setCurrPageNum={setCurrPageNum}
+              currID={currID}
+              urrPage={currPage}
+              setCurrPage={setCurrPage}
+            />
+
+            {/* <IconButton aria-label="nextPage" color="primary">
             <NavigateNextRoundedIcon />
-          </IconButton>
-        </div>
+          </IconButton> */}
+          </div>
+        </Grid>
       </Grid>
 
       <Grid container justify="center">
@@ -144,7 +187,10 @@ function EditAlbumPage() {
           <Page
             albumPages={albumPages}
             currPageNum={currPageNum}
+            setCurrPageNum={setCurrPageNum}
             currID={currID}
+            currPage={currPage}
+            setCurrPage={setCurrPage}
           />
         </div>
       </Grid>

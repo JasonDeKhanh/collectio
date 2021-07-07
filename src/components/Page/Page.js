@@ -39,14 +39,20 @@ function Page(props) {
   // inside props will have
   // array of AlbumItem
   // or pass into props only the page number, then load the page object in here
-  const currPageNum = props.currPageNum;
-  const currID = props.currID;
-  const albumPages = props.albumPages; // pages array
+
+  const {
+    albumPages, // pages array
+    currPageNum,
+    setCurrPageNum,
+    currID,
+    currPage,
+    setCurrPage,
+  } = props;
 
   console.log(currPageNum + " " + currID);
   //
-  const currPage = albumPages[currPageNum];
-  console.log(albumPages);
+  // const currPage = albumPages[currPageNum];
+  // console.log(albumPages);
   //
   // do an if else here, if album orientation is landscape, then = useStylesLandscape(), else = useStylePortrait
   const paperClassesLandscape = useStylesPaperLandscape();
@@ -80,7 +86,7 @@ function Page(props) {
             {/* need to put the ? because idk without it everything breaks */}
 
             <Grid container justify="center">
-              <h1>Page Number :D : {currPage?.pgNum}</h1>
+              <h1>Page Number : {currPage?.pgNum}</h1>
             </Grid>
             <br />
             {currPage?.bgColor}
