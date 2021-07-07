@@ -142,11 +142,9 @@ function EditAlbumPage() {
 
       {/* pass current page items into this page object */}
 
-      <Grid container justify="center">
-        <Grid>
-          <div>
-            {/* <div className={navigateButtonClassese}> */}
-            {/* <IconButton
+      <Grid container direction="row" justify="center" alignItems="center">
+        {/* <div className={navigateButtonClassese}> */}
+        {/* <IconButton
             aria-label="prevPage"
             color="primary"
             component={Link}
@@ -155,31 +153,29 @@ function EditAlbumPage() {
             <NavigateBeforeRoundedIcon />
           </IconButton> */}
 
-            <NavigatePrevPageButton
-              albumPages={albumPages}
-              currPageNum={currPageNum}
-              setCurrPageNum={setCurrPageNum}
-              currID={currID}
-              urrPage={currPage}
-              setCurrPage={setCurrPage}
-            />
+        <NavigatePrevPageButton
+          albumPages={albumPages}
+          currPageNum={currPageNum}
+          setCurrPageNum={setCurrPageNum}
+          currID={currID}
+          urrPage={currPage}
+          setCurrPage={setCurrPage}
+        />
 
-            <subtitle> Page {currPageNum}</subtitle>
+        <h3> Page {currPageNum}</h3>
 
-            <NavigateNextPageButton
-              albumPages={albumPages}
-              currPageNum={currPageNum}
-              setCurrPageNum={setCurrPageNum}
-              currID={currID}
-              urrPage={currPage}
-              setCurrPage={setCurrPage}
-            />
+        <NavigateNextPageButton
+          albumPages={albumPages}
+          currPageNum={currPageNum}
+          setCurrPageNum={setCurrPageNum}
+          currID={currID}
+          urrPage={currPage}
+          setCurrPage={setCurrPage}
+        />
 
-            {/* <IconButton aria-label="nextPage" color="primary">
+        {/* <IconButton aria-label="nextPage" color="primary">
             <NavigateNextRoundedIcon />
           </IconButton> */}
-          </div>
-        </Grid>
       </Grid>
 
       <Grid container justify="center">
