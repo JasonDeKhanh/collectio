@@ -215,6 +215,10 @@ function EditAlbumPage() {
           currID={currID}
           importedItems={importedItems}
           setImportedItems={setImportedItems}
+          albumPages={albumPages}
+          setAlbumPages={setAlbumPages}
+          currPageNum={currPageNum}
+          setCurrPageNum={setCurrPageNum}
         />
       </div>
     </div>
