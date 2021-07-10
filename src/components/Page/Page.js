@@ -13,6 +13,8 @@ import firebase from "@firebase/app";
 import "@firebase/firestore";
 import "@firebase/storage";
 
+import AlbumItem from "../ItemOnPage/AlbumItem";
+
 // card imported items style
 const useStylesCard = makeStyles((theme) => ({
   root: {
@@ -85,6 +87,7 @@ function Page(props) {
     currPage,
     setCurrPage,
     itemsThisPage,
+    setAlbumPages,
   } = props;
 
   console.log(currPageNum + " " + currID);
@@ -125,7 +128,7 @@ function Page(props) {
             <Grid container justify="center">
               <h1>Page Number : {currPage?.pgNum}</h1>
             </Grid>
-            Page background color: {currPage?.bgColor}
+            {/* Page background color: {currPage?.bgColor}
             <br />
             <br />
             Page orientation: {currPage?.orientation}
@@ -137,7 +140,7 @@ function Page(props) {
             can write this in the testing excel also.
             <br />
             also Brenda we need to fix these fonts thing HAHAHA
-            <br />
+            <br /> */}
             {/* {itemsThisPage?.map((item) => (
               //do stuff
               <div>
@@ -148,7 +151,23 @@ function Page(props) {
             <Grid container direction="row" justify="center">
               {itemsThisPage?.map((item) => (
                 <div>
-                  <Card className={cardClasses.root} variant="outlined">
+                  <br />
+
+                  <div>
+                    <AlbumItem
+                      thisItem={item}
+                      albumPages={albumPages}
+                      currPageNum={currPageNum}
+                      setCurrPageNum={setCurrPageNum}
+                      currID={currID}
+                      currPage={currPage}
+                      setCurrPage={setCurrPage}
+                      itemsThisPage={currPage?.itemsOnPage}
+                      setAlbumPages={setAlbumPages}
+                    />
+                  </div>
+
+                  {/* <Card className={cardClasses.root} variant="outlined">
                     <CardHeader
                       // titleTypographyProps={{ variant: "subtitle1" }}
                       className={cardClasses.header}
@@ -160,7 +179,7 @@ function Page(props) {
                       image={item.img}
                       title={item.name}
                     />
-                  </Card>
+                  </Card> */}
 
                   <br />
                 </div>

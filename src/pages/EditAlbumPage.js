@@ -188,6 +188,7 @@ function EditAlbumPage() {
             currPage={currPage}
             setCurrPage={setCurrPage}
             itemsThisPage={currPage?.itemsOnPage}
+            setAlbumPages={setAlbumPages}
           />
         </div>
       </Grid>
