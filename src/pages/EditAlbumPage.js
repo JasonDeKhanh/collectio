@@ -208,7 +208,11 @@ function EditAlbumPage() {
     </div>
   );
 
-  return done1 && done2 ? (
+  return !(done1 & done2) ? (
+    <Grid container justify="center">
+      <ReactLoading type={"bars"} color={"#3c54b4"} height={100} width={100} />
+    </Grid>
+  ) : (
     <div>
       <br></br>
       <h1>Edit Page</h1>
@@ -227,8 +231,6 @@ function EditAlbumPage() {
         />
       </div>
     </div>
-  ) : (
-    <ReactLoading type={"bars"} color={"#3c54b4"} height={100} width={100} />
   );
 }
 

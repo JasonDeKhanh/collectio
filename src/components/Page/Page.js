@@ -127,7 +127,7 @@ function Page(props) {
           <div>
             {/* need to put the ? because idk without it everything breaks */}
             <Grid container justify="center">
-              <h1>Page Number : {currPage?.pgNum}</h1>
+              <h2>Page Number : {currPage?.pgNum}</h2>
             </Grid>
             {/* Page background color: {currPage?.bgColor}
             <br />
