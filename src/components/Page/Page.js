@@ -14,6 +14,7 @@ import "@firebase/firestore";
 import "@firebase/storage";
 
 import AlbumItem from "../ItemOnPage/AlbumItem";
+import PreLoader from "../PreLoader";
 
 // card imported items style
 const useStylesCard = makeStyles((theme) => ({
