@@ -33,6 +33,8 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Button, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
+import Draggable from "react-draggable";
+
 import MenuIconTopRight from "../MenuIconTopRight";
 
 import firebase from "@firebase/app";
@@ -214,6 +216,7 @@ export default function ImportDrawer(props) {
             </Grid>
           </List>
           <Divider />
+
           <List>
             {importedItems.map((importedItem) => (
               <div>

@@ -11,6 +11,9 @@ import NavigateNextRoundedIcon from "@material-ui/icons/NavigateNextRounded";
 import NavigateBeforeRoundedIcon from "@material-ui/icons/NavigateBeforeRounded";
 import Grid from "@material-ui/core/Grid";
 
+import Draggable from "react-draggable";
+import { Button, Typography } from "@material-ui/core";
+
 import firebase from "@firebase/app";
 import "@firebase/firestore";
 import "@firebase/storage";

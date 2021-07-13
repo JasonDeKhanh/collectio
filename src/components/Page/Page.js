@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
+import { Button, Typography } from "@material-ui/core";
+
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -13,7 +15,12 @@ import firebase from "@firebase/app";
 import "@firebase/firestore";
 import "@firebase/storage";
 
+import Draggable from "react-draggable";
+
 import AlbumItem from "../ItemOnPage/AlbumItem";
+import { AlbumItemClass } from "../ItemOnPage/AlbumItemClass";
+
+import styles from "./Page.module.css";
 
 // card imported items style
 const useStylesCard = makeStyles((theme) => ({
@@ -48,13 +55,17 @@ const useStylesCard = makeStyles((theme) => ({
 
 const useStylesPaperLandscape = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
+    // display: "flex",
+    // flexWrap: "wrap",
     "& > *": {
       margin: theme.spacing(1),
       width: 1280,
       height: 720,
     },
+  },
+  stuff: {
+    width: 1280,
+    height: 720,
   },
 }));
 
@@ -122,8 +133,31 @@ function Page(props) {
 
       {/* Paper size and stuff depends on album orientation */}
       <div className={paperClasses.root}>
-        <Paper elevation={18}>
-          <div>
+        <Paper
+          // style={
+          //   // height: 500,
+          //   // width: 500,
+          //   // must keep this line for dragging boundaries to work
+          //   // backgroundColor: "orange",
+          //   // color: "#ffffff",
+          //   currPage?.orientation === "landscape"
+          //     ? { height: 720, width: 1280, position: "relative" }
+          //     : { height: 1280, width: 720, position: "relative" }
+          // }
+          elevation={18}
+        >
+          <div
+            style={
+              // height: 500,
+              // width: 500,
+              // must keep this line for dragging boundaries to work
+              // backgroundColor: "orange",
+              // color: "#ffffff",
+              currPage?.orientation === "landscape"
+                ? { height: 720, width: 1280, position: "relative" }
+                : { height: 1280, width: 720, position: "relative" }
+            }
+          >
             {/* need to put the ? because idk without it everything breaks */}
             <Grid container justify="center">
               <h1>Page Number : {currPage?.pgNum}</h1>
@@ -148,43 +182,22 @@ function Page(props) {
                 <h3>{item.name}</h3>
               </div>
             ))} */}
-            <Grid container direction="row" justify="center">
-              {itemsThisPage?.map((item) => (
-                <div>
-                  <br />
-
-                  <div>
-                    <AlbumItem
-                      thisItem={item}
-                      albumPages={albumPages}
-                      currPageNum={currPageNum}
-                      setCurrPageNum={setCurrPageNum}
-                      currID={currID}
-                      currPage={currPage}
-                      setCurrPage={setCurrPage}
-                      itemsThisPage={currPage?.itemsOnPage}
-                      setAlbumPages={setAlbumPages}
-                    />
-                  </div>
-
-                  {/* <Card className={cardClasses.root} variant="outlined">
-                    <CardHeader
-                      // titleTypographyProps={{ variant: "subtitle1" }}
-                      className={cardClasses.header}
-                      title={item.name}
-                      classes={{ title: cardClasses.cardTitle }}
-                    />
-                    <CardMedia
-                      className={cardClasses.media}
-                      image={item.img}
-                      title={item.name}
-                    />
-                  </Card> */}
-
-                  <br />
-                </div>
-              ))}
-            </Grid>
+            {/* <Grid container direction="row" justify="center"> */}
+            {/* <Grid container direction="row" justify="center"> */}
+            {itemsThisPage?.map((item) => (
+              <AlbumItem
+                thisItem={item}
+                albumPages={albumPages}
+                currPageNum={currPageNum}
+                setCurrPageNum={setCurrPageNum}
+                currID={currID}
+                currPage={currPage}
+                setCurrPage={setCurrPage}
+                itemsThisPage={currPage?.itemsOnPage}
+                setAlbumPages={setAlbumPages}
+              />
+            ))}
+            {/* </Grid> */}
           </div>
         </Paper>
       </div>

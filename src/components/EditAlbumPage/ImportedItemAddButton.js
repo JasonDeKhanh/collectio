@@ -65,8 +65,12 @@ function ImportedItemAddButton(props) {
     //create a new tempPages array
     const tempPages = Object.assign([], albumPages);
 
+    const tempImportedItem = {
+      ...importedItem,
+      defaultPosition: { xPos: 0, yPos: 0 },
+    };
     //add the imported item into the page in the tempPages array
-    tempPages[currPageNum]?.itemsOnPage.push(importedItem);
+    tempPages[currPageNum]?.itemsOnPage.push(tempImportedItem);
 
     //make the tempPages the new pages array
     setAlbumPages(tempPages);

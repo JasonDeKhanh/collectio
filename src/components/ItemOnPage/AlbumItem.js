@@ -30,10 +30,12 @@ function AlbumItem(props) {
 
   const itemClasses = useStylesItem();
 
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
+  // default position obtained from firebase
+  const [x, setX] = useState(thisItem?.defaultPosition?.xPos);
+  const [y, setY] = useState(thisItem?.defaultPosition?.yPos);
 
   const handleStop = (event, dragElement) => {
+    // event.preventDefault();
     setX(dragElement.x);
     setY(dragElement.y);
 
@@ -48,6 +50,7 @@ function AlbumItem(props) {
       if (tempItemsThisPage[i].id === thisItem.id) {
         tempItemsThisPage[i] = {
           ...thisItem,
+          // defaultPosition: { xPos: dragElement.x, yPos: dragElement.y },
           defaultPosition: { xPos: dragElement.x, yPos: dragElement.y },
         };
       }
@@ -79,31 +82,42 @@ function AlbumItem(props) {
   // -
 
   return (
-    <div>
-      {/* {thisItem.name} */}
+    // <div
+    //   style={
+    //     currPage?.orientation === "landscape"
+    //       ? { height: 720, width: 1280 }
+    //       : { height: 1280, width: 720 }
+    //   }
+    // >
 
-      <Draggable
-        onStop={handleStop}
-        position={{
-          x: thisItem?.defaultPosition?.xPos,
-          y: thisItem?.defaultPosition?.yPos,
+    <Draggable
+      onStop={handleStop}
+      // position={{
+      //   x: thisItem?.defaultPosition?.xPos,
+      //   y: thisItem?.defaultPosition?.yPos,
+      // }}
+      position={{
+        x: x,
+        y: y,
+      }}
+      // bounds={{ left: 500, top: 500, right: 500, bottom: 200 }}
+      bounds="parent"
+      // defaultPosition={{
+      //   x: thisItem?.defaultPosition?.xPos,
+      //   y: thisItem?.defaultPosition?.yPos,
+      // }}
+    >
+      <img
+        src={thisItem.img}
+        alt={thisItem.name}
+        style={{
+          height: 200,
+          width: 200,
         }}
-        defaultPosition={{
-          x: thisItem?.defaultPosition?.xPos,
-          y: thisItem?.defaultPosition?.yPos,
-        }}
-      >
-        <div className={itemClasses.img}>
-          <img
-            src={thisItem.img}
-            alt={thisItem.name}
-            style={{
-              height: 200,
-            }}
-          />
-        </div>
-      </Draggable>
-    </div>
+      />
+      {/* <h1 style={{ height: 100, width: 100 }}>hello</h1> */}
+    </Draggable>
+    // </div>
   );
 }
 
