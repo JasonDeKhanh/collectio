@@ -18,9 +18,10 @@ import "@firebase/storage";
 import Draggable from "react-draggable";
 
 import AlbumItem from "../ItemOnPage/AlbumItem";
-import { AlbumItemClass } from "../ItemOnPage/AlbumItemClass";
 
 import styles from "./Page.module.css";
+
+import PreLoader from "../PreLoader";
 
 // card imported items style
 const useStylesCard = makeStyles((theme) => ({
@@ -160,7 +161,7 @@ function Page(props) {
           >
             {/* need to put the ? because idk without it everything breaks */}
             <Grid container justify="center">
-              <h1>Page Number : {currPage?.pgNum}</h1>
+              <h2>Page Number : {currPage?.pgNum}</h2>
             </Grid>
             {/* Page background color: {currPage?.bgColor}
             <br />

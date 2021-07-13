@@ -2,6 +2,8 @@ import react from "react";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
+import ReactLoading from "react-loading";
+
 import ImportDrawer from "../components/EditAlbumPage/ImportDrawer";
 import AppShell from "../components/AppShell";
 
@@ -40,6 +42,9 @@ function EditAlbumPage() {
   // retrieve albums data from firestore
   const [albums, setAlbums] = useState([]);
 
+  const [done1, setDone1] = useState(undefined);
+  const [done2, setDone2] = useState(undefined);
+
   useEffect(() => {
     (async () => {
       const snapshot = await db
@@ -55,6 +60,7 @@ function EditAlbumPage() {
         });
       });
       setAlbums(albumsArray);
+      setDone1(true);
     })();
   }, []);
 
@@ -123,6 +129,7 @@ function EditAlbumPage() {
         });
       });
       setAlbumPages(pagesArray);
+      setDone2(true);
     })();
   }, []);
   //
@@ -204,7 +211,11 @@ function EditAlbumPage() {
     </div>
   );
 
-  return (
+  return !(done1 & done2) ? (
+    <Grid container justify="center">
+      <ReactLoading type={"bars"} color={"#3c54b4"} height={100} width={100} />
+    </Grid>
+  ) : (
     <div>
       <br></br>
       <h1>Edit Page</h1>
