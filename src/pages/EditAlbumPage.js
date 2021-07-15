@@ -44,6 +44,7 @@ function EditAlbumPage() {
 
   const [done1, setDone1] = useState(undefined);
   const [done2, setDone2] = useState(undefined);
+  const [done3, setDone3] = useState(undefined);
 
   useEffect(() => {
     (async () => {
@@ -107,6 +108,7 @@ function EditAlbumPage() {
         });
       });
       setImportedItems(itemsArray);
+      setDone3(true);
     })();
   }, []);
 
@@ -211,7 +213,7 @@ function EditAlbumPage() {
     </div>
   );
 
-  return !(done1 & done2) ? (
+  return !(done1 & done2 & done3) ? (
     <Grid container justify="center">
       <ReactLoading type={"bars"} color={"#3c54b4"} height={100} width={100} />
     </Grid>

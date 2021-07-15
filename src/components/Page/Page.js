@@ -21,7 +21,7 @@ import AlbumItem from "../ItemOnPage/AlbumItem";
 
 import styles from "./Page.module.css";
 
-import PreLoader from "../PreLoader";
+// import PreLoader from "../PreLoader";
 
 // card imported items style
 const useStylesCard = makeStyles((theme) => ({
