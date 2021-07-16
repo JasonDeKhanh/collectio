@@ -42,9 +42,9 @@ function EditAlbumPage() {
   // retrieve albums data from firestore
   const [albums, setAlbums] = useState([]);
 
-  const [done1, setDone1] = useState(undefined);
-  const [done2, setDone2] = useState(undefined);
-  const [done3, setDone3] = useState(undefined);
+  const [done1, setDone1] = useState(false);
+  const [done2, setDone2] = useState(false);
+  const [done3, setDone3] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -53,6 +53,7 @@ function EditAlbumPage() {
         .doc(uid)
         .collection("albums")
         .get();
+      // .then(setDone1(true));
       const albumsArray = [];
       snapshot.forEach((doc) => {
         albumsArray.push({
@@ -100,6 +101,7 @@ function EditAlbumPage() {
         .doc(currID)
         .collection("importedItems")
         .get();
+      // .then(setDone3(true));
       const itemsArray = [];
       snapshot.forEach((doc) => {
         itemsArray.push({
@@ -115,56 +117,87 @@ function EditAlbumPage() {
   //
   // obtain array of pages
   const [albumPages, setAlbumPages] = useState([]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const snapshot = await db
+  //       .collection("users")
+  //       .doc(uid)
+  //       .collection("albums")
+  //       .doc(currID)
+  //       .collection("pages")
+  //       .get();
+  //     // .then(setDone2(true));
+  //     const pagesArray = [];
+  //     snapshot.forEach((doc) => {
+  //       pagesArray.push({
+  //         ...doc.data(),
+  //       });
+  //     });
+
+  //     // setAlbumPages(pagesArray);
+  //     // if (!albumPages.length === 0) {
+  //     //   setDone2(true);
+  //     // }
+  //     setAlbumPages(pagesArray);
+  //     setDone2(true);
+  //   })();
+  // }, []);
   useEffect(() => {
-    (async () => {
-      const snapshot = await db
-        .collection("users")
+    const tempArray = [];
+    const fetchAlbumPages = () => {
+      db.collection("users")
         .doc(uid)
         .collection("albums")
         .doc(currID)
         .collection("pages")
-        .get();
-      const pagesArray = [];
-      snapshot.forEach((doc) => {
-        pagesArray.push({
-          ...doc.data(),
-        });
-      });
-      setAlbumPages(pagesArray);
-      setDone2(true);
-    })();
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach(function (doc) {
+            // doc.data() is never undefined for query doc snapshots
+            tempArray.push({
+              ...doc.data(),
+            });
+          });
+        })
+        .then(() => setAlbumPages(tempArray));
+    };
+    fetchAlbumPages();
+    setDone2(true);
   }, []);
+
   //
-  console.log(
-    "log here here, albumPages[currPageNum].bgColor: " + albumPages[0]?.bgColor
-  );
 
+  // test
+
+  //
+
+  console.log("album length:" + albumPages.length);
   const [currPage, setCurrPage] = useState(albumPages[currPageNum]);
-  console.log("log beneath here then, " + currPage?.bgColor);
-  // setCurrPage(albumPages[0]);
 
-  const body = (
+  useEffect(() => {
+    const fetchPage = () => {
+      db.collection("users")
+        .doc(uid)
+        .collection("albums")
+        .doc(currID)
+        .collection("pages")
+        .doc(currPageNum.toString())
+        .get()
+        .then((doc) => doc.data())
+        .then((data) => setCurrPage(data));
+    };
+    fetchPage();
+  }, []);
+
+  console.log("what the fuck" + currPage?.orientation);
+
+  const body = !(done1 & done2 & done3) ? (
+    <Grid container justify="center">
+      <ReactLoading type={"bars"} color={"#3c54b4"} height={100} width={100} />
+    </Grid>
+  ) : (
     <div>
-      {/* <h2>{currAlbum?.name}</h2>
-      <img
-        src={currAlbum?.coverImg}
-        alt={currAlbum?.title}
-        style={{ width: "1000px" }}
-      /> */}
-
-      {/* pass current page items into this page object */}
-
       <Grid container direction="row" justify="center" alignItems="center">
-        {/* <div className={navigateButtonClassese}> */}
-        {/* <IconButton
-            aria-label="prevPage"
-            color="primary"
-            component={Link}
-            to={"/edit/" + currID + "/0"}
-          >
-            <NavigateBeforeRoundedIcon />
-          </IconButton> */}
-
         <NavigatePrevPageButton
           albumPages={albumPages}
           currPageNum={currPageNum}
@@ -213,11 +246,7 @@ function EditAlbumPage() {
     </div>
   );
 
-  return !(done1 & done2 & done3) ? (
-    <Grid container justify="center">
-      <ReactLoading type={"bars"} color={"#3c54b4"} height={100} width={100} />
-    </Grid>
-  ) : (
+  return (
     <div>
       <br></br>
       <h1>Edit Page</h1>

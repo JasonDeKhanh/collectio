@@ -24,6 +24,9 @@ function NavigatePrevPageButton(props) {
     setCurrPage,
   } = props;
 
+  const currPageFromLink = useParams().pageNum;
+  console.log("currPageFromLink = " + currPageFromLink);
+
   const buttonClasses = useStylesNavigateButton();
 
   const newPageNum = currPageNum - 1;
@@ -41,7 +44,7 @@ function NavigatePrevPageButton(props) {
         color="primary"
         component={Link}
         to={"/edit/" + currID + "/" + newPageNum.toString()}
-        disabled={currPageNum === 0}
+        disabled={currPageFromLink === "0"} // hard code, change if possible
         onClick={handleClick}
       >
         <NavigateBeforeRoundedIcon />
