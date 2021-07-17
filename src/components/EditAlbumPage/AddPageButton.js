@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AddPageButton(props) {
-  const { albumPages, currID, currPage } = props;
+  const { albumPages, setAlbumPages, currID, currPage } = props;
 
   const classes = useStyles();
 
@@ -24,18 +24,25 @@ function AddPageButton(props) {
   const newPageNum = albumPages.length;
 
   const handleClick = () => {
+    const newPage = {
+      itemsOnPage: [],
+      bgColor: "white",
+      pgNum: newPageNum,
+      orientation: currPage?.orientation,
+    };
+
     db.collection("users")
       .doc(uid)
       .collection("albums")
       .doc(currID)
       .collection("pages")
       .doc(String(newPageNum))
-      .set({
-        itemsOnPage: [],
-        bgColor: "white",
-        pgNum: newPageNum,
-        orientation: currPage?.orientation,
-      });
+      .set(newPage);
+
+    // add to albumPages array somehow
+    const tempAlbumPages = Object.assign([], albumPages);
+    tempAlbumPages.push(newPage);
+    setAlbumPages(tempAlbumPages);
   };
 
   return (

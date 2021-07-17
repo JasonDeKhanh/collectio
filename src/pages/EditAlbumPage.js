@@ -225,14 +225,6 @@ function EditAlbumPage() {
       </Grid>
 
       <Grid container justify="center">
-        <AddPageButton
-          albumPages={albumPages}
-          currID={currID}
-          currPage={currPage}
-        />
-      </Grid>
-
-      <Grid container justify="center">
         <div>
           <Page
             albumPages={albumPages}
@@ -245,6 +237,15 @@ function EditAlbumPage() {
             setAlbumPages={setAlbumPages}
           />
         </div>
+      </Grid>
+
+      <Grid container justify="center">
+        <AddPageButton
+          albumPages={albumPages}
+          setAlbumPages={setAlbumPages}
+          currID={currID}
+          currPage={currPage}
+        />
       </Grid>
 
       {/* for next page button or something, can just get the "pages".length or something to prevent going out of bound 
