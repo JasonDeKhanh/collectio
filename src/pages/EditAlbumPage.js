@@ -23,6 +23,7 @@ import "@firebase/storage";
 import Page from "../components/Page/Page";
 import NavigatePrevPageButton from "../components/EditAlbumPage/NavigatePrevPageButton";
 import NavigateNextPageButton from "../components/EditAlbumPage/NavigateNextPageButton";
+import AddPageButton from "../components/EditAlbumPage/AddPageButton";
 
 // prev next page button style
 // const useStylesNavigateButton = makeStyles((theme) => ({
@@ -221,6 +222,14 @@ function EditAlbumPage() {
         {/* <IconButton aria-label="nextPage" color="primary">
             <NavigateNextRoundedIcon />
           </IconButton> */}
+      </Grid>
+
+      <Grid container justify="center">
+        <AddPageButton
+          albumPages={albumPages}
+          currID={currID}
+          currPage={currPage}
+        />
       </Grid>
 
       <Grid container justify="center">
