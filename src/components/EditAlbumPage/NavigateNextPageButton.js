@@ -26,7 +26,9 @@ function NavigateNextPageButton(props) {
 
   const buttonClasses = useStylesNavigateButton();
 
-  const newPageNum = currPageNum + 1;
+  const currPageFromLink = parseInt(useParams().pageNum);
+  console.log("curr page from link next: " + currPageFromLink);
+  const newPageNum = currPageFromLink + 1;
 
   // find max page num
   const lastPage = albumPages.length - 1;
