@@ -46,6 +46,7 @@ function EditAlbumPage() {
   const [done1, setDone1] = useState(false);
   const [done2, setDone2] = useState(false);
   const [done3, setDone3] = useState(false);
+  const [done4, setDone4] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -218,9 +219,10 @@ function EditAlbumPage() {
     };
 
     fetchItemsAdded();
+    setDone4(true);
   }, []);
 
-  const body = !(done1 & done2 & done3) ? (
+  const body = !(done1 & done2 & done3 & done4) ? (
     <Grid container justify="center">
       <ReactLoading type={"bars"} color={"#3c54b4"} height={100} width={100} />
     </Grid>

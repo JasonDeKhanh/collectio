@@ -90,7 +90,7 @@ function AlbumItem(props) {
   // - drag image around and the "location" will be saved
   // -
 
-  return (
+  return thisItem.onPage === currPageNum ? (
     // <div
     //   style={
     //     currPage?.orientation === "landscape"
@@ -126,8 +126,8 @@ function AlbumItem(props) {
       />
       {/* <h1 style={{ height: 100, width: 100 }}>hello</h1> */}
     </DraggableCore>
-    // </div>
-  );
+  ) : // </div>
+  null;
 }
 
 export default AlbumItem;

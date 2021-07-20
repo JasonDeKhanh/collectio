@@ -191,44 +191,18 @@ function Page(props) {
             {/* <Grid container direction="row" justify="center"> */}
             {/* <Grid container direction="row" justify="center"> */}
             {itemsAdded?.map((item) => (
-              <div
-              // style={
-              //   // height: 500,
-              //   // width: 500,
-              //   // must keep this line for dragging boundaries to work
-              //   // backgroundColor: "orange",
-              //   // color: "#ffffff",
-              //   currPage?.orientation === "landscape"
-              //     ? { height: 720, width: 1280, position: "absolute" }
-              //     : { height: 1280, width: 720, position: "absolute" }
-              // }
-              >
-                {item.onPage === currPageNum ? (
-                  <AlbumItem
-                    thisItem={item}
-                    albumPages={albumPages}
-                    currPageNum={currPageNum}
-                    setCurrPageNum={setCurrPageNum}
-                    currID={currID}
-                    currPage={currPage}
-                    setCurrPage={setCurrPage}
-                    setAlbumPages={setAlbumPages}
-                    itemsAdded={itemsAdded}
-                    setItemsAdded={setItemsAdded}
-                  />
-                ) : null}
-                {/* <AlbumItem
-                  thisItem={item}
-                  albumPages={albumPages}
-                  currPageNum={currPageNum}
-                  setCurrPageNum={setCurrPageNum}
-                  currID={currID}
-                  currPage={currPage}
-                  setCurrPage={setCurrPage}
-                  itemsThisPage={currPage?.itemsOnPage}
-                  setAlbumPages={setAlbumPages}
-                /> */}
-              </div>
+              <AlbumItem
+                thisItem={item}
+                albumPages={albumPages}
+                currPageNum={currPageNum}
+                setCurrPageNum={setCurrPageNum}
+                currID={currID}
+                currPage={currPage}
+                setCurrPage={setCurrPage}
+                setAlbumPages={setAlbumPages}
+                itemsAdded={itemsAdded}
+                setItemsAdded={setItemsAdded}
+              />
             ))}
           </div>
         </Paper>
