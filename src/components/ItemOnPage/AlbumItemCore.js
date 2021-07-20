@@ -1,0 +1,183 @@
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Button from "@material-ui/core/Button";
+
+import { withStyles } from "@material-ui/core/styles";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import BuildIcon from "@material-ui/icons/Build";
+import IconButton from "@material-ui/core/IconButton";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+
+import firebase from "@firebase/app";
+import "@firebase/firestore";
+import "@firebase/storage";
+
+const StyledMenu = withStyles({
+  paper: {
+    border: "1px solid #d3d4d5",
+  },
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "center",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "center",
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    "&:focus": {
+      backgroundColor: theme.palette.primary.main,
+      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+        color: theme.palette.common.white,
+      },
+    },
+  },
+}))(MenuItem);
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  },
+});
+
+// added items card style
+const useStylesCard = makeStyles((theme) => ({
+  root: {
+    width: 250,
+    height: 250,
+    border: "1px solid #B5B5B5",
+  },
+  cardTitle: {
+    fontSize: [16],
+    overflow: "hidden",
+  },
+  media: {
+    // height: "100%",
+    //width: 200,
+    height: "70%",
+    display: "flex",
+    objectFit: "cover",
+    margin: "auto",
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  header: {
+    height: 35,
+    overflow: "hidden",
+    display: "block",
+    paddingTop: 13,
+    paddingBottom: 0,
+  },
+  button: {
+    margin: "auto",
+    width: 20,
+    height: 20,
+    paddingLeft: 0,
+  },
+}));
+
+function AlbumItemCore(props) {
+  const {
+    albumPages, // pages array
+    currPageNum,
+    setCurrPageNum,
+    currID,
+    currPage,
+    setCurrPage,
+    setAlbumPages,
+    itemsAdded,
+    setItemsAdded,
+    thisItem,
+  } = props;
+
+  const cardClasses = useStylesCard();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const db = firebase.firestore();
+  const uid = firebase.auth().currentUser?.uid;
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleDelete = () => {
+    const tempItemsAdded = Object.assign([], itemsAdded);
+    for (var i = 0; i < tempItemsAdded.length; i++) {
+      if (tempItemsAdded[i].id === thisItem.id) {
+        tempItemsAdded.splice(i, 1);
+        break;
+      }
+    }
+
+    setItemsAdded(tempItemsAdded);
+
+    //update firebase
+    db.collection("users")
+      .doc(uid)
+      .collection("albums")
+      .doc(currID)
+      .collection("itemsAdded")
+      .doc(thisItem.id)
+      .delete();
+  };
+
+  return (
+    <Card className={cardClasses.root}>
+      <CardHeader
+        className={cardClasses.header}
+        title={thisItem.name}
+        classes={{ title: cardClasses.cardTitle }}
+      />
+      <CardMedia
+        className={cardClasses.media}
+        image={thisItem.img}
+        title={thisItem.name}
+      />
+      <CardActions disableSpacing>
+        <Button
+          variant="outlined"
+          className={cardClasses.button}
+          startIcon={<EditIcon />}
+        >
+          Resize
+        </Button>
+        <Button
+          variant="outlined"
+          className={cardClasses.button}
+          startIcon={<DeleteIcon />}
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
+      </CardActions>
+    </Card>
+  );
+}
+
+export default AlbumItemCore;

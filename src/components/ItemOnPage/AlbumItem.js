@@ -10,6 +10,7 @@ import "@firebase/storage";
 
 import Draggable from "react-draggable";
 import DraggableCore from "react-draggable";
+import AlbumItemCore from "./AlbumItemCore";
 
 const useStylesItem = makeStyles((theme) => ({}));
 
@@ -116,14 +117,20 @@ function AlbumItem(props) {
       //   y: thisItem?.defaultPosition?.yPos,
       // }}
     >
-      <img
-        src={thisItem.img}
-        alt={thisItem.name}
-        style={{
-          height: 200,
-          width: 200,
-        }}
+      <AlbumItemCore
+        albumPages={albumPages}
+        currPageNum={currPageNum}
+        setCurrPageNum={setCurrPageNum}
+        currID={currID}
+        currPage={currPage}
+        setCurrPage={setCurrPage}
+        itemsThisPage={itemsThisPage}
+        setAlbumPages={setAlbumPages}
+        itemsAdded={itemsAdded}
+        setItemsAdded={setItemsAdded}
+        thisItem={thisItem}
       />
+
       {/* <h1 style={{ height: 100, width: 100 }}>hello</h1> */}
     </DraggableCore>
   ) : // </div>
