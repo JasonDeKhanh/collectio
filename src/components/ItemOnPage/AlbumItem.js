@@ -10,6 +10,7 @@ import "@firebase/storage";
 
 import Draggable from "react-draggable";
 import DraggableCore from "react-draggable";
+import AlbumItemCore from "./AlbumItemCore";
 
 import { ResizableBox } from "react-resizable";
 import "react-resizable/css/styles.css";
@@ -130,6 +131,20 @@ function AlbumItem(props) {
       //   y: thisItem?.defaultPosition?.yPos,
       // }}
     >
+      <AlbumItemCore
+        albumPages={albumPages}
+        currPageNum={currPageNum}
+        setCurrPageNum={setCurrPageNum}
+        currID={currID}
+        currPage={currPage}
+        setCurrPage={setCurrPage}
+        itemsThisPage={itemsThisPage}
+        setAlbumPages={setAlbumPages}
+        itemsAdded={itemsAdded}
+        setItemsAdded={setItemsAdded}
+        thisItem={thisItem}
+      />
+
       <ResizableBox
         className="box"
         // width={boxWidth}
