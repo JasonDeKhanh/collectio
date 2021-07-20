@@ -22,6 +22,8 @@ function NavigatePrevPageButton(props) {
     currID,
     currPage,
     setCurrPage,
+    currPageItems,
+    setCurrPageItems,
   } = props;
 
   const buttonClasses = useStylesNavigateButton();

@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -98,11 +99,15 @@ function Page(props) {
     currID,
     currPage,
     setCurrPage,
-    itemsThisPage,
+    // itemsThisPage,
     setAlbumPages,
+    itemsAdded,
+    setItemsAdded,
   } = props;
 
-  console.log(currPageNum + " " + currID);
+  const currPageFromLink = parseInt(useParams().pageNum);
+
+  console.log(currPageFromLink + " " + currID);
   //
   // const currPage = albumPages[currPageNum];
   // console.log(albumPages);
@@ -185,20 +190,46 @@ function Page(props) {
             ))} */}
             {/* <Grid container direction="row" justify="center"> */}
             {/* <Grid container direction="row" justify="center"> */}
-            {itemsThisPage?.map((item) => (
-              <AlbumItem
-                thisItem={item}
-                albumPages={albumPages}
-                currPageNum={currPageNum}
-                setCurrPageNum={setCurrPageNum}
-                currID={currID}
-                currPage={currPage}
-                setCurrPage={setCurrPage}
-                itemsThisPage={currPage?.itemsOnPage}
-                setAlbumPages={setAlbumPages}
-              />
+            {itemsAdded?.map((item) => (
+              <div
+              // style={
+              //   // height: 500,
+              //   // width: 500,
+              //   // must keep this line for dragging boundaries to work
+              //   // backgroundColor: "orange",
+              //   // color: "#ffffff",
+              //   currPage?.orientation === "landscape"
+              //     ? { height: 720, width: 1280, position: "absolute" }
+              //     : { height: 1280, width: 720, position: "absolute" }
+              // }
+              >
+                {item.onPage === currPageNum ? (
+                  <AlbumItem
+                    thisItem={item}
+                    albumPages={albumPages}
+                    currPageNum={currPageNum}
+                    setCurrPageNum={setCurrPageNum}
+                    currID={currID}
+                    currPage={currPage}
+                    setCurrPage={setCurrPage}
+                    setAlbumPages={setAlbumPages}
+                    itemsAdded={itemsAdded}
+                    setItemsAdded={setItemsAdded}
+                  />
+                ) : null}
+                {/* <AlbumItem
+                  thisItem={item}
+                  albumPages={albumPages}
+                  currPageNum={currPageNum}
+                  setCurrPageNum={setCurrPageNum}
+                  currID={currID}
+                  currPage={currPage}
+                  setCurrPage={setCurrPage}
+                  itemsThisPage={currPage?.itemsOnPage}
+                  setAlbumPages={setAlbumPages}
+                /> */}
+              </div>
             ))}
-            {/* </Grid> */}
           </div>
         </Paper>
       </div>

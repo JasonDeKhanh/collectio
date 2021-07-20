@@ -192,6 +192,34 @@ function EditAlbumPage() {
 
   console.log("what the fuck" + currPage?.orientation);
 
+  // obtain items added to pages
+  const [itemsAdded, setItemsAdded] = useState([]);
+
+  useEffect(() => {
+    const tempArray = [];
+    console.log("in here");
+    const fetchItemsAdded = () => {
+      db.collection("users")
+        .doc(uid)
+        .collection("albums")
+        .doc(currID)
+        .collection("itemsAdded")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach(function (doc) {
+            // doc.data() is never undefined for query doc snapshots
+            tempArray.push({
+              ...doc.data(),
+              id: doc.id,
+            });
+          });
+        })
+        .then(() => setItemsAdded(tempArray));
+    };
+
+    fetchItemsAdded();
+  }, []);
+
   const body = !(done1 & done2 & done3) ? (
     <Grid container justify="center">
       <ReactLoading type={"bars"} color={"#3c54b4"} height={100} width={100} />
@@ -206,6 +234,8 @@ function EditAlbumPage() {
           currID={currID}
           urrPage={currPage}
           setCurrPage={setCurrPage}
+          itemsAdded={itemsAdded}
+          setitemsAdded={setItemsAdded}
         />
 
         <caption> Page {currPageNum}</caption>
@@ -215,7 +245,7 @@ function EditAlbumPage() {
           currPageNum={currPageNum}
           setCurrPageNum={setCurrPageNum}
           currID={currID}
-          urrPage={currPage}
+          currPage={currPage}
           setCurrPage={setCurrPage}
         />
 
@@ -233,8 +263,10 @@ function EditAlbumPage() {
             currID={currID}
             currPage={currPage}
             setCurrPage={setCurrPage}
-            itemsThisPage={currPage?.itemsOnPage}
+            // itemsThisPage={currPage?.itemsOnPage}
             setAlbumPages={setAlbumPages}
+            itemsAdded={itemsAdded}
+            setItemsAdded={setItemsAdded}
           />
         </div>
       </Grid>
@@ -272,6 +304,8 @@ function EditAlbumPage() {
           setAlbumPages={setAlbumPages}
           currPageNum={currPageNum}
           setCurrPageNum={setCurrPageNum}
+          itemsAdded={itemsAdded}
+          setItemsAdded={setItemsAdded}
         />
       </div>
     </div>

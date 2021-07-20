@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useParams, Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -8,6 +9,7 @@ import "@firebase/firestore";
 import "@firebase/storage";
 
 import Draggable from "react-draggable";
+import DraggableCore from "react-draggable";
 
 const useStylesItem = makeStyles((theme) => ({}));
 
@@ -21,6 +23,8 @@ function AlbumItem(props) {
     setCurrPage,
     itemsThisPage,
     setAlbumPages,
+    itemsAdded,
+    setItemsAdded,
   } = props;
 
   const thisItem = props.thisItem;
@@ -34,45 +38,50 @@ function AlbumItem(props) {
   const [x, setX] = useState(thisItem?.defaultPosition?.xPos);
   const [y, setY] = useState(thisItem?.defaultPosition?.yPos);
 
+  const currPageFromLink = parseInt(useParams().pageNum);
+
   const handleStop = (event, dragElement) => {
     // event.preventDefault();
     setX(dragElement.x);
     setY(dragElement.y);
-
     // save position to firebase
     // create new temp item
     // put new temp item into new temp array
     // put new temp array into the itemsThisPage firebase
+    const tempNewItem = {
+      ...thisItem,
+      // defaultPosition: { xPos: dragElement.x, yPos: dragElement.y },
+      defaultPosition: { xPos: dragElement.x, yPos: dragElement.y },
+    };
 
     // search the array to find the item with the same ID
-    const tempItemsThisPage = Object.assign([], itemsThisPage);
-    for (var i = 0; i < tempItemsThisPage.length; i++) {
-      if (tempItemsThisPage[i].id === thisItem.id) {
-        tempItemsThisPage[i] = {
-          ...thisItem,
-          // defaultPosition: { xPos: dragElement.x, yPos: dragElement.y },
-          defaultPosition: { xPos: dragElement.x, yPos: dragElement.y },
-        };
+    const tempItemsAdded = Object.assign([], itemsAdded);
+    for (var i = 0; i < tempItemsAdded.length; i++) {
+      if (tempItemsAdded[i].id === thisItem.id) {
+        tempItemsAdded[i] = tempNewItem;
       }
     }
 
-    const tempPages = Object.assign([], albumPages);
-    tempPages[currPageNum].itemsOnPage = tempItemsThisPage;
+    // const tempPages = Object.assign([], albumPages);
 
-    setAlbumPages(tempPages);
+    // tempPages[currPageNum].itemsOnPage = tempItemsThisPage;
 
-    const tempPage = tempPages[currPageNum];
+    // setAlbumPages(tempPages);
 
-    setCurrPage(tempPage);
+    // const tempPage = tempPages[currPageNum];
+
+    // setCurrPage(tempPage);
+
+    setItemsAdded(tempItemsAdded);
 
     // update in firebase
     db.collection("users")
       .doc(uid)
       .collection("albums")
       .doc(currID)
-      .collection("pages")
-      .doc(currPageNum.toString())
-      .set(tempPage);
+      .collection("itemsAdded")
+      .doc(thisItem.id)
+      .set(tempNewItem);
   };
 
   // display only the image
@@ -90,7 +99,7 @@ function AlbumItem(props) {
     //   }
     // >
 
-    <Draggable
+    <DraggableCore
       onStop={handleStop}
       // position={{
       //   x: thisItem?.defaultPosition?.xPos,
@@ -116,7 +125,7 @@ function AlbumItem(props) {
         }}
       />
       {/* <h1 style={{ height: 100, width: 100 }}>hello</h1> */}
-    </Draggable>
+    </DraggableCore>
     // </div>
   );
 }

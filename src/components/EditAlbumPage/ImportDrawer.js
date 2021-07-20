@@ -145,6 +145,8 @@ export default function ImportDrawer(props) {
     setAlbumPages,
     currPageNum,
     setCurrPageNum,
+    itemsAdded,
+    setItemsAdded,
   } = props;
 
   const [importPopup, setImportPopup] = useState(false);
@@ -265,6 +267,8 @@ export default function ImportDrawer(props) {
                             setAlbumPages={setAlbumPages}
                             currPageNum={currPageNum}
                             setCurrPageNum={setCurrPageNum}
+                            itemsAdded={itemsAdded}
+                            setItemsAdded={setItemsAdded}
                           />
                         </IconButton>
                         {/* <Typography className={cardClasses.buttonLabel}>

@@ -34,6 +34,8 @@ function ImportedItemAddButton(props) {
     setAlbumPages,
     currPageNum,
     setCurrPageNum,
+    itemsAdded,
+    setItemsAdded,
   } = props;
 
   const db = firebase.firestore();
@@ -62,30 +64,27 @@ function ImportedItemAddButton(props) {
       .doc(importedItemID)
       .delete();
 
-    //create a new tempPages array
-    const tempPages = Object.assign([], albumPages);
+    //create a new itemsAdded array
+    const tempItemsAdded = Object.assign([], itemsAdded);
 
-    const tempImportedItem = {
+    const tempItemAdded = {
       ...importedItem,
       defaultPosition: { xPos: 0, yPos: 0 },
+      onPage: currPageNum,
     };
     //add the imported item into the page in the tempPages array
-    tempPages[currPageNum]?.itemsOnPage.push(tempImportedItem);
+    tempItemsAdded.push(tempItemAdded);
 
-    //make the tempPages the new pages array
-    setAlbumPages(tempPages);
-
-    //make a tempPage
-    const tempPage = tempPages[currPageNum];
+    //update itemsAdded
+    setItemsAdded(tempItemsAdded);
 
     //add item to firebase
     db.collection("users")
       .doc(uid)
       .collection("albums")
       .doc(currID)
-      .collection("pages")
-      .doc(currPageNum.toString())
-      .set(tempPage);
+      .collection("itemsAdded")
+      .add(tempItemAdded);
   };
 
   return (
