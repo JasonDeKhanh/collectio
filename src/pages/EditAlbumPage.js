@@ -195,7 +195,6 @@ function EditAlbumPage() {
 
   // obtain items added to pages
   const [itemsAdded, setItemsAdded] = useState([]);
-
   useEffect(() => {
     const tempArray = [];
     console.log("in here");
