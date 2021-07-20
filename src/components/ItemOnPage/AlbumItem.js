@@ -132,8 +132,10 @@ function AlbumItem(props) {
     >
       <ResizableBox
         className="box"
-        width={boxWidth}
-        height={boxHeight}
+        // width={boxWidth}
+        // height={boxHeight}
+        width={200}
+        height={200}
         resizeHandles={["s", "w", "e", "n", "sw", "nw", "se", "ne"]}
         onResize={handleResize}
       >
