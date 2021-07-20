@@ -131,20 +131,6 @@ function AlbumItem(props) {
       //   y: thisItem?.defaultPosition?.yPos,
       // }}
     >
-      <AlbumItemCore
-        albumPages={albumPages}
-        currPageNum={currPageNum}
-        setCurrPageNum={setCurrPageNum}
-        currID={currID}
-        currPage={currPage}
-        setCurrPage={setCurrPage}
-        itemsThisPage={itemsThisPage}
-        setAlbumPages={setAlbumPages}
-        itemsAdded={itemsAdded}
-        setItemsAdded={setItemsAdded}
-        thisItem={thisItem}
-      />
-
       <ResizableBox
         className="box"
         // width={boxWidth}
@@ -154,13 +140,26 @@ function AlbumItem(props) {
         resizeHandles={["s", "w", "e", "n", "sw", "nw", "se", "ne"]}
         onResize={handleResize}
       >
-        <img
+        {/* <img
           src={thisItem.img}
           alt={thisItem.name}
           style={{
             height: "100%",
             width: "100%",
           }}
+        /> */}
+        <AlbumItemCore
+          albumPages={albumPages}
+          currPageNum={currPageNum}
+          setCurrPageNum={setCurrPageNum}
+          currID={currID}
+          currPage={currPage}
+          setCurrPage={setCurrPage}
+          itemsThisPage={itemsThisPage}
+          setAlbumPages={setAlbumPages}
+          itemsAdded={itemsAdded}
+          setItemsAdded={setItemsAdded}
+          thisItem={thisItem}
         />
       </ResizableBox>
       {/* <h1 style={{ height: 100, width: 100 }}>hello</h1> */}

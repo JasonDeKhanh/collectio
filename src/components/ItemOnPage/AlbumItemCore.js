@@ -64,8 +64,8 @@ const useStyles = makeStyles({
 // added items card style
 const useStylesCard = makeStyles((theme) => ({
   root: {
-    width: 250,
-    height: 250,
+    width: "100%",
+    height: "100%",
     border: "1px solid #B5B5B5",
   },
   cardTitle: {
@@ -149,11 +149,11 @@ function AlbumItemCore(props) {
 
   return (
     <Card className={cardClasses.root}>
-      <CardHeader
+      {/* <CardHeader
         className={cardClasses.header}
         title={thisItem.name}
         classes={{ title: cardClasses.cardTitle }}
-      />
+      /> */}
       <CardMedia
         className={cardClasses.media}
         image={thisItem.img}
