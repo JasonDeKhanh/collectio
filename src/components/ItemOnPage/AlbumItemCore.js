@@ -7,13 +7,23 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 
+import { useTheme } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from "@material-ui/icons/Info";
+import AddBoxIcon from "@material-ui/icons/AddBox";
+
 import { withStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import BuildIcon from "@material-ui/icons/Build";
-import IconButton from "@material-ui/core/IconButton";
+
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -148,35 +158,57 @@ function AlbumItemCore(props) {
   };
 
   return (
-    <Card className={cardClasses.root}>
-      {/* <CardHeader
-        className={cardClasses.header}
-        title={thisItem.name}
-        classes={{ title: cardClasses.cardTitle }}
-      /> */}
-      <CardMedia
-        className={cardClasses.media}
-        image={thisItem.img}
-        title={thisItem.name}
+    // <Card className={cardClasses.root}>
+    //   {/* <CardHeader
+    //     className={cardClasses.header}
+    //     title={thisItem.name}
+    //     classes={{ title: cardClasses.cardTitle }}
+    //   /> */}
+    //   <CardMedia
+    //     className={cardClasses.media}
+    //     image={thisItem.img}
+    //     title={thisItem.name}
+    //   />
+    //   <CardActions disableSpacing>
+    //     <Button
+    //       variant="outlined"
+    //       className={cardClasses.button}
+    //       startIcon={<EditIcon />}
+    //     >
+    //       Resize
+    //     </Button>
+    //     <Button
+    //       variant="outlined"
+    //       className={cardClasses.button}
+    //       startIcon={<DeleteIcon />}
+    //       onClick={handleDelete}
+    //     >
+    //       Delete
+    //     </Button>
+    //   </CardActions>
+    // </Card>
+    <GridListTile key={thisItem.img}>
+      <img
+        src={thisItem.img}
+        alt={thisItem.name}
+        style={{
+          // border: "2px solid #C8C8C8",
+          height: "100%",
+          width: "100%",
+          // borderRadius: 5,
+          // margin: "auto",
+        }}
       />
-      <CardActions disableSpacing>
-        <Button
-          variant="outlined"
-          className={cardClasses.button}
-          startIcon={<EditIcon />}
-        >
-          Resize
-        </Button>
-        <Button
-          variant="outlined"
-          className={cardClasses.button}
-          startIcon={<DeleteIcon />}
-          onClick={handleDelete}
-        >
-          Delete
-        </Button>
-      </CardActions>
-    </Card>
+      <GridListTileBar
+        actionIcon={
+          <IconButton aria-label={`info about ${thisItem.name}`}>
+            <DeleteIcon fontSize="small" />
+          </IconButton>
+        }
+        // style={{ width: "99.7%" }}
+      />
+    </GridListTile>
+    // just make the tilebar background transparent or something
   );
 }
 

@@ -137,7 +137,7 @@ function AlbumItem(props) {
         // height={boxHeight}
         width={200}
         height={200}
-        resizeHandles={["s", "w", "e", "n", "sw", "nw", "se", "ne"]}
+        resizeHandles={["nw"]}
         onResize={handleResize}
       >
         {/* <img
