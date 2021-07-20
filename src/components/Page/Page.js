@@ -160,8 +160,8 @@ function Page(props) {
               // backgroundColor: "orange",
               // color: "#ffffff",
               currPage?.orientation === "landscape"
-                ? { height: 720, width: 1280, position: "relative" }
-                : { height: 1280, width: 720, position: "relative" }
+                ? { height: 720, width: 1280, position: "absolute" }
+                : { height: 1280, width: 720, position: "absolute" }
             }
           >
             {/* need to put the ? because idk without it everything breaks */}

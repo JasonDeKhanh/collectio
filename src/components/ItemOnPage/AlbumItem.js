@@ -12,6 +12,9 @@ import Draggable from "react-draggable";
 import DraggableCore from "react-draggable";
 import AlbumItemCore from "./AlbumItemCore";
 
+import { ResizableBox } from "react-resizable";
+import "react-resizable/css/styles.css";
+
 const useStylesItem = makeStyles((theme) => ({}));
 
 function AlbumItem(props) {
@@ -38,6 +41,11 @@ function AlbumItem(props) {
   // default position obtained from firebase
   const [x, setX] = useState(thisItem?.defaultPosition?.xPos);
   const [y, setY] = useState(thisItem?.defaultPosition?.yPos);
+
+  // width and height of "box" / item
+  // default should be the fetch data
+  const [boxHeight, setBoxHeight] = useState(thisItem?.itemHeight);
+  const [boxWidth, setBoxWidth] = useState(thisItem?.itemWidth);
 
   const currPageFromLink = parseInt(useParams().pageNum);
 
@@ -83,6 +91,12 @@ function AlbumItem(props) {
       .collection("itemsAdded")
       .doc(thisItem.id)
       .set(tempNewItem);
+  };
+
+  // handle resizing
+  const handleResize = (event, { element, size, handle }) => {
+    setBoxHeight(size.height);
+    setBoxWidth(size.width);
   };
 
   // display only the image
@@ -131,6 +145,22 @@ function AlbumItem(props) {
         thisItem={thisItem}
       />
 
+      <ResizableBox
+        className="box"
+        width={boxWidth}
+        height={boxHeight}
+        resizeHandles={["s", "w", "e", "n", "sw", "nw", "se", "ne"]}
+        onResize={handleResize}
+      >
+        <img
+          src={thisItem.img}
+          alt={thisItem.name}
+          style={{
+            height: "100%",
+            width: "100%",
+          }}
+        />
+      </ResizableBox>
       {/* <h1 style={{ height: 100, width: 100 }}>hello</h1> */}
     </DraggableCore>
   ) : // </div>
