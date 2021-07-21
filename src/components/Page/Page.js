@@ -103,6 +103,8 @@ function Page(props) {
     setAlbumPages,
     itemsAdded,
     setItemsAdded,
+    importedItems,
+    setImportedItems,
   } = props;
 
   const currPageFromLink = parseInt(useParams().pageNum);
@@ -202,6 +204,8 @@ function Page(props) {
                 setAlbumPages={setAlbumPages}
                 itemsAdded={itemsAdded}
                 setItemsAdded={setItemsAdded}
+                importedItems={importedItems}
+                setImportedItems={setImportedItems}
               />
             ))}
           </div>

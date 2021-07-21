@@ -17,6 +17,8 @@ import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 
+import { fade } from "@material-ui/core/styles/colorManipulator";
+
 import { withStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -72,38 +74,75 @@ const useStyles = makeStyles({
 });
 
 // added items card style
-const useStylesCard = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    height: "100%",
-    border: "1px solid #B5B5B5",
+// const useStylesCard = makeStyles((theme) => ({
+//   root: {
+//     width: "100%",
+//     height: "100%",
+//     border: "1px solid #B5B5B5",
+//   },
+//   cardTitle: {
+//     fontSize: [16],
+//     overflow: "hidden",
+//   },
+//   media: {
+//     // height: "100%",
+//     //width: 200,
+//     height: "70%",
+//     display: "flex",
+//     objectFit: "cover",
+//     margin: "auto",
+//     marginTop: 5,
+//     marginBottom: 5,
+//   },
+//   header: {
+//     height: 35,
+//     overflow: "hidden",
+//     display: "block",
+//     paddingTop: 13,
+//     paddingBottom: 0,
+//   },
+//   button: {
+//     margin: "auto",
+//     width: 20,
+//     height: 20,
+//     paddingLeft: 0,
+//   },
+// }));
+
+const useStylesItem = makeStyles((theme) => ({
+  // root: {
+  //   display: "flex",
+  //   //flexWrap: "wrap",
+  //   justifyContent: "space-evenly",
+  //   overflow: "hidden",
+  //   backgroundColor: theme.palette.background.paper,
+  // },
+  // gridList: {
+  //   width: "100%",
+  // },
+  // gridTile: {},
+  // icon: {
+  //   color: "rgba(255, 255, 255, 0.54)",
+  // },
+  // buttonCreateAlbum: {
+  //   backgroundColor: "#5FC9FF",
+  //   height: 200,
+  //   width: "100%",
+  //   margin: "auto",
+  //   fontSize: 20,
+  //   color: "white",
+  //   fontWeight: "fontWeightBold",
+  // },
+  gridListTileBar: {
+    background: "transparent",
   },
-  cardTitle: {
-    fontSize: [16],
-    overflow: "hidden",
-  },
-  media: {
-    // height: "100%",
-    //width: 200,
-    height: "70%",
-    display: "flex",
-    objectFit: "cover",
-    margin: "auto",
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  header: {
-    height: 35,
-    overflow: "hidden",
-    display: "block",
-    paddingTop: 13,
-    paddingBottom: 0,
-  },
-  button: {
-    margin: "auto",
-    width: 20,
-    height: 20,
-    paddingLeft: 0,
+
+  iconButton: {
+    background: fade("#BDBDBD", 0.8),
+    "&:hover": {
+      background: fade("#f00", 0.75),
+    },
+    border: "1px solid #717171",
   },
 }));
 
@@ -119,9 +158,12 @@ function AlbumItemCore(props) {
     itemsAdded,
     setItemsAdded,
     thisItem,
+    importedItems,
+    setImportedItems,
   } = props;
 
-  const cardClasses = useStylesCard();
+  // const cardClasses = useStylesCard();
+  const itemClasses = useStylesItem();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -145,16 +187,28 @@ function AlbumItemCore(props) {
       }
     }
 
-    setItemsAdded(tempItemsAdded);
-
-    //update firebase
+    // update firebase
     db.collection("users")
       .doc(uid)
       .collection("albums")
       .doc(currID)
       .collection("itemsAdded")
       .doc(thisItem.id)
-      .delete();
+      .delete()
+      .then(setItemsAdded(tempItemsAdded)); // update "local" array
+
+    // add deleted item to the importedItem list
+    const tempImportedItems = Object.assign([], importedItems);
+    tempImportedItems.push(thisItem);
+
+    // update importedItem firebase
+    db.collection("users")
+      .doc(uid)
+      .collection("albums")
+      .doc(currID)
+      .collection("importedItems")
+      .add(thisItem)
+      .then(setImportedItems(tempImportedItems)); // update "local" array
   };
 
   return (
@@ -200,9 +254,13 @@ function AlbumItemCore(props) {
         }}
       />
       <GridListTileBar
+        className={itemClasses.gridListTileBar}
         actionIcon={
-          <IconButton aria-label={`info about ${thisItem.name}`}>
-            <DeleteIcon fontSize="large" onClick={handleDelete} />
+          <IconButton
+            className={itemClasses.iconButton}
+            aria-label={`info about ${thisItem.name}`}
+          >
+            <DeleteIcon fontSize="small" onClick={handleDelete} />
           </IconButton>
         }
         // style={{ width: "99.7%" }}

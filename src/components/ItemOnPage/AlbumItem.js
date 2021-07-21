@@ -29,6 +29,8 @@ function AlbumItem(props) {
     setAlbumPages,
     itemsAdded,
     setItemsAdded,
+    importedItems,
+    setImportedItems,
   } = props;
 
   const thisItem = props.thisItem;
@@ -161,7 +163,7 @@ function AlbumItem(props) {
         width={boxWidth}
         height={boxHeight}
         minConstraints={[50, "100%"]}
-        resizeHandles={["s", "w", "e", "n", "sw", "nw", "se", "ne"]}
+        resizeHandles={["nw"]}
         onResize={handleResize}
       >
         {/* <img
@@ -184,6 +186,8 @@ function AlbumItem(props) {
           itemsAdded={itemsAdded}
           setItemsAdded={setItemsAdded}
           thisItem={thisItem}
+          importedItems={importedItems}
+          setImportedItems={setImportedItems}
         />
       </ResizableBox>
       {/* <h1 style={{ height: 100, width: 100 }}>hello</h1> */}

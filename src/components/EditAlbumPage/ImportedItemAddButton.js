@@ -77,16 +77,14 @@ function ImportedItemAddButton(props) {
     //add the imported item into the page in the tempPages array
     tempItemsAdded.push(tempItemAdded);
 
-    //update itemsAdded
-    setItemsAdded(tempItemsAdded);
-
     //add item to firebase
     db.collection("users")
       .doc(uid)
       .collection("albums")
       .doc(currID)
       .collection("itemsAdded")
-      .add(tempItemAdded);
+      .add(tempItemAdded)
+      .then(setItemsAdded(tempItemsAdded)); //update itemsAdded
   };
 
   return (

@@ -268,6 +268,8 @@ function EditAlbumPage() {
             setAlbumPages={setAlbumPages}
             itemsAdded={itemsAdded}
             setItemsAdded={setItemsAdded}
+            importedItems={importedItems}
+            setImportedItems={setImportedItems}
           />
         </div>
       </Grid>
