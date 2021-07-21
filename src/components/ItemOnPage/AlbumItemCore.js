@@ -202,7 +202,7 @@ function AlbumItemCore(props) {
       <GridListTileBar
         actionIcon={
           <IconButton aria-label={`info about ${thisItem.name}`}>
-            <DeleteIcon fontSize="small" />
+            <DeleteIcon fontSize="large" onClick={handleDelete} />
           </IconButton>
         }
         // style={{ width: "99.7%" }}

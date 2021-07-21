@@ -97,6 +97,29 @@ function AlbumItem(props) {
   const handleResize = (event, { element, size, handle }) => {
     setBoxHeight(size.height);
     setBoxWidth(size.width);
+
+    const tempNewItem = {
+      ...thisItem,
+      itemHeight: size.height,
+      itemWidth: size.width,
+    };
+
+    const tempItemsAdded = Object.assign([], itemsAdded);
+    for (var i = 0; i < tempItemsAdded.length; i++) {
+      if (tempItemsAdded[i].id === thisItem.id) {
+        tempItemsAdded[i] = tempNewItem;
+      }
+    }
+
+    setItemsAdded(tempItemsAdded);
+
+    db.collection("users")
+      .doc(uid)
+      .collection("albums")
+      .doc(currID)
+      .collection("itemsAdded")
+      .doc(thisItem.id)
+      .set(tempNewItem);
   };
 
   // display only the image
@@ -105,7 +128,7 @@ function AlbumItem(props) {
   // - drag image around and the "location" will be saved
   // -
 
-  return thisItem.onPage === currPageNum ? (
+  return thisItem.onPage === currPageNum.toString() ? (
     // <div
     //   style={
     //     currPage?.orientation === "landscape"
@@ -135,9 +158,10 @@ function AlbumItem(props) {
         className="box"
         // width={boxWidth}
         // height={boxHeight}
-        width={200}
-        height={200}
-        resizeHandles={["nw"]}
+        width={boxWidth}
+        height={boxHeight}
+        minConstraints={[50, "100%"]}
+        resizeHandles={["s", "w", "e", "n", "sw", "nw", "se", "ne"]}
         onResize={handleResize}
       >
         {/* <img
