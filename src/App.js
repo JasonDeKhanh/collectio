@@ -20,6 +20,7 @@ import AppShell from "./components/AppShell";
 import firebase from "@firebase/app";
 import "@firebase/firestore";
 import "@firebase/storage";
+import ViewingPage from "./pages/ViewingPage";
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
                   </Route>
                   <Route path="/edit/:albumID/:pageNum">
                     <EditAlbumPage />
+                  </Route>
+                  <Route path="/view/:albumID/:pageNum">
+                    <AppShell />
+                    <ViewingPage />
                   </Route>
                 </Switch>
               </div>

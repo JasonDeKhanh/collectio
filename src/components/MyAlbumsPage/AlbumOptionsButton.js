@@ -126,7 +126,7 @@ export default function AlbumOptionsButton(props) {
           <ListItemText primary="Edit" />
         </StyledMenuItem>
 
-        <StyledMenuItem>
+        <StyledMenuItem component={Link} to={"/view/" + thisAlbum.id + "/0"}>
           <ListItemIcon>
             <LooksIcon fontSize="small" />
           </ListItemIcon>
