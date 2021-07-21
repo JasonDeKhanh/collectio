@@ -12,6 +12,7 @@ import Grid from "@material-ui/core/Grid";
 
 import NavigateNextPageButton from "../components/EditAlbumPage/NavigateNextPageButton";
 import NavigatePrevPageButton from "../components/EditAlbumPage/NavigatePrevPageButton";
+import ViewingPageItem from "../components/ViewingPage/ViewingPageItem";
 
 // useStyle for the page's paper
 const useStylesPaperLandscape = makeStyles((theme) => ({
@@ -208,6 +209,20 @@ function ViewingPage() {
                 <h2>Page Number : {currPage?.pgNum}</h2>
               </Grid>
             </div>
+            {itemsAdded?.map((item) => (
+              <ViewingPageItem
+                thisItem={item}
+                albumPages={albumPages}
+                currPageNum={currPageNum}
+                setCurrPageNum={setCurrPageNum}
+                currID={currID}
+                currPage={currPage}
+                setCurrPage={setCurrPage}
+                setAlbumPages={setAlbumPages}
+                itemsAdded={itemsAdded}
+                setItemsAdded={setItemsAdded}
+              />
+            ))}
           </Paper>
         </div>
       </Grid>

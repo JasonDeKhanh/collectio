@@ -46,7 +46,9 @@ function AlbumItem(props) {
 
   // width and height of "box" / item
   // default should be the fetch data
-  const [boxHeight, setBoxHeight] = useState(thisItem?.itemHeight);
+  const [boxHeight, setBoxHeight] = useState(
+    !thisItem?.itemHeight === "100%" ? thisItem?.itemHeight : "100%"
+  );
   const [boxWidth, setBoxWidth] = useState(thisItem?.itemWidth);
 
   const currPageFromLink = parseInt(useParams().pageNum);
