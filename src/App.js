@@ -49,7 +49,7 @@ function App() {
                   <Route path="/edit/:albumID/:pageNum">
                     <EditAlbumPage />
                   </Route>
-                  <Route path="/view/:albumID/:pageNum">
+                  <Route path="/view/:uid/:albumID/:pageNum">
                     <AppShell />
                     <ViewingPage />
                   </Route>

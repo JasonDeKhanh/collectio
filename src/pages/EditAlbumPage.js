@@ -1,6 +1,6 @@
 import react from "react";
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useRouteMatch } from "react-router-dom";
 
 import ReactLoading from "react-loading";
 
@@ -72,8 +72,6 @@ function EditAlbumPage() {
 
   // obtain page number
   const [currPageNum, setCurrPageNum] = useState(useParams().pageNum);
-  console.log("curr page num: " + currPageNum);
-  console.log("currID: " + currID);
 
   // const tempAlbums = Object.assign([], albums);
   var currAlbum;
@@ -229,6 +227,7 @@ function EditAlbumPage() {
     <div>
       <Grid container direction="row" justify="center" alignItems="center">
         <NavigatePrevPageButton
+          uid={uid}
           albumPages={albumPages}
           currPageNum={currPageNum}
           setCurrPageNum={setCurrPageNum}
@@ -237,22 +236,21 @@ function EditAlbumPage() {
           setCurrPage={setCurrPage}
           itemsAdded={itemsAdded}
           setitemsAdded={setItemsAdded}
+          inMode="edit"
         />
 
         <caption> Page {currPageNum}</caption>
 
         <NavigateNextPageButton
+          uid={uid}
           albumPages={albumPages}
           currPageNum={currPageNum}
           setCurrPageNum={setCurrPageNum}
           currID={currID}
           currPage={currPage}
           setCurrPage={setCurrPage}
+          inMode="edit"
         />
-
-        {/* <IconButton aria-label="nextPage" color="primary">
-            <NavigateNextRoundedIcon />
-          </IconButton> */}
       </Grid>
 
       <Grid container justify="center">
@@ -290,6 +288,9 @@ function EditAlbumPage() {
       */}
     </div>
   );
+
+  const { url, path } = useRouteMatch();
+  console.log("url routeMatch = " + url + " path routeMatch = " + path);
 
   return (
     <div>

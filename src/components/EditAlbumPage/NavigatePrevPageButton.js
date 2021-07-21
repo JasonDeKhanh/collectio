@@ -16,6 +16,7 @@ const useStylesNavigateButton = makeStyles((theme) => ({
 
 function NavigatePrevPageButton(props) {
   const {
+    uid,
     albumPages,
     currPageNum,
     setCurrPageNum,
@@ -24,6 +25,7 @@ function NavigatePrevPageButton(props) {
     setCurrPage,
     currPageItems,
     setCurrPageItems,
+    inMode,
   } = props;
 
   const buttonClasses = useStylesNavigateButton();
@@ -43,7 +45,13 @@ function NavigatePrevPageButton(props) {
         aria-label="prevPage"
         color="primary"
         component={Link}
-        to={"/edit/" + currID + "/" + newPageNum.toString()}
+        to={
+          inMode === "edit"
+            ? "/edit/" + currID + "/" + newPageNum.toString()
+            : inMode === "view"
+            ? "/view/" + uid + "/" + currID + "/" + newPageNum.toString()
+            : "/"
+        }
         disabled={currPageFromLink === 0} // hard code, change if possible
         onClick={handleClick}
       >
