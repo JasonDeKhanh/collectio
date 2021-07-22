@@ -208,7 +208,6 @@ function EditAlbumPage() {
             // doc.data() is never undefined for query doc snapshots
             tempArray.push({
               ...doc.data(),
-              id: doc.id,
             });
           });
         })
@@ -219,12 +218,45 @@ function EditAlbumPage() {
     setDone4(true);
   }, []);
 
+  // Refresh button
+  // const [tempArrayItemsAdded, setTempArrayItemsAdded] = useState(
+  //   Object.assign([], itemsAdded)
+  // );
+
+  const handleRefresh = () => {
+    const tempArray = [];
+    const fetchItemsAdded = () => {
+      db.collection("users")
+        .doc(uid)
+        .collection("albums")
+        .doc(currID)
+        .collection("itemsAdded")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach(function (doc) {
+            // doc.data() is never undefined for query doc snapshots
+            tempArray.push({
+              ...doc.data(),
+            });
+          });
+        })
+        .then(setItemsAdded(tempArray));
+    };
+    fetchItemsAdded();
+  };
+
+  //////////////
+
   const body = !(done1 & done2 & done3 & done4) ? (
     <Grid container justify="center">
       <ReactLoading type={"bars"} color={"#3c54b4"} height={100} width={100} />
     </Grid>
   ) : (
     <div>
+      {/* <Grid container justify="center" alignItems="center">
+        <Button onClick={handleRefresh}>Refresh</Button>
+      </Grid> */}
+
       <Grid container direction="row" justify="center" alignItems="center">
         <NavigatePrevPageButton
           uid={uid}

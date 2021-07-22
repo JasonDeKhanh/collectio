@@ -193,22 +193,44 @@ function AlbumItemCore(props) {
       .collection("albums")
       .doc(currID)
       .collection("itemsAdded")
-      .doc(thisItem.id)
+      .doc(thisItem?.id)
       .delete()
-      .then(setItemsAdded(tempItemsAdded)); // update "local" array
+      .then(setItemsAdded(tempItemsAdded)) // update "local" array
+      .then(() => {
+        // add deleted item to the importedItem list
+        const tempImportedItems = Object.assign([], importedItems);
+        // tempImportedItems.push(thisItem);
 
-    // add deleted item to the importedItem list
-    const tempImportedItems = Object.assign([], importedItems);
-    tempImportedItems.push(thisItem);
-
-    // update importedItem firebase
-    db.collection("users")
-      .doc(uid)
-      .collection("albums")
-      .doc(currID)
-      .collection("importedItems")
-      .add(thisItem)
-      .then(setImportedItems(tempImportedItems)); // update "local" array
+        // update importedItem firebase
+        var lastID;
+        var finalImportedItem;
+        db.collection("users")
+          .doc(uid)
+          .collection("albums")
+          .doc(currID)
+          .collection("importedItems")
+          .add(thisItem)
+          .then((docRef) => {
+            lastID = docRef?.id;
+          })
+          .then(() => {
+            db.collection("users")
+              .doc(uid)
+              .collection("albums")
+              .doc(currID)
+              .collection("importedItems")
+              .doc(lastID)
+              .update({
+                id: lastID,
+              });
+            finalImportedItem = {
+              ...thisItem,
+              id: lastID,
+            };
+          })
+          .then(tempImportedItems.push(finalImportedItem))
+          .then(setImportedItems(tempImportedItems)); // update "local" array
+      });
   };
 
   return (

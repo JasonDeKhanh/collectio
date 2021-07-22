@@ -42,15 +42,14 @@ function ImportedItemDeleteButton(props) {
       }
     }
 
-    setImportedItems(tempImportedItems);
-
     db.collection("users")
       .doc(uid)
       .collection("albums")
       .doc(currID)
       .collection("importedItems")
       .doc(importedItemID)
-      .delete();
+      .delete()
+      .then(setImportedItems(tempImportedItems));
     // .then(() => {
     //   console.log("item successfully deleted!");
     // })

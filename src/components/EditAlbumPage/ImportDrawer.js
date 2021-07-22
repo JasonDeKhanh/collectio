@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -154,6 +154,33 @@ export default function ImportDrawer(props) {
   const db = firebase.firestore();
   const uid = firebase.auth().currentUser?.uid;
 
+  const [tempImportedItems, setTempImportedItems] = useState(
+    Object.assign([], importedItems)
+  );
+
+  const handleRefresh = () => {
+    (async () => {
+      const snapshot = await db
+        .collection("users")
+        .doc(uid)
+        .collection("albums")
+        .doc(currID)
+        .collection("importedItems")
+        .get();
+      // .then(setDone3(true));
+      const itemsArray = [];
+      snapshot.forEach((doc) => {
+        itemsArray.push({
+          ...doc.data(),
+          id: doc.id,
+        });
+      });
+      setTempImportedItems(itemsArray);
+    })();
+
+    setImportedItems(tempImportedItems);
+  };
+
   return (
     <div className={drawerClass.root}>
       <CssBaseline />
@@ -215,6 +242,7 @@ export default function ImportDrawer(props) {
               >
                 Import Item
               </Button>
+              <Button onClick={handleRefresh}>refresh</Button>
             </Grid>
           </List>
           <Divider />
@@ -244,13 +272,13 @@ export default function ImportDrawer(props) {
                       <CardHeader
                         // titleTypographyProps={{ variant: "subtitle1" }}
                         className={cardClasses.header}
-                        title={importedItem.name}
+                        title={importedItem?.name}
                         classes={{ title: cardClasses.cardTitle }}
                       />
                       <CardMedia
                         className={cardClasses.media}
-                        image={importedItem.img}
-                        title={importedItem.name}
+                        image={importedItem?.img}
+                        title={importedItem?.name}
                       />
                       <CardActions disableSpacing>
                         <IconButton
@@ -259,7 +287,7 @@ export default function ImportDrawer(props) {
                         >
                           <ImportedItemAddButton
                             importedItem={importedItem}
-                            importedItemID={importedItem.id}
+                            importedItemID={importedItem?.id}
                             currID={currID} //current album ID
                             importedItems={importedItems}
                             setImportedItems={setImportedItems}
@@ -284,7 +312,7 @@ export default function ImportDrawer(props) {
                         >
                           <ImportedItemDeleteButton
                             importedItem={importedItem}
-                            importedItemID={importedItem.id}
+                            importedItemID={importedItem?.id}
                             currID={currID} //current album ID
                             importedItems={importedItems}
                             setImportedItems={setImportedItems}

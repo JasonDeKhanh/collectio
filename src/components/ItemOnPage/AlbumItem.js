@@ -93,8 +93,10 @@ function AlbumItem(props) {
       .collection("albums")
       .doc(currID)
       .collection("itemsAdded")
-      .doc(thisItem.id)
-      .set(tempNewItem);
+      .doc(thisItem?.id)
+      .update({
+        defaultPosition: { xPos: dragElement.x, yPos: dragElement.y },
+      });
   };
 
   // handle resizing
@@ -115,15 +117,14 @@ function AlbumItem(props) {
       }
     }
 
-    setItemsAdded(tempItemsAdded);
-
     db.collection("users")
       .doc(uid)
       .collection("albums")
       .doc(currID)
       .collection("itemsAdded")
-      .doc(thisItem.id)
-      .set(tempNewItem);
+      .doc(thisItem?.id)
+      .update({ itemHeight: size.height, itemWidth: size.width })
+      .then(setItemsAdded(tempItemsAdded));
   };
 
   // display only the image
@@ -132,7 +133,7 @@ function AlbumItem(props) {
   // - drag image around and the "location" will be saved
   // -
 
-  return thisItem.onPage === currPageNum.toString() ? (
+  return thisItem?.onPage === currPageNum.toString() ? (
     // <div
     //   style={
     //     currPage?.orientation === "landscape"
