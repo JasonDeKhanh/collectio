@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -18,10 +18,13 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import LooksIcon from "@material-ui/icons/Looks";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ShareIcon from "@material-ui/icons/Share";
 
 import firebase from "@firebase/app";
 import "@firebase/firestore";
 import "@firebase/storage";
+
+import ShareAlbumPopup from "../ShareAlbumPopup";
 
 const StyledMenu = withStyles({
   paper: {
@@ -56,9 +59,14 @@ const StyledMenuItem = withStyles((theme) => ({
 
 export default function AlbumOptionsButton(props) {
   const db = firebase.firestore();
+  const uid = props.uid;
   const thisAlbum = props.album;
   const albums = props.albums;
   const setAlbums = props.setAlbums;
+  // const shareTrigger = props.shareTrigger;
+  // const setShareTrigger = props.setShareTrigger;
+
+  const [sharePopup, setSharePopup] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -70,7 +78,6 @@ export default function AlbumOptionsButton(props) {
     setAnchorEl(null);
   };
 
-  const uid = firebase.auth().currentUser?.uid;
   const handleDelete = () => {
     const tempAlbums = Object.assign([], albums);
     // now let's try to delete using array search ;--;
@@ -96,8 +103,21 @@ export default function AlbumOptionsButton(props) {
       });
   };
 
+  const handleShare = () => {
+    setSharePopup(true);
+  };
+
   return (
     <div>
+      <div>
+        <ShareAlbumPopup
+          trigger={sharePopup}
+          setTrigger={setSharePopup}
+          currAlbum={thisAlbum}
+          uid={uid}
+        />
+      </div>
+
       <IconButton
         aria-controls="customized-menu"
         aria-haspopup="true"
@@ -134,6 +154,13 @@ export default function AlbumOptionsButton(props) {
             <LooksIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="View" />
+        </StyledMenuItem>
+
+        <StyledMenuItem onClick={handleShare}>
+          <ListItemIcon>
+            <ShareIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Share" />
         </StyledMenuItem>
 
         <StyledMenuItem onClick={handleDelete}>

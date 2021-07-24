@@ -58,7 +58,7 @@ function ViewingPage() {
   const [currPageNum, setCurrPageNum] = useState(useParams().pageNum);
 
   const db = firebase.firestore();
-  const uid = firebase.auth().currentUser?.uid;
+  const uid = useParams().uid;
 
   // retrieve album data from firebase
   const [albums, setAlbums] = useState([]);

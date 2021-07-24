@@ -27,6 +27,7 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
 
 import Button from "@material-ui/core/Button";
+import ShareAlbumPopup from "../components/ShareAlbumPopup";
 
 //import duck from "../components/CreateNewAlbumPopup/duck.jpg";
 
@@ -139,18 +140,23 @@ function MyAlbumsPage(props) {
       <br></br>
 
       <AlbumList
+        uid={uid}
         albumsList={albumsList}
         cols={cols}
         setButtonPopup={setButtonPopup}
         albums={filteredalbums}
         setAlbums={setAlbums}
+        // shareTrigger={sharePopup}
+        // setShareTrigger={setSharePopup}
       />
     </div>
   );
 }
 
 function AlbumList(props) {
-  const { albumsList, cols, setButtonPopup, albums, setAlbums } = props;
+  const { uid, albumsList, cols, setButtonPopup, albums, setAlbums } = props;
+
+  // const [sharePopup, setSharePopup] = useState(false);
 
   return (
     <div>
@@ -195,9 +201,12 @@ function AlbumList(props) {
                     className={albumsList.icon}
                   >
                     <AlbumOptionsButton
+                      uid={uid}
                       album={album}
                       albums={albums}
                       setAlbums={setAlbums}
+                      // shareTrigger={sharePopup}
+                      // setShareTrigger={setSharePopup}
                     />
                   </IconButton>
                 }
