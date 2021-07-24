@@ -123,7 +123,7 @@ function ShareAlbumPopup(props) {
       </Grid>
       <br />
       <Grid container direction="row" justify="center">
-        <div>After copying the, send your friends the link</div>
+        <div>After copying the link, send it to your friends</div>
       </Grid>
       <Grid container direction="row" justify="center">
         <div>
@@ -143,7 +143,10 @@ function ShareAlbumPopup(props) {
       </Grid>
       <br /> */}
       <Grid container direction="row" justify="center">
-        <div>...or if that somehow failed, copy the link below!</div>
+        <div>
+          ...or if the button above somehow failed, copy the link directly
+          below!
+        </div>
       </Grid>
       <Grid container direction="row" justify="center" alignItems="center">
         {/* <IconButton>
