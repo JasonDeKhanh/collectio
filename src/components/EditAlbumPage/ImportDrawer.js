@@ -16,6 +16,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
+import RefreshIcon from "@material-ui/icons/Refresh";
 
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -234,15 +235,18 @@ export default function ImportDrawer(props) {
           <br></br>
           <Divider />
           <List>
-            <Grid container justify="center">
+            <Grid container alignItems="center" justify="center">
               <Button
                 variant="contained"
                 color="primary"
                 onClick={() => setImportPopup(true)}
+                style={{ marginLeft: 20 }}
               >
                 Import Item
               </Button>
-              <Button onClick={handleRefresh}>refresh</Button>
+              <IconButton onClick={handleRefresh}>
+                <RefreshIcon fontSize="small" />
+              </IconButton>
             </Grid>
           </List>
           <Divider />
@@ -333,7 +337,7 @@ export default function ImportDrawer(props) {
         </div>
       </Drawer>
       {/* Item bar */}
-      <Drawer
+      {/* <Drawer
         className={itemBarClasses.drawer}
         variant="permanent"
         classes={{
@@ -344,10 +348,9 @@ export default function ImportDrawer(props) {
         <Grid container justify="center">
           <Button variant="contained" color="primary">
             Test button
-            {/* style this button and add other buttons shit heheeh */}
           </Button>
         </Grid>
-      </Drawer>
+      </Drawer> */}
 
       <main className={drawerClass.content}>{body}</main>
     </div>
