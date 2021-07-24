@@ -69,7 +69,7 @@ function ImportedItemAddButton(props) {
         const tempItemAdded = {
           ...importedItem,
           defaultPosition: { xPos: 0, yPos: 0 },
-          itemWidth: 50,
+          itemWidth: 100,
           itemHeight: "100%",
           onPage: currPageNum.toString(),
         };

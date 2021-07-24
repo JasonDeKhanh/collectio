@@ -32,7 +32,9 @@ function ImportItemPopup(props) {
   const [item, setItem] = useState({
     img: "",
     name: "",
+    date: "",
     note1: "",
+    note2: "",
   });
 
   const onChange = (e) => {
@@ -86,7 +88,9 @@ function ImportItemPopup(props) {
     setItem({
       img: "",
       name: "",
+      date: "",
       note1: "",
+      note2: "",
     });
   };
 
@@ -143,17 +147,54 @@ function ImportItemPopup(props) {
         </div>
         <br />
         <div>
-          <label htmlFor="item-note1">Note #1:</label>
+          <label htmlFor="item-date">Date Obtained:</label>
           <br />
           <input
+            type="date"
+            value={item.date}
+            onChange={onChange}
+            name="date"
+            id="item-date"
+          />
+        </div>
+        <br />
+        <div>
+          <label htmlFor="item-note1">Note #1:</label>
+          <br />
+          {/* <input
             type="text"
             value={item.note1}
             onChange={onChange}
             name="note1"
             id="item-note1"
+            size="25"
+            line-height="2em"
+          /> */}
+          <textarea
+            name="note1"
+            id="item-note1"
+            value={item.note1}
+            onChange={onChange}
           />
         </div>
         <br />
+        <div>
+          <label htmlFor="item-note2">Note #2:</label>
+          <br />
+          {/* <input
+            type="text"
+            value={item.note2}
+            onChange={onChange}
+            name="note2"
+            id="item-note2"
+          /> */}
+          <textarea
+            name="note2"
+            id="item-note2"
+            value={item.note2}
+            onChange={onChange}
+          />
+        </div>
         <br />
         <div>
           <button type="submit"> Import new item </button>

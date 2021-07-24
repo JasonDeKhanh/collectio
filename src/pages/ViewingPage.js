@@ -9,6 +9,8 @@ import "@firebase/storage";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 import NavigateNextPageButton from "../components/EditAlbumPage/NavigateNextPageButton";
 import NavigatePrevPageButton from "../components/EditAlbumPage/NavigatePrevPageButton";
@@ -38,8 +40,15 @@ const useStylesPaperPortrait = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
       width: 720,
-      height: 1280,
+      height: 1018,
     },
+  },
+}));
+
+const useStylesTitle = makeStyles((theme) => ({
+  title: {
+    fontFamily: "Roboto Slab",
+    fontWeight: 250,
   },
 }));
 
@@ -53,6 +62,19 @@ function ViewingPage() {
 
   // retrieve album data from firebase
   const [albums, setAlbums] = useState([]);
+  const [currAlbum, setCurrAlbum] = useState({});
+  useEffect(() => {
+    const fetchName = () => {
+      db.collection("users")
+        .doc(uid)
+        .collection("albums")
+        .doc(currID)
+        .get()
+        .then((doc) => doc.data())
+        .then((data) => setCurrAlbum(data));
+    };
+    fetchName();
+  }, []);
 
   const [done1, setDone1] = useState(false);
   const [done2, setDone2] = useState(false);
@@ -151,6 +173,24 @@ function ViewingPage() {
     setDone4(true);
   }, []);
 
+  const useStylesTitleOnPage = makeStyles((theme) =>
+    currPage?.orientation === "landscape"
+      ? {
+          title: {
+            fontFamily: "Roboto Slab",
+            fontWeight: 250,
+            fontSize: 200,
+          },
+        }
+      : {
+          title: {
+            fontFamily: "Roboto Slab",
+            fontWeight: 250,
+            fontSize: 120,
+          },
+        }
+  );
+
   const paperClassesLandscape = useStylesPaperLandscape();
   const paperClassesPortrait = useStylesPaperPortrait();
   var paperClasses;
@@ -159,14 +199,22 @@ function ViewingPage() {
   } else {
     paperClasses = paperClassesPortrait;
   }
+  const titleClasses = useStylesTitle();
+  const titleOnPageClasses = useStylesTitleOnPage();
 
   return (
     <div>
-      <div>Hello, this is the Viewing Page for album:</div>
+      {/* <div>Hello, this is the Viewing Page for album:</div>
       <br />
       <div>
         Id: {currID} and on page: {currPageFromLink}
-      </div>
+      </div> */}
+      <br />
+      <Grid container justify="center">
+        <Typography className={titleClasses.title} variant="h3">
+          {currAlbum?.name}
+        </Typography>
+      </Grid>
       <Grid container direction="row" justify="center" alignItems="center">
         <NavigatePrevPageButton
           uid={uid}
@@ -181,7 +229,11 @@ function ViewingPage() {
           inMode="view"
         />
 
-        <caption> Page {currPageNum}</caption>
+        <caption>
+          {currPageNum.toString() === "0"
+            ? "Cover Page"
+            : "Page " + currPageNum}
+        </caption>
 
         <NavigateNextPageButton
           uid={uid}
@@ -202,13 +254,58 @@ function ViewingPage() {
               style={
                 currPage?.orientation === "landscape"
                   ? { height: 720, width: 1280, position: "absolute" }
-                  : { height: 1280, width: 720, position: "absolute" }
+                  : { height: 1018, width: 720, position: "absolute" }
               }
             >
-              <Grid container justify="center">
+              {/* <Grid container justify="center">
                 <h2>Page Number : {currPage?.pgNum}</h2>
-              </Grid>
+              </Grid> */}
             </div>
+            {currPageNum.toString() === "0" ? (
+              <Grid
+                container
+                style={
+                  currPage?.orientation === "landscape"
+                    ? {
+                        height: 720,
+                      }
+                    : {
+                        height: 1018,
+                      }
+                }
+                alignItems="center"
+                justify="center"
+              >
+                <Box
+                  style={
+                    currPage?.orientation === "landscape"
+                      ? {
+                          width: 1050,
+                          height: 550,
+                          border: "1px solid #D6D6D6",
+
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }
+                      : {
+                          width: 550,
+                          height: 720,
+                          border: "1px solid #D6D6D6",
+
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }
+                  }
+                >
+                  <Typography className={titleOnPageClasses.title} variant="h1">
+                    {currAlbum?.name}
+                  </Typography>
+                </Box>
+              </Grid>
+            ) : null}
+
             {itemsAdded?.map((item) => (
               <ViewingPageItem
                 thisItem={item}

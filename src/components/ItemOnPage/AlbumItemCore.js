@@ -133,6 +133,10 @@ const useStylesItem = makeStyles((theme) => ({
   //   color: "white",
   //   fontWeight: "fontWeightBold",
   // },
+  gridListTileBarCover: {
+    height: "100%",
+    background: "transparent",
+  },
   gridListTileBar: {
     background: "transparent",
   },
@@ -275,6 +279,7 @@ function AlbumItemCore(props) {
           // margin: "auto",
         }}
       />
+      <GridListTileBar className={itemClasses.gridListTileBarCover} />
       <GridListTileBar
         className={itemClasses.gridListTileBar}
         actionIcon={

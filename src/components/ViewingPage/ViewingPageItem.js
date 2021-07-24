@@ -68,21 +68,19 @@ function ViewingPageItem(props) {
       {/* <h1>hello</h1> */}
       {/* <GridListTile key={thisItem.img}> */}
       <Draggable disabled={true} defaultPosition={{ x: x, y: y }}>
-        <div>
-          <Button onClick={() => setButtonPopup(true)}>
-            <img
-              src={thisItem.img}
-              alt={thisItem.name}
-              style={{
-                // border: "2px solid #C8C8C8",
-                height: "100%",
-                width: thisItem?.itemWidth,
-                // borderRadius: 5,
-                // margin: "auto",
-              }}
-            />
-          </Button>
-        </div>
+        <Button onClick={() => setButtonPopup(true)}>
+          <img
+            src={thisItem.img}
+            alt={thisItem.name}
+            style={{
+              // border: "2px solid #C8C8C8",
+              height: "100%",
+              width: thisItem?.itemWidth,
+              // borderRadius: 5,
+              // margin: "auto",
+            }}
+          />
+        </Button>
       </Draggable>
       {/* </GridListTile> */}
       <br />

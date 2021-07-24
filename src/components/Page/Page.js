@@ -11,6 +11,7 @@ import { Button, Typography } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
+import Box from "@material-ui/core/Box";
 
 import firebase from "@firebase/app";
 import "@firebase/firestore";
@@ -78,7 +79,7 @@ const useStylesPaperPortrait = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
       width: 720,
-      height: 1280,
+      height: 1018,
     },
   },
 }));
@@ -93,6 +94,7 @@ function Page(props) {
   // or pass into props only the page number, then load the page object in here
 
   const {
+    currAlbum,
     albumPages, // pages array
     currPageNum,
     setCurrPageNum,
@@ -106,6 +108,24 @@ function Page(props) {
     importedItems,
     setImportedItems,
   } = props;
+
+  const useStylesTitle = makeStyles((theme) =>
+    currPage?.orientation === "landscape"
+      ? {
+          title: {
+            fontFamily: "Roboto Slab",
+            fontWeight: 250,
+            fontSize: 200,
+          },
+        }
+      : {
+          title: {
+            fontFamily: "Roboto Slab",
+            fontWeight: 250,
+            fontSize: 120,
+          },
+        }
+  );
 
   const currPageFromLink = parseInt(useParams().pageNum);
 
@@ -125,6 +145,7 @@ function Page(props) {
   }
 
   //= useStylesPaper();
+  const titleClasses = useStylesTitle();
 
   return (
     <div>
@@ -155,6 +176,7 @@ function Page(props) {
           elevation={18}
         >
           <div
+            container
             style={
               // height: 500,
               // width: 500,
@@ -162,14 +184,63 @@ function Page(props) {
               // backgroundColor: "orange",
               // color: "#ffffff",
               currPage?.orientation === "landscape"
-                ? { height: 720, width: 1280, position: "absolute" }
-                : { height: 1280, width: 720, position: "absolute" }
+                ? {
+                    height: 720,
+                    width: 1280,
+                    position: "relative",
+                  }
+                : {
+                    height: 1018,
+                    width: 720,
+                    position: "relative",
+                  }
             }
           >
             {/* need to put the ? because idk without it everything breaks */}
-            <Grid container justify="center">
-              <h2>Page Number : {currPage?.pgNum}</h2>
-            </Grid>
+            {currPageNum.toString() === "0" ? (
+              <Grid
+                container
+                style={
+                  currPage?.orientation === "landscape"
+                    ? {
+                        height: 720,
+                      }
+                    : {
+                        height: 1018,
+                      }
+                }
+                alignItems="center"
+                justify="center"
+              >
+                <Box
+                  style={
+                    currPage?.orientation === "landscape"
+                      ? {
+                          width: 1050,
+                          height: 550,
+                          border: "1px solid #D6D6D6",
+
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }
+                      : {
+                          width: 550,
+                          height: 720,
+                          border: "1px solid #D6D6D6",
+
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }
+                  }
+                >
+                  <Typography className={titleClasses.title} variant="h1">
+                    {currAlbum?.name}
+                  </Typography>
+                </Box>
+              </Grid>
+            ) : null}
             {/* Page background color: {currPage?.bgColor}
             <br />
             <br />

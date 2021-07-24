@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { useTheme, useMediaQuery } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 
 import withWidth, { isWidthUp, isWidthDown } from "@material-ui/core/withWidth";
 
@@ -27,14 +28,15 @@ const useStylesPopup = makeStyles((theme) => ({
     },
     [theme.breakpoints.up("lg")]: {
       //   height: 500,
-      width: 1000,
+      width: 900,
     },
     [theme.breakpoints.up("xl")]: {
       //   height: 500,
-      width: 1000,
+      width: 900,
     },
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
+    borderRadius: 20,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -47,7 +49,16 @@ const useStylesPopup = makeStyles((theme) => ({
     // },
     direction: "column",
     justify: "center",
-    alignItems: "center",
+    // alignItems: "center",
+  },
+  name: {
+    fontFamily: "Roboto Slab",
+    fontWeight: 370,
+    textDecoration: "underline",
+  },
+  field: {
+    fontStyle: "italic",
+    fontSize: 20,
   },
 }));
 
@@ -104,7 +115,7 @@ function ViewingPageItemPopup(props) {
             useSmallScreen
               ? {
                   width: "90%",
-                  height: 200,
+                  height: thisItem?.height,
                   border: "1px solid #D6D6D6",
 
                   display: "flex",
@@ -115,6 +126,7 @@ function ViewingPageItemPopup(props) {
                   width: 400,
                   height: 400,
                   border: "1px solid #D6D6D6",
+                  marginRight: 50,
 
                   // three lines below put the picture in the middle of the box
                   display: "flex",
@@ -129,7 +141,7 @@ function ViewingPageItemPopup(props) {
             alt={thisItem.name}
             style={{
               //   height: "100%",
-              width: 200,
+              width: "60%",
               // borderRadius: 5,
               // margin: "auto",
               // paddingRight: ,
@@ -139,9 +151,39 @@ function ViewingPageItemPopup(props) {
         </Box>
 
         <div>
-          <div>hello this is a popup</div>
-          <div>Note #1:</div>
-          <div>{thisItem?.note1}</div>
+          <div style={{ width: 350 }}>
+            <br />
+            <Typography variant="h3" className={PopupStyle.name}>
+              {thisItem?.name}
+            </Typography>
+            <br />
+            <Typography className={PopupStyle.field}>Date obtained:</Typography>
+            {/* <div>{thisItem?.date}</div> */}
+            {thisItem.date ? thisItem.date : "oops, no date here I guess"}
+            <br />
+            <br />
+            {/* <Typography className={PopupStyle.field}>Note #1:</Typography> */}
+            {/* <div style={{ width: 350 }}>{thisItem?.note1}</div> */}
+            <div style={{ width: 350 }}>
+              {thisItem.note1 ? (
+                <div>
+                  <Typography className={PopupStyle.field}>Note #1:</Typography>
+                  <div>{thisItem.note1}</div>
+                </div>
+              ) : null}
+            </div>
+            <br />
+            {/* <Typography className={PopupStyle.field}>Note #2:</Typography> */}
+            {/* <div style={{ width: 350 }}>{thisItem?.note2}</div> */}
+            <div style={{ width: 350 }}>
+              {thisItem.note2 ? (
+                <div>
+                  <Typography className={PopupStyle.field}>Note #2:</Typography>
+                  <div>{thisItem.note2}</div>
+                </div>
+              ) : null}
+            </div>
+          </div>
         </div>
       </Grid>
       <br />

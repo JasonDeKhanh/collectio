@@ -73,22 +73,20 @@ function EditAlbumPage() {
   // obtain page number
   const [currPageNum, setCurrPageNum] = useState(useParams().pageNum);
 
-  // const tempAlbums = Object.assign([], albums);
-  var currAlbum;
-  // run through albums array
-  // THIS IS NOT WORKING FOR SOME REASON, BUT IT IS NOT BEING USED ANYWAY, DO NOT DELETE, MIGHT BE HANDY LATER
-  for (var i = 0; i < albums.length; i++) {
-    if (albums[i]?.id === currID) {
-      // currAlbum = albums[i];
-      currAlbum = {
-        ...albums[i],
-        id: currID,
-      };
-      break;
-    }
-  }
-
-  console.log("currAlbum: " + currAlbum);
+  // obtain currAlbum
+  const [currAlbum, setCurrAlbum] = useState({});
+  useEffect(() => {
+    const fetchName = () => {
+      db.collection("users")
+        .doc(uid)
+        .collection("albums")
+        .doc(currID)
+        .get()
+        .then((doc) => doc.data())
+        .then((data) => setCurrAlbum(data));
+    };
+    fetchName();
+  }, []);
 
   // retrieve imported items tied to album being edited
   const [importedItems, setImportedItems] = useState([]);
@@ -271,7 +269,11 @@ function EditAlbumPage() {
           inMode="edit"
         />
 
-        <caption> Page {currPageNum}</caption>
+        <caption>
+          {currPageNum.toString() === "0"
+            ? "Cover Page"
+            : "Page " + currPageNum}
+        </caption>
 
         <NavigateNextPageButton
           uid={uid}
@@ -288,6 +290,7 @@ function EditAlbumPage() {
       <Grid container justify="center">
         <div>
           <Page
+            currAlbum={currAlbum}
             albumPages={albumPages}
             currPageNum={currPageNum}
             setCurrPageNum={setCurrPageNum}
