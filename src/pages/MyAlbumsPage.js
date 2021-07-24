@@ -123,12 +123,6 @@ function MyAlbumsPage(props) {
 
   return (
     <div>
-      <Button
-        component={Link}
-        to={"/view/S1wLzK2l1iSk4ysYVqNdZvggkjl2/eUgD2dzdVT7XJ1QKvmCE/0"}
-      >
-        Go to Random ALbum
-      </Button>
       <br></br>
       <Grid container justify="center">
         <SearchBar handleChange={(e) => setSearchTerm(e.target.value)} />
