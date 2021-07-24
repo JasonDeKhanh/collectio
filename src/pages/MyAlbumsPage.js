@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams, Link, useRouteMatch } from "react-router-dom";
 
 import AppBar1 from "../components/AppBar1";
 import AlbumOptionsButton from "../components/MyAlbumsPage/AlbumOptionsButton";
@@ -122,6 +123,12 @@ function MyAlbumsPage(props) {
 
   return (
     <div>
+      <Button
+        component={Link}
+        to={"/view/S1wLzK2l1iSk4ysYVqNdZvggkjl2/eUgD2dzdVT7XJ1QKvmCE/0"}
+      >
+        Go to Random ALbum
+      </Button>
       <br></br>
       <Grid container justify="center">
         <SearchBar handleChange={(e) => setSearchTerm(e.target.value)} />
