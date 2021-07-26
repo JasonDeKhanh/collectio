@@ -186,7 +186,8 @@ function AlbumItemCore(props) {
     const tempItemsAdded = Object.assign([], itemsAdded);
     for (var i = 0; i < tempItemsAdded.length; i++) {
       if (tempItemsAdded[i].id === thisItem.id) {
-        tempItemsAdded.splice(i, 1);
+        // tempItemsAdded.splice(i, 1);
+        tempItemsAdded[i].onPage = -1;
         break;
       }
     }

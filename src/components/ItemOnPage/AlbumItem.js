@@ -68,7 +68,8 @@ function AlbumItem(props) {
     };
 
     // search the array to find the item with the same ID
-    const tempItemsAdded = Object.assign([], itemsAdded);
+    // const tempItemsAdded = Object.assign([], itemsAdded);
+    const tempItemsAdded = [...itemsAdded];
     for (var i = 0; i < tempItemsAdded.length; i++) {
       if (tempItemsAdded[i].id === thisItem.id) {
         tempItemsAdded[i] = tempNewItem;
@@ -88,12 +89,13 @@ function AlbumItem(props) {
     setItemsAdded(tempItemsAdded);
 
     // update in firebase
+    console.log("item id: " + thisItem.id);
     db.collection("users")
       .doc(uid)
       .collection("albums")
       .doc(currID)
       .collection("itemsAdded")
-      .doc(thisItem?.id)
+      .doc(thisItem.id)
       .update({
         defaultPosition: { xPos: dragElement.x, yPos: dragElement.y },
       });

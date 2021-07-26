@@ -60,60 +60,63 @@ function ImportedItemAddButton(props) {
       .doc(currID)
       .collection("importedItems")
       .doc(importedItemID)
-      .delete()
-      .then(setImportedItems(tempImportedItems))
-      .then(() => {
-        //create a new itemsAdded array
-        const tempItemsAdded = Object.assign([], itemsAdded);
+      .delete();
 
-        const tempItemAdded = {
-          ...importedItem,
-          defaultPosition: { xPos: 0, yPos: 0 },
-          itemWidth: 100,
-          itemHeight: "100%",
-          onPage: currPageNum.toString(),
+    setImportedItems(tempImportedItems);
+
+    //create a new itemsAdded array
+    // const tempItemsAdded = Object.assign([], itemsAdded);
+
+    const tempItemAdded = {
+      ...importedItem,
+      defaultPosition: { xPos: 0, yPos: 0 },
+      itemWidth: 100,
+      itemHeight: "100%",
+      onPage: currPageNum.toString(),
+    };
+    //add the imported item into the page in the tempPages array
+    // tempItemsAdded.push(tempItemAdded);
+
+    //add item to firebase
+    var lastID;
+    let finalItemAdded;
+    db.collection("users")
+      .doc(uid)
+      .collection("albums")
+      .doc(currID)
+      .collection("itemsAdded")
+      .add(tempItemAdded)
+      .then((docRef) => {
+        lastID = docRef.id;
+        finalItemAdded = {
+          ...tempItemAdded,
+          id: lastID,
         };
-        //add the imported item into the page in the tempPages array
-        // tempItemsAdded.push(tempItemAdded);
-
-        //add item to firebase
-        var lastID;
-        var finalItemAdded;
+        const tempItemsAdded = [...itemsAdded, { ...finalItemAdded }];
+        setItemsAdded(tempItemsAdded);
+        console.log("last ID inside " + lastID);
+      })
+      .then(() => {
         db.collection("users")
           .doc(uid)
           .collection("albums")
           .doc(currID)
           .collection("itemsAdded")
-          .add(tempItemAdded)
-          .then((docRef) => {
-            lastID = docRef.id;
-          })
-          .then(() => {
-            db.collection("users")
-              .doc(uid)
-              .collection("albums")
-              .doc(currID)
-              .collection("itemsAdded")
-              .doc(lastID)
-              .update({
-                id: lastID,
-              });
-          })
-          .then(
-            (finalItemAdded = {
-              ...tempItemAdded,
-              id: lastID,
-            })
-          )
-          .then(tempItemsAdded.push(finalItemAdded))
-          // .then(
-          //   console.log(
-          //     "final item added " + finalItemAdded + " lastID: " + lastID
-          //   )
-          // )
-          .then(setItemsAdded(tempItemsAdded)); //update itemsAdded
-        // console.log("lastID: " + lastID);
+          .doc(lastID)
+          .update({
+            id: lastID,
+          });
       });
+    // console.log("last ID finalItem " + finalItemAdded.id);
+    // .then(
+    // finalItemAdded = {
+    //   ...tempItemAdded,
+    //   id: lastID,
+    // };
+    // )
+    // tempItemsAdded.push(finalItemAdded);
+    //update itemsAdded
+    // console.log("lastID: " + lastID);
 
     // //create a new itemsAdded array
     // const tempItemsAdded = Object.assign([], itemsAdded);
