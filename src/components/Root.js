@@ -12,9 +12,6 @@ function Root() {
         </div>
       </div>
       <hr />
-      {/* <div className="row">
-        <div className="col-xs-10 col-xs-offset-1">{this.props.children}</div>
-      </div> */}
     </div>
   );
 }

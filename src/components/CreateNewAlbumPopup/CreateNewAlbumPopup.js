@@ -13,8 +13,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import styles from "./CreateNewAlbumPopup.module.css";
 
-//import duck from "./duck.jpg";
-
 function CreateNewAlbumPopup(props) {
   const buttonPopup = props.trigger;
   const setButtonPopup = props.setTrigger;
@@ -151,10 +149,6 @@ function CreateNewAlbumPopup(props) {
   // Body of modal
   const body = (
     <div className={Popup.paper} style={popupStyle}>
-      {/* <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p> */}
       <h1>Create New Album</h1>
 
       <br></br>
@@ -213,52 +207,6 @@ function CreateNewAlbumPopup(props) {
           {body}
         </Modal>
       </div>
-
-      {/* <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-        <h1>Create New Album</h1>
-
-        <br></br>
-        <form id="create-album-form" onSubmit={onSubmit}>
-          <div>
-            <label htmlFor="album-name">Album Name:</label>
-            <br />
-            <input
-              type="text"
-              value={album.name}
-              onChange={onChange}
-              name="name"
-              id="album-name"
-            />
-          </div>
-          <br></br>
-          Orientation:
-          <div value={album.orientation} onChange={onChange}>
-            <input
-              type="radio"
-              id="portrait"
-              name="orientation"
-              value="portrait"
-            />
-            <label htmlFor="portrait">Portrait</label>
-            <input
-              type="radio"
-              id="landscape"
-              name="orientation"
-              value="landscape"
-            />
-            <label htmlFor="landscape">Landscape</label>
-          </div>
-          <br></br>
-          <div>
-            <input type="file" onChange={onFileChange} />
-          </div>
-          <br></br>
-          <div>
-            <button type="submit"> Create new album </button>
-          </div>
-        </form>
-        <br></br>
-      </Popup> */}
     </div>
   );
 }

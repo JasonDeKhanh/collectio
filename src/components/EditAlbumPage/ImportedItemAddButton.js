@@ -107,38 +107,6 @@ function ImportedItemAddButton(props) {
             id: lastID,
           });
       });
-    // console.log("last ID finalItem " + finalItemAdded.id);
-    // .then(
-    // finalItemAdded = {
-    //   ...tempItemAdded,
-    //   id: lastID,
-    // };
-    // )
-    // tempItemsAdded.push(finalItemAdded);
-    //update itemsAdded
-    // console.log("lastID: " + lastID);
-
-    // //create a new itemsAdded array
-    // const tempItemsAdded = Object.assign([], itemsAdded);
-
-    // const tempItemAdded = {
-    //   ...importedItem,
-    //   defaultPosition: { xPos: 0, yPos: 0 },
-    //   itemWidth: 50,
-    //   itemHeight: "100%",
-    //   onPage: currPageNum.toString(),
-    // };
-    // //add the imported item into the page in the tempPages array
-    // tempItemsAdded.push(tempItemAdded);
-
-    // //add item to firebase
-    // db.collection("users")
-    //   .doc(uid)
-    //   .collection("albums")
-    //   .doc(currID)
-    //   .collection("itemsAdded")
-    //   .add(tempItemAdded)
-    //   .then(setItemsAdded(tempItemsAdded)); //update itemsAdded
   };
 
   return (

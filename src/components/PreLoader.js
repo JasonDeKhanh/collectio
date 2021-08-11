@@ -26,10 +26,6 @@ function PreLoader(props) {
   const [done, setDone] = useState(undefined);
 
   useEffect(() => {
-    // fetch the data, then setData(the data)
-    // then setDone(true) which means data is loading.
-    //const pagedata = itemsThisPage;
-    //get current page data
     setData(itemsThisPage);
     setDone(true);
   }, []);

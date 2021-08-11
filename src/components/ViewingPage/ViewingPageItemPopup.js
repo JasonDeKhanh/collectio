@@ -12,8 +12,7 @@ import withWidth, { isWidthUp, isWidthDown } from "@material-ui/core/withWidth";
 const useStylesPopup = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    // height: 500,
-    // width: 1000,
+
     [theme.breakpoints.down("sm")]: {
       //   height: ,
       width: "80%",
@@ -41,15 +40,8 @@ const useStylesPopup = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   grid: {
-    // [theme.breakpoints.down("sm")]: {
-    //   direction: "column",
-    // },
-    // [theme.breakpoints.up("sm")]: {
-    //   direction: "column",
-    // },
     direction: "column",
     justify: "center",
-    // alignItems: "center",
   },
   name: {
     fontFamily: "Roboto Slab",
@@ -84,7 +76,6 @@ function ViewingPageItemPopup(props) {
   }
   const [popupStyle] = React.useState(getPopupStyle);
   const PopupStyle = useStylesPopup();
-  ///////////////////
 
   const themeHere = useTheme();
   const useSmallScreen = useMediaQuery(themeHere.breakpoints.down("sm"));
@@ -100,15 +91,12 @@ function ViewingPageItemPopup(props) {
   }
   const [imageBoxStyle] = React.useState(getImageBoxStyle);
 
-  //////////////
   const body = (
     <div className={PopupStyle.paper} style={popupStyle}>
       <Grid
         container
         className={PopupStyle.grid}
         direction={useSmallScreen ? "column" : "row"}
-        // justify="center"
-        // alignItems="center"
       >
         <Box
           style={
@@ -128,26 +116,19 @@ function ViewingPageItemPopup(props) {
                   border: "1px solid #D6D6D6",
                   marginRight: 50,
 
-                  // three lines below put the picture in the middle of the box
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }
           }
         >
-          {/* <Grid container justify="center" alignItems="center"> */}
           <img
             src={thisItem.img}
             alt={thisItem.name}
             style={{
-              //   height: "100%",
               width: "60%",
-              // borderRadius: 5,
-              // margin: "auto",
-              // paddingRight: ,
             }}
           />
-          {/* </Grid> */}
         </Box>
 
         <div>
@@ -158,12 +139,10 @@ function ViewingPageItemPopup(props) {
             </Typography>
             <br />
             <Typography className={PopupStyle.field}>Date obtained:</Typography>
-            {/* <div>{thisItem?.date}</div> */}
             {thisItem.date ? thisItem.date : "oops, no date here I guess"}
             <br />
             <br />
-            {/* <Typography className={PopupStyle.field}>Note #1:</Typography> */}
-            {/* <div style={{ width: 350 }}>{thisItem?.note1}</div> */}
+
             <div style={{ width: 350 }}>
               {thisItem.note1 ? (
                 <div>
@@ -173,8 +152,7 @@ function ViewingPageItemPopup(props) {
               ) : null}
             </div>
             <br />
-            {/* <Typography className={PopupStyle.field}>Note #2:</Typography> */}
-            {/* <div style={{ width: 350 }}>{thisItem?.note2}</div> */}
+
             <div style={{ width: 350 }}>
               {thisItem.note2 ? (
                 <div>

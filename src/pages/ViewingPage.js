@@ -19,8 +19,6 @@ import ViewingPageItem from "../components/ViewingPage/ViewingPageItem";
 // useStyle for the page's paper
 const useStylesPaperLandscape = makeStyles((theme) => ({
   root: {
-    // display: "flex",
-    // flexWrap: "wrap",
     "& > *": {
       margin: theme.spacing(1),
       width: 1280,
@@ -204,11 +202,6 @@ function ViewingPage() {
 
   return (
     <div>
-      {/* <div>Hello, this is the Viewing Page for album:</div>
-      <br />
-      <div>
-        Id: {currID} and on page: {currPageFromLink}
-      </div> */}
       <br />
       <Grid container justify="center">
         <Typography className={titleClasses.title} variant="h3">
@@ -256,11 +249,7 @@ function ViewingPage() {
                   ? { height: 720, width: 1280, position: "absolute" }
                   : { height: 1018, width: 720, position: "absolute" }
               }
-            >
-              {/* <Grid container justify="center">
-                <h2>Page Number : {currPage?.pgNum}</h2>
-              </Grid> */}
-            </div>
+            ></div>
             {currPageNum.toString() === "0" ? (
               <Grid
                 container

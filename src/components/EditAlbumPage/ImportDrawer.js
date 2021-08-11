@@ -254,22 +254,6 @@ export default function ImportDrawer(props) {
           <List>
             {importedItems.map((importedItem) => (
               <div>
-                {/* <GridListTile key={importedItem.img}>
-                  <img
-                    src={importedItem.img}
-                    alt={importedItem.name}
-                    style={{ width: 200, height: 200 }}
-                  />
-                  <GridListTileBar
-                    title={importedItem.name}
-                    actionIcon={
-                      <IconButton
-                        aria-label={`info about ${importedItem.name}`}
-                        className={importedItemsList.icon}
-                      ></IconButton>
-                    }
-                  />
-                </GridListTile> */}
                 <div>
                   <Grid container justify="center">
                     <Card className={cardClasses.root} variant="outlined">
@@ -303,16 +287,10 @@ export default function ImportDrawer(props) {
                             setItemsAdded={setItemsAdded}
                           />
                         </IconButton>
-                        {/* <Typography className={cardClasses.buttonLabel}>
-                            {" "}
-                            Add{" "}
-                          </Typography> */}
+
                         <IconButton
                           aria-label="delete"
                           className={cardClasses.button}
-                          // style={cardClasses.button}
-                          // iconStyle={cardClasses.icon}
-                          // tooltipStyles={cardClasses.tooltip}
                         >
                           <ImportedItemDeleteButton
                             importedItem={importedItem}
@@ -322,10 +300,6 @@ export default function ImportDrawer(props) {
                             setImportedItems={setImportedItems}
                           />
                         </IconButton>
-                        {/* <Typography className={cardClasses.buttonLabel}>
-                            {" "}
-                            Delete{" "}
-                          </Typography> */}
                       </CardActions>
                     </Card>
                   </Grid>
@@ -336,21 +310,6 @@ export default function ImportDrawer(props) {
           </List>
         </div>
       </Drawer>
-      {/* Item bar */}
-      {/* <Drawer
-        className={itemBarClasses.drawer}
-        variant="permanent"
-        classes={{
-          paper: itemBarClasses.drawerPaper,
-        }}
-      >
-        <Toolbar />
-        <Grid container justify="center">
-          <Button variant="contained" color="primary">
-            Test button
-          </Button>
-        </Grid>
-      </Drawer> */}
 
       <main className={drawerClass.content}>{body}</main>
     </div>

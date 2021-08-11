@@ -14,29 +14,6 @@ import Draggable from "react-draggable";
 import ViewingPageItemPopup from "./ViewingPageItemPopup";
 
 const useStylesItem = makeStyles((theme) => ({
-  // root: {
-  //   display: "flex",
-  //   //flexWrap: "wrap",
-  //   justifyContent: "space-evenly",
-  //   overflow: "hidden",
-  //   backgroundColor: theme.palette.background.paper,
-  // },
-  // gridList: {
-  //   width: "100%",
-  // },
-  // gridTile: {},
-  // icon: {
-  //   color: "rgba(255, 255, 255, 0.54)",
-  // },
-  // buttonCreateAlbum: {
-  //   backgroundColor: "#5FC9FF",
-  //   height: 200,
-  //   width: "100%",
-  //   margin: "auto",
-  //   fontSize: 20,
-  //   color: "white",
-  //   fontWeight: "fontWeightBold",
-  // },
   gridListTileBar: {
     background: "transparent",
   },
@@ -63,26 +40,19 @@ function ViewingPageItem(props) {
   const [buttonPopup, setButtonPopup] = useState(false);
 
   return thisItem.onPage === currPageNum.toString() ? (
-    // <div style={{ transform: "rotate(90deg)" }}>
     <div>
-      {/* <h1>hello</h1> */}
-      {/* <GridListTile key={thisItem.img}> */}
       <Draggable disabled={true} defaultPosition={{ x: x, y: y }}>
         <Button onClick={() => setButtonPopup(true)}>
           <img
             src={thisItem.img}
             alt={thisItem.name}
             style={{
-              // border: "2px solid #C8C8C8",
               height: "100%",
               width: thisItem?.itemWidth,
-              // borderRadius: 5,
-              // margin: "auto",
             }}
           />
         </Button>
       </Draggable>
-      {/* </GridListTile> */}
       <br />
       <ViewingPageItemPopup
         thisItem={thisItem}

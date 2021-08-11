@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
@@ -21,12 +20,9 @@ function NavigateNextPageButton(props) {
     currPageNum,
     setCurrPageNum,
     currID,
-    currPage,
     setCurrPage,
     inMode,
   } = props;
-
-  const buttonClasses = useStylesNavigateButton();
 
   const currPageFromLink = parseInt(useParams().pageNum);
   console.log("curr page from link next: " + currPageFromLink);

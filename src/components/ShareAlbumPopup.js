@@ -64,21 +64,6 @@ function ShareAlbumPopup(props) {
       color: "white",
       backgroundColor: displayTooltip === "none" ? "#46BBFC" : "#18FF60",
     },
-    // customTootltip: {
-    //   display: displayTooltip,
-    //   marginLeft: 40,
-    //   paddingLeft: 5,
-    //   paddingRight: 5,
-    //   backgroundColor: "#000000df",
-    //   borderRadius: 4,
-    //   color: "#fff",
-    // },
-    // tooltipContainer: {
-    //   display: "flex",
-    //   alignItems: "center",
-    //   marginTop: 16,
-    //   //   minHeight: 30,
-    // },
   }));
 
   const Popup = useStyles();
@@ -131,17 +116,7 @@ function ShareAlbumPopup(props) {
         </div>
       </Grid>
       <br />
-      {/* <Grid container direction="row" justify="center">
-        <div>Append the following line to the back of the current url!</div>
-      </Grid>
-      <Grid container direction="row" justify="center">
-        <Box className={Popup.box}>
-          <div>
-            /view/{uid}/{currAlbumID}/0
-          </div>
-        </Box>
-      </Grid>
-      <br /> */}
+
       <Grid container direction="row" justify="center">
         <div>
           ...or if the button above somehow failed, copy the link directly

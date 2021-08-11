@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,20 +14,8 @@ const useStylesNavigateButton = makeStyles((theme) => ({
 }));
 
 function NavigatePrevPageButton(props) {
-  const {
-    uid,
-    albumPages,
-    currPageNum,
-    setCurrPageNum,
-    currID,
-    currPage,
-    setCurrPage,
-    currPageItems,
-    setCurrPageItems,
-    inMode,
-  } = props;
-
-  const buttonClasses = useStylesNavigateButton();
+  const { uid, albumPages, setCurrPageNum, currID, setCurrPage, inMode } =
+    props;
 
   const currPageFromLink = parseInt(useParams().pageNum);
   const newPageNum = currPageFromLink - 1;
