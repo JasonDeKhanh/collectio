@@ -67,7 +67,7 @@ function ViewingPageItem(props) {
     <div>
       {/* <h1>hello</h1> */}
       {/* <GridListTile key={thisItem.img}> */}
-      <Draggable disabled={true} defaultPosition={{ x: x, y: y }}>
+      <Draggable disabled={true} position={{ x: x, y: y }}>
         <Button onClick={() => setButtonPopup(true)}>
           <img
             src={thisItem.img}
