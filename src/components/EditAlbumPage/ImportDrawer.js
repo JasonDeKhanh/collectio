@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -11,30 +11,16 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import RefreshIcon from "@material-ui/icons/Refresh";
 
-import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
-import { grey, red } from "@material-ui/core/colors";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import { Button, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
-import Draggable from "react-draggable";
 
 import MenuIconTopRight from "../MenuIconTopRight";
 
@@ -42,7 +28,6 @@ import firebase from "@firebase/app";
 import "@firebase/firestore";
 import "@firebase/storage";
 
-import AppBar1 from "../AppBar1";
 import ImportItemPopup from "./ImportItemPopup";
 import ImportedItemDeleteButton from "./ImportedItemDeleteButton";
 import ImportedItemAddButton from "./ImportedItemAddButton";
@@ -82,17 +67,16 @@ const useStylesDrawer = makeStyles((theme) => ({
 }));
 
 // item bar style
-const itemBarWidth = 50;
-const useStylesItemBar = makeStyles((theme) => ({
-  drawer: {
-    width: itemBarWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    marginLeft: 240,
-    width: itemBarWidth,
-  },
-}));
+// const useStylesItemBar = makeStyles((theme) => ({
+//   drawer: {
+//     width: itemBarWidth,
+//     flexShrink: 0,
+//   },
+//   drawerPaper: {
+//     marginLeft: 240,
+//     width: itemBarWidth,
+//   },
+// }));
 
 // card imported items style
 const useStylesCard = makeStyles((theme) => ({
@@ -133,12 +117,11 @@ const useStylesCard = makeStyles((theme) => ({
 export default function ImportDrawer(props) {
   const drawerClass = useStylesDrawer();
   const cardClasses = useStylesCard();
-  const itemBarClasses = useStylesItemBar();
 
   const {
     body,
-    albums,
-    setAlbums,
+    // albums,
+    // setAlbums,
     currID,
     importedItems,
     setImportedItems,
@@ -254,22 +237,6 @@ export default function ImportDrawer(props) {
           <List>
             {importedItems.map((importedItem) => (
               <div>
-                {/* <GridListTile key={importedItem.img}>
-                  <img
-                    src={importedItem.img}
-                    alt={importedItem.name}
-                    style={{ width: 200, height: 200 }}
-                  />
-                  <GridListTileBar
-                    title={importedItem.name}
-                    actionIcon={
-                      <IconButton
-                        aria-label={`info about ${importedItem.name}`}
-                        className={importedItemsList.icon}
-                      ></IconButton>
-                    }
-                  />
-                </GridListTile> */}
                 <div>
                   <Grid container justify="center">
                     <Card className={cardClasses.root} variant="outlined">
@@ -303,16 +270,10 @@ export default function ImportDrawer(props) {
                             setItemsAdded={setItemsAdded}
                           />
                         </IconButton>
-                        {/* <Typography className={cardClasses.buttonLabel}>
-                            {" "}
-                            Add{" "}
-                          </Typography> */}
+
                         <IconButton
                           aria-label="delete"
                           className={cardClasses.button}
-                          // style={cardClasses.button}
-                          // iconStyle={cardClasses.icon}
-                          // tooltipStyles={cardClasses.tooltip}
                         >
                           <ImportedItemDeleteButton
                             importedItem={importedItem}
@@ -322,10 +283,6 @@ export default function ImportDrawer(props) {
                             setImportedItems={setImportedItems}
                           />
                         </IconButton>
-                        {/* <Typography className={cardClasses.buttonLabel}>
-                            {" "}
-                            Delete{" "}
-                          </Typography> */}
                       </CardActions>
                     </Card>
                   </Grid>
@@ -336,21 +293,6 @@ export default function ImportDrawer(props) {
           </List>
         </div>
       </Drawer>
-      {/* Item bar */}
-      {/* <Drawer
-        className={itemBarClasses.drawer}
-        variant="permanent"
-        classes={{
-          paper: itemBarClasses.drawerPaper,
-        }}
-      >
-        <Toolbar />
-        <Grid container justify="center">
-          <Button variant="contained" color="primary">
-            Test button
-          </Button>
-        </Grid>
-      </Drawer> */}
 
       <main className={drawerClass.content}>{body}</main>
     </div>

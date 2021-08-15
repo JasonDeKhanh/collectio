@@ -1,8 +1,6 @@
 import React from "react";
 
-import { useState, useEffect } from "react";
-
-import Popup from "../Popup";
+import { useState } from "react";
 
 import firebase from "@firebase/app";
 import "@firebase/firestore";
@@ -10,8 +8,6 @@ import "@firebase/storage";
 
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
-
-//import duck from "./duck.jpg";
 
 function ImportItemPopup(props) {
   const buttonPopup = props.trigger;
@@ -61,10 +57,6 @@ function ImportItemPopup(props) {
   };
 
   const onSubmit = (e) => {
-    // stub
-    // something like db.collection("users").doc(uid).collection("albums").doc(albumID).collection("items").add(newItem);
-    // also add into "items" array, use a similar useEffect
-    // "items" array should be made in the Edit Albums page, and then passed down to ImportDrawer, then to this ImportItemPopup
     e.preventDefault();
 
     const newImportedItem = {
@@ -161,15 +153,7 @@ function ImportItemPopup(props) {
         <div>
           <label htmlFor="item-note1">Note #1:</label>
           <br />
-          {/* <input
-            type="text"
-            value={item.note1}
-            onChange={onChange}
-            name="note1"
-            id="item-note1"
-            size="25"
-            line-height="2em"
-          /> */}
+
           <textarea
             name="note1"
             id="item-note1"
@@ -181,13 +165,7 @@ function ImportItemPopup(props) {
         <div>
           <label htmlFor="item-note2">Note #2:</label>
           <br />
-          {/* <input
-            type="text"
-            value={item.note2}
-            onChange={onChange}
-            name="note2"
-            id="item-note2"
-          /> */}
+
           <textarea
             name="note2"
             id="item-note2"

@@ -1,18 +1,14 @@
 import React from "react";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { Link } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
 import BuildIcon from "@material-ui/icons/Build";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
@@ -63,8 +59,6 @@ export default function AlbumOptionsButton(props) {
   const thisAlbum = props.album;
   const albums = props.albums;
   const setAlbums = props.setAlbums;
-  // const shareTrigger = props.shareTrigger;
-  // const setShareTrigger = props.setShareTrigger;
 
   const [sharePopup, setSharePopup] = useState(false);
 

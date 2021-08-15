@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link, useRouteMatch } from "react-router-dom";
 
-import AppBar1 from "../components/AppBar1";
 import AlbumOptionsButton from "../components/MyAlbumsPage/AlbumOptionsButton";
 import SearchBar from "../components/SearchBar";
 
@@ -15,20 +13,15 @@ import "@firebase/storage";
 
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
-import InfoIcon from "@material-ui/icons/Info";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 
-import { FirebaseAuthConsumer } from "@react-firebase/auth";
-
 import Button from "@material-ui/core/Button";
-import ShareAlbumPopup from "../components/ShareAlbumPopup";
 
 //import duck from "../components/CreateNewAlbumPopup/duck.jpg";
 
@@ -58,14 +51,6 @@ function MyAlbumsPage(props) {
       setAlbums(albumsArray);
     })();
   }, []);
-
-  // detect changes in albums and update firestore
-  // useEffect(() => {
-  //   const uid = firebase.auth().currentUser?.uid;
-  //   const db = firebase.firestore();
-  //   db.collection("users").doc(uid).set({ albums: albums });
-  // }, [albums]);
-  // DOESN'T WORK, DELETE LATER
 
   // Grid List style
 
@@ -147,8 +132,6 @@ function MyAlbumsPage(props) {
         setButtonPopup={setButtonPopup}
         albums={filteredalbums}
         setAlbums={setAlbums}
-        // shareTrigger={sharePopup}
-        // setShareTrigger={setSharePopup}
       />
     </div>
   );
@@ -156,8 +139,6 @@ function MyAlbumsPage(props) {
 
 function AlbumList(props) {
   const { uid, albumsList, cols, setButtonPopup, albums, setAlbums } = props;
-
-  // const [sharePopup, setSharePopup] = useState(false);
 
   return (
     <div>
@@ -206,8 +187,6 @@ function AlbumList(props) {
                       album={album}
                       albums={albums}
                       setAlbums={setAlbums}
-                      // shareTrigger={sharePopup}
-                      // setShareTrigger={setSharePopup}
                     />
                   </IconButton>
                 }

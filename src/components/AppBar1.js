@@ -34,24 +34,6 @@ const useStyles = makeStyles((theme) => ({
 export default function AppBar1() {
   const classes = useStyles();
 
-  /*
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  
-  const handleLogout = (firebase) => {
-    handleClose();
-    firebase.auth().signOut();
-  };*/
-
   return (
     <div className={classes.root}>
       <AppBar position="static">

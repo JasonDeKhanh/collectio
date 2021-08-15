@@ -1,12 +1,7 @@
 import React from "react";
 
-import { useState } from "react";
-
-import { useParams } from "react-router";
-
 import { makeStyles } from "@material-ui/core/styles";
 import AddBoxIcon from "@material-ui/icons/AddBox";
-import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 
 import firebase from "@firebase/app";
@@ -30,10 +25,10 @@ function ImportedItemAddButton(props) {
     currID,
     importedItems,
     setImportedItems,
-    albumPages,
-    setAlbumPages,
+    // albumPages,
+    // setAlbumPages,
     currPageNum,
-    setCurrPageNum,
+    // setCurrPageNum,
     itemsAdded,
     setItemsAdded,
   } = props;
@@ -107,38 +102,6 @@ function ImportedItemAddButton(props) {
             id: lastID,
           });
       });
-    // console.log("last ID finalItem " + finalItemAdded.id);
-    // .then(
-    // finalItemAdded = {
-    //   ...tempItemAdded,
-    //   id: lastID,
-    // };
-    // )
-    // tempItemsAdded.push(finalItemAdded);
-    //update itemsAdded
-    // console.log("lastID: " + lastID);
-
-    // //create a new itemsAdded array
-    // const tempItemsAdded = Object.assign([], itemsAdded);
-
-    // const tempItemAdded = {
-    //   ...importedItem,
-    //   defaultPosition: { xPos: 0, yPos: 0 },
-    //   itemWidth: 50,
-    //   itemHeight: "100%",
-    //   onPage: currPageNum.toString(),
-    // };
-    // //add the imported item into the page in the tempPages array
-    // tempItemsAdded.push(tempItemAdded);
-
-    // //add item to firebase
-    // db.collection("users")
-    //   .doc(uid)
-    //   .collection("albums")
-    //   .doc(currID)
-    //   .collection("itemsAdded")
-    //   .add(tempItemAdded)
-    //   .then(setItemsAdded(tempItemsAdded)); //update itemsAdded
   };
 
   return (

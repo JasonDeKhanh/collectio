@@ -1,20 +1,12 @@
 import react from "react";
 import { useState, useEffect } from "react";
-import { useParams, Link, useRouteMatch } from "react-router-dom";
+import { useParams, useRouteMatch } from "react-router-dom";
 
 import ReactLoading from "react-loading";
 
 import ImportDrawer from "../components/EditAlbumPage/ImportDrawer";
-import AppShell from "../components/AppShell";
 
-import { makeStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import NavigateNextRoundedIcon from "@material-ui/icons/NavigateNextRounded";
-import NavigateBeforeRoundedIcon from "@material-ui/icons/NavigateBeforeRounded";
 import Grid from "@material-ui/core/Grid";
-
-import Draggable from "react-draggable";
-import { Button, Typography } from "@material-ui/core";
 
 import firebase from "@firebase/app";
 import "@firebase/firestore";
@@ -25,18 +17,7 @@ import NavigatePrevPageButton from "../components/EditAlbumPage/NavigatePrevPage
 import NavigateNextPageButton from "../components/EditAlbumPage/NavigateNextPageButton";
 import AddPageButton from "../components/EditAlbumPage/AddPageButton";
 
-// prev next page button style
-// const useStylesNavigateButton = makeStyles((theme) => ({
-//   root: {
-//     "& > *": {
-//       margin: theme.spacing(1),
-//     },
-//   },
-// }));
-
 function EditAlbumPage() {
-  // const navigateButtonClassese = useStylesNavigateButton();
-
   const db = firebase.firestore();
   const uid = firebase.auth().currentUser?.uid;
 
@@ -112,34 +93,8 @@ function EditAlbumPage() {
     })();
   }, []);
 
-  //
-  // obtain array of pages
   const [albumPages, setAlbumPages] = useState([]);
-  // useEffect(() => {
-  //   (async () => {
-  //     const snapshot = await db
-  //       .collection("users")
-  //       .doc(uid)
-  //       .collection("albums")
-  //       .doc(currID)
-  //       .collection("pages")
-  //       .get();
-  //     // .then(setDone2(true));
-  //     const pagesArray = [];
-  //     snapshot.forEach((doc) => {
-  //       pagesArray.push({
-  //         ...doc.data(),
-  //       });
-  //     });
 
-  //     // setAlbumPages(pagesArray);
-  //     // if (!albumPages.length === 0) {
-  //     //   setDone2(true);
-  //     // }
-  //     setAlbumPages(pagesArray);
-  //     setDone2(true);
-  //   })();
-  // }, []);
   useEffect(() => {
     const tempArray = [];
     const fetchAlbumPages = () => {
@@ -162,12 +117,6 @@ function EditAlbumPage() {
     fetchAlbumPages();
     setDone2(true);
   }, []);
-
-  //
-
-  // test
-
-  //
 
   console.log("album length:" + albumPages.length);
   const [currPage, setCurrPage] = useState(albumPages[currPageNum]);
@@ -216,34 +165,27 @@ function EditAlbumPage() {
     setDone4(true);
   }, []);
 
-  // Refresh button
-  // const [tempArrayItemsAdded, setTempArrayItemsAdded] = useState(
-  //   Object.assign([], itemsAdded)
-  // );
-
-  const handleRefresh = () => {
-    const tempArray = [];
-    const fetchItemsAdded = () => {
-      db.collection("users")
-        .doc(uid)
-        .collection("albums")
-        .doc(currID)
-        .collection("itemsAdded")
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach(function (doc) {
-            // doc.data() is never undefined for query doc snapshots
-            tempArray.push({
-              ...doc.data(),
-            });
-          });
-        })
-        .then(setItemsAdded(tempArray));
-    };
-    fetchItemsAdded();
-  };
-
-  //////////////
+  // const handleRefresh = () => {
+  //   const tempArray = [];
+  //   const fetchItemsAdded = () => {
+  //     db.collection("users")
+  //       .doc(uid)
+  //       .collection("albums")
+  //       .doc(currID)
+  //       .collection("itemsAdded")
+  //       .get()
+  //       .then((querySnapshot) => {
+  //         querySnapshot.forEach(function (doc) {
+  //           // doc.data() is never undefined for query doc snapshots
+  //           tempArray.push({
+  //             ...doc.data(),
+  //           });
+  //         });
+  //       })
+  //       .then(setItemsAdded(tempArray));
+  //   };
+  //   fetchItemsAdded();
+  // };
 
   const body = !(done1 & done2 & done3 & done4) ? (
     <Grid container justify="center">
@@ -251,10 +193,6 @@ function EditAlbumPage() {
     </Grid>
   ) : (
     <div>
-      {/* <Grid container justify="center" alignItems="center">
-        <Button onClick={handleRefresh}>Refresh</Button>
-      </Grid> */}
-
       <Grid container direction="row" justify="center" alignItems="center">
         <NavigatePrevPageButton
           uid={uid}
@@ -315,12 +253,6 @@ function EditAlbumPage() {
           currPage={currPage}
         />
       </Grid>
-
-      {/* for next page button or something, can just get the "pages".length or something to prevent going out of bound 
-        , when creating the new page, the orientation will = currAlbum.orientation
-
-        FOR WEDNESDAY 7 JULY - figure out how to put divs in a row, to put the prev and next button 
-      */}
     </div>
   );
 
